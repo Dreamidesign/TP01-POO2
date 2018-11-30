@@ -58,14 +58,14 @@ TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t ) : Tra
 
 } //----- Fin de TrajetCompose
 
-TrajetCompose::TrajetCompose(const TrajetCompose & unTrajet)
+TrajetCompose::TrajetCompose(const TrajetCompose & unTrajet) : Trajet(unTrajet.getVilleDepart(), unTrajet.getVilleArrive())
 // Algorithme :
 //
 {
 #ifdef MAP
 	cout << "Appel au constructeur de copie  de <TrajetCompose>" << endl;
 #endif
-	//ajouterTrajet(t, nb);
+	
 	nbTrajets = unTrajet.nbTrajets;
 	trajet = unTrajet.trajet;
 } //----- Fin de TrajetCompose
