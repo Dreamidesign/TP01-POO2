@@ -58,7 +58,7 @@ TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t ) : Tra
 
 } //----- Fin de TrajetCompose
 
-TrajetCompose::TrajetCompose(const Trajet & unTrajet)
+TrajetCompose::TrajetCompose(const TrajetCompose & unTrajet)
 // Algorithme :
 //
 {
