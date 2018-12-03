@@ -22,20 +22,21 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void TrajetCompose::Affichage (const char* c = "") const 
+void TrajetCompose::Affichage (const char* c = "") const
 // Algorithme :
 //
 {
-	Trajet::Affichage(c); 
+	Trajet::Affichage(c);
 	cout << "Le trajet est composé des trajets suivants :" << endl;
 	for (int i = 0; i < nbTrajets; i++)
 	{
-		trajet[i]->Affichage(); // a revoir ( possibilite d'afficher un trajet simple ou compose ) 
+		trajet[i]->Affichage(); // a revoir ( possibilite d'afficher un trajet simple ou compose )
 	}
 } //----- Fin de Méthode
+
 void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
 {
-	//trajet = new Trajet*[nb]; 
+	//trajet = new Trajet*[nb];
 	for(int i = 0; i < nb; i++)
 	{
 		trajet[i] = t[i];
@@ -43,7 +44,20 @@ void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
 }
 
 //-------------------------------------------- Constructeurs - destructeur
- 
+
+/*
+TrajetCompose::TrajetCompose(const Trajet & unTrajet)
+// Algorithme :
+//
+{
+	#ifdef MAP
+	cout << "Appel au constructeur de copie  de <TrajetCompose>" << endl;
+	#endif
+	//ajouterTrajet(t, nb);
+	nbTrajets = unTrajet.nbTrajets;
+	trajet = unTrajet.trajet;
+} //----- Fin de TrajetCompose*/
+
 
 TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t ) : Trajet(a, b)
 // Algorithme :
@@ -52,22 +66,20 @@ TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t ) : Tra
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
+
+	villeDepart = new char [strlen(a)];
+	villeArrive = new char [strlen(b)];
 	//ajouterTrajet(t, nb);
+	for (unsigned int i = 0; i < strlen(a); i++) {
+		villeDepart[i] = a[i];
+	}
+	for (unsigned int i = 0; i < strlen(b); i++) {
+		villeArrive[i] = a[i];
+	}
+
 	trajet = t;
 	nbTrajets = nb;
 
-} //----- Fin de TrajetCompose
-
-TrajetCompose::TrajetCompose(const Trajet & unTrajet)
-// Algorithme :
-//
-{
-#ifdef MAP
-	cout << "Appel au constructeur de copie  de <TrajetCompose>" << endl;
-#endif
-	//ajouterTrajet(t, nb);
-	nbTrajets = unTrajet.nbTrajets;
-	trajet = unTrajet.trajet;
 } //----- Fin de TrajetCompose
 
 

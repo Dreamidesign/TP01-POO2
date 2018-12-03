@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <cstring>
-#include "Trajet.h" 
+#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -24,14 +24,14 @@
 //
 //------------------------------------------------------------------------
 
-class TrajetCompose : public Trajet 
+class TrajetCompose : public Trajet
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    void Affichage (const char* c)const ; 
+
+    void Affichage (const char* c)const ;
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,7 +65,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	int nbTrajets;
-	//Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs 
+	//Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetCompose>

@@ -1,15 +1,15 @@
 /*************************************************************************
 						   CATALOGUE  -  description
 							 -------------------
-	début                : ${date}
+	dï¿½but                : ${date}
 	copyright            : (C) ${year} par ${user}
 *************************************************************************/
 
-//---------- Réalisation de la classe <CATALOGUE> (fichier Catalogue) --
+//---------- Rï¿½alisation de la classe <CATALOGUE> (fichier Catalogue) --
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include système
+//-------------------------------------------------------- Include systï¿½me
 using namespace std;
 #include <iostream>
 #include <cstring>
@@ -21,17 +21,17 @@ using namespace std;
 
 //---------------------------------------------------- Variables de classe
 
-//----------------------------------------------------------- Types privés
+//----------------------------------------------------------- Types privï¿½s
 
 
 //----------------------------------------------------------------- PUBLIC
 //-------------------------------------------------------- Fonctions amies
 
-//----------------------------------------------------- Méthodes publiques
+//----------------------------------------------------- Mï¿½thodes publiques
 
 void Catalogue::AjoutTrajet(Trajet *t)
 {
-	if (trajet == NULL)
+	if (trajet == nullptr)
 		*trajet = t;
 	else
 	{
@@ -41,17 +41,15 @@ void Catalogue::AjoutTrajet(Trajet *t)
 	}
 }
 
-Catalogue Catalogue::RechercheSimple(char* a, char* b) const
+void Catalogue::RechercheSimple(char* a, char* b) const
 {
-	Catalogue c1;
 	for (int i=0; i<nbTrajets; i++)
 	{
 		if (strcmp(trajet[i]->getVilleDepart(), a) && strcmp(trajet[i]->getVilleArrive(),b))
 		{
-			c1.AjoutTrajet(*trajet);
+			trajet[i]->Affichage();
 		}
 	}
-	return c1;
 }
 
 /*Catalogue Catalogue::RechercheComposee(char* a, char* b) const
@@ -74,7 +72,7 @@ Catalogue::Catalogue (const Catalogue &unCatalogue)
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <CATALOGUE>" << endl;
 #endif
-	nbTrajets = unCatalogue.nbTrajets; 
+	nbTrajets = unCatalogue.nbTrajets;
 	trajet = unCatalogue.trajet;
 
 } //----- Fin de CATALOGUE (constructeur de copie)
@@ -103,12 +101,12 @@ Catalogue::~Catalogue ()
 	{
 		delete[] trajet[i];
 	}
-	delete[] trajet; 
+	delete[] trajet;
 } //----- Fin de ~CATALOGUE
 
 
 //------------------------------------------------------------------ PRIVE
 
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Mï¿½thodes protï¿½gï¿½es
 
-//------------------------------------------------------- Méthodes privées
+//------------------------------------------------------- Mï¿½thodes privï¿½es
