@@ -59,18 +59,13 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-<<<<<<< HEAD
-TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t ) : Trajet(a, b)
-=======
-TrajetCompose::TrajetCompose(const TrajetCompose & unTrajet) : Trajet(unTrajet.getVilleDepart(), unTrajet.getVilleArrive())
->>>>>>> e90a306ab59e3f2b0b3aebd19b3c5b2a580738a3
+TrajetCompose::TrajetCompose ( char* a , char* b , int nb  , Trajet ** t )
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-<<<<<<< HEAD
 
 	villeDepart = new char [strlen(a)];
 	villeArrive = new char [strlen(b)];
@@ -85,11 +80,6 @@ TrajetCompose::TrajetCompose(const TrajetCompose & unTrajet) : Trajet(unTrajet.g
 	trajet = t;
 	nbTrajets = nb;
 
-=======
-	
-	nbTrajets = unTrajet.nbTrajets;
-	trajet = unTrajet.trajet;
->>>>>>> e90a306ab59e3f2b0b3aebd19b3c5b2a580738a3
 } //----- Fin de TrajetCompose
 
 
