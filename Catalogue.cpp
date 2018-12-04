@@ -33,11 +33,7 @@ void Catalogue::AjoutTrajet(Trajet *t)
 {
 
 
-	if (nbTrajets = 0)
-	{
-		*trajet = t;
-	}
-	else if(nbAllocated == nbTrajets)
+if(nbAllocated == nbTrajets)
 	{
 		Trajet ** temp;
 		nbAllocated += 30;
@@ -49,15 +45,9 @@ void Catalogue::AjoutTrajet(Trajet *t)
 
 		trajet = temp;
 
-		*trajet[nbTrajets + 1] = *t;
-		nbTrajets++;
 	}
-	else
-	{
-		trajet++;
-		*trajet = t;
-		nbTrajets++;
-	}
+	nbTrajets++;
+	trajet[nbTrajets - 1] = t;
 
 }
 
@@ -65,7 +55,7 @@ void Catalogue::RechercheSimple(char* a, char* b) const
 {
 	for (int i=0; i<nbTrajets; i++)
 	{
-		if (strcmp(trajet[i]->getVilleDepart(), a) && strcmp(trajet[i]->getVilleArrive(),b))
+		if (!strcmp(trajet[i]->getVilleDepart(), a) && !strcmp(trajet[i]->getVilleArrive(),b))
 		{
 			trajet[i]->Affichage();
 		}
