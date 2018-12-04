@@ -116,9 +116,11 @@ Catalogue::~Catalogue ()
 #ifdef MAP
 	cout << "Appel au destructeur de <CATALOGUE>" << endl;
 #endif
-	for (int i = 0; i < nbTrajets; i++)
+
+
+	for (int i = 0; i < nbAllocated; i++)
 	{
-		delete[] trajet[i];
+		delete trajet[i];
 	}
 	delete[] trajet;
 } //----- Fin de ~CATALOGUE

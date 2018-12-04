@@ -90,7 +90,7 @@ TrajetCompose::~TrajetCompose ( )
 	//Trajet::~Trajet();
 	for (int i = 0; i < nbTrajets; i++)
 	{
-		delete[] trajet[i];
+		delete trajet[i];
 	}
 	delete[] trajet;
 } //----- Fin de ~TrajetCompose

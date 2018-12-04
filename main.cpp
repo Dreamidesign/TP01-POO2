@@ -16,28 +16,30 @@ void ajoutSimple(Catalogue* monCatalogue)
 	char* depart = new char [100];
 	char* arrivee = new char[100];
 	char* mt = new char[100];
+
 	cout << "Quel est le depart du trajet" << endl;
 	cin >> depart;
 	cout << "Quelle est l'arrivee du trajet" << endl;
 	cin >> arrivee;
 	cout << "Quel est le moyen de transport employe ?" << endl;
 	cin >> mt;
+
 	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
+	cout << sizeof(t) << endl ;
 
 	bool canBeAdded = true;
 	for(int i=0; i<monCatalogue->getNbTrajets(); i++)
 	{
-		if(!strcmp(monCatalogue->getTabTrajet()[i]->getType(), t->getType())
-		&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleDepart(), depart)
-		&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleArrive(), arrivee)
-		&& !strcmp(monCatalogue->getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
-		{
-			canBeAdded = false;
-			cout << "\n" << "Trajet existant" << "\n" << endl;
-			break;
-		}
+			if(!strcmp(monCatalogue->getTabTrajet()[i]->getType(), t->getType())
+			&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleDepart(), depart)
+			&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleArrive(), arrivee)
+			&& !strcmp(monCatalogue->getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
+			{
+				canBeAdded = false;
+				cout << "\n" << "Trajet existant" << "\n" << endl;
+				break;
+			}
 	}
-
 	if(canBeAdded == true)
 	{
 		monCatalogue->AjoutTrajet(t);
