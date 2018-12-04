@@ -117,7 +117,6 @@ Catalogue::~Catalogue ()
 	cout << "Appel au destructeur de <CATALOGUE>" << endl;
 #endif
 
-
 	for (int i = 0; i < nbAllocated; i++)
 	{
 		delete trajet[i];
