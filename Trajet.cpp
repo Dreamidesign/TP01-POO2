@@ -50,6 +50,11 @@ using namespace std;
 		return "";
 	}
 
+	char* Trajet::getMoyenTransport() const
+	{
+		return villeArrive;
+	}
+
 
 	//-------------------------------------------- Constructeurs - destructeur
 	/*Trajet::Trajet(const Trajet & unTrajet)

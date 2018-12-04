@@ -27,16 +27,24 @@ void ajoutSimple(Catalogue* monCatalogue)
 	bool canBeAdded = true;
 	for(int i=0; i<monCatalogue->getNbTrajets(); i++)
 	{
-		if(!strcmp(t->getType(), monCatalogue->getTabTrajet()[i]->getType()) && !strcmp(monCatalogue->getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(monCatalogue->getTabTrajet()[i]->getVilleArrive(), arrivee) )
+		if(!strcmp(monCatalogue->getTabTrajet()[i]->getType(), t->getType())
+		&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleDepart(), depart)
+		&& !strcmp(monCatalogue->getTabTrajet()[i]->getVilleArrive(), arrivee)
+		&& !strcmp(monCatalogue->getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
+		{
 			canBeAdded = false;
-			cout << "\n" << "Trajet existant" << endl;
+			cout << "\n" << "Trajet existant" << "\n" << endl;
 			break;
+		}
 	}
 
 	if(canBeAdded == true)
 	{
 		monCatalogue->AjoutTrajet(t);
 		cout << "\n" << "Trajet ajoute !" << endl;
+	}
+	else{
+		delete t;
 	}
 
 	/*delete[] depart;
