@@ -44,12 +44,12 @@ void Catalogue::AjoutTrajet(Trajet *t)
 		temp = new Trajet *[nbAllocated];
 
 		for (int i = 0; i < nbTrajets; i++) {
-			temp[i] = Trajet[i];
+			temp[i] = trajet[i];
 		}
 
-		Trajet = temp;
+		trajet = temp;
 
-		*Trajet[nbTrajets + 1] = t;
+		*trajet[nbTrajets + 1] = *t;
 		nbTrajets++;
 	}
 	else

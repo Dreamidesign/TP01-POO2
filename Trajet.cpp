@@ -70,10 +70,21 @@ using namespace std;
 		villeArrive = new char[strlen(b)];
 
 		for (unsigned int i = 0; i < strlen(a); i++) {
+			if (a[i] == '\0')
+			{
+				villeDepart[i] = '\0';
+				break;
+			}
 			villeDepart[i] = a[i];
+			
 		}
 
 		for (unsigned int i = 0; i < strlen(b); i++) {
+			if (b[i] == '\0')
+			{
+				villeArrive[i] = '\0';
+				break;
+			}
 			villeArrive[i] = b[i];
 		}
 

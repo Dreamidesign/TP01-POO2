@@ -38,9 +38,9 @@ void ajoutCompose(Catalogue* monCatalogue)
 	cout << "Combien d'�tapes comporte votre trajet (nombre de villes total)" << endl;
 	cin >> nbVilles;
 	char** tabVille = new char *[nbVilles];
-	char** tabMT = new char *[1000];
+	char** tabMT = new char *[nbVilles];
 	Trajet ** tabTrajets;
-	tabTrajets = new Trajet *(nbVilles - 1));
+	tabTrajets = new Trajet *[nbVilles - 1];
 
 
 	cout << nbVilles << endl;
@@ -67,11 +67,12 @@ void ajoutCompose(Catalogue* monCatalogue)
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajout� !" << endl;
 
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < nbVilles; i++) {
 		delete [] tabVille[i];
 	}
 	delete [] tabVille;
-	for (int i = 0; i < 1000; i++) {
+
+	for (int i = 1; i < nbVilles; i++) {
 		delete [] tabMT[i];
 	}
 	delete [] tabMT;
