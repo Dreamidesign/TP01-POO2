@@ -8,7 +8,7 @@
 using namespace std;
 
 int choix1 = 0; //Choix du premier menu
-int choix2 = 3; //choix du sous menu d'ajout de trajets 
+int choix2 = 3; //choix du sous menu d'ajout de trajets
 
 
 void ajoutSimple(Catalogue* monCatalogue)
@@ -117,6 +117,9 @@ void rechercher(Catalogue* monCatalogue)
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 	monCatalogue->RechercheSimple(depart, arrivee);
+
+	delete depart;
+	delete arrivee;
 }
 
 
