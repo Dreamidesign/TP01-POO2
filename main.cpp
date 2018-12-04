@@ -16,16 +16,16 @@ void ajoutSimple(Catalogue* monCatalogue)
 	char* depart = new char [100];
 	char* arrivee = new char[100];
 	char* mt = new char[100];
-	cout << "Quel est le d�part du trajet" << endl;
+	cout << "Quel est le depart du trajet" << endl;
 	cin >> depart;
-	cout << "Quelle est l'arriv�e du trajet" << endl;
+	cout << "Quelle est l'arrivee du trajet" << endl;
 	cin >> arrivee;
-	cout << "Quel est le moyen de transport employ� ?" << endl;
+	cout << "Quel est le moyen de transport employe ?" << endl;
 	cin >> mt;
 	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
 
 	monCatalogue->AjoutTrajet(t);
-	cout << "\n" << "Trajet ajout� !" << endl;
+	cout << "\n" << "Trajet ajoute !" << endl;
 
 	delete[] depart;
 	delete[] arrivee;
@@ -35,7 +35,7 @@ void ajoutSimple(Catalogue* monCatalogue)
 void ajoutCompose(Catalogue* monCatalogue)
 {
 	int nbVilles = 0;
-	cout << "Combien d'�tapes comporte votre trajet (nombre de villes total)" << endl;
+	cout << "Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
 	cin >> nbVilles;
 	char** tabVille = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
@@ -54,7 +54,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 			// cout << "soucis1" << endl;
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
 			tabMT[i] = new char[20];
-			cin >> tabMT[i]; //Le moyen de transport est stock� � l'adresse de la ville d'arriv�e, aucun moyen de transport en 0
+			cin >> tabMT[i]; //Le moyen de transport est stocke e l'adresse de la ville d'arrivee, aucun moyen de transport en 0
 
 
 			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVille[i], tabMT[i]);
@@ -65,7 +65,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles - 1], nbVilles - 1, tabTrajets);
 
 	monCatalogue->AjoutTrajet(tc);
-	cout << "\n" << "Trajet ajout� !" << endl;
+	cout << "\n" << "Trajet ajoute !" << endl;
 
 	for (int i = 0; i < nbVilles; i++) {
 		delete [] tabVille[i];
@@ -83,9 +83,9 @@ void rechercher(Catalogue* monCatalogue)
 	char* depart = new char[100];
 	char* arrivee = new char[100];
 
-	cout << "Bonjour, quelle est votre destination de d�part ? " << endl;
+	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
 	cin >> depart;
-	cout << "Et votre ville d'arriv�e" << endl;
+	cout << "Et votre ville d'arrivee" << endl;
 	cin >> arrivee;
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
@@ -98,7 +98,7 @@ void mainMenu()
 	cout << "\n" << "\n" << "------Bienvenue sur FlexiTrip------" << "\n" << endl;
 	cout << "         Menu         " << endl;
 	cout << "1. Ajouter un trajet" << endl;
-	cout << "2. Afficher le catalogue de trajets propos�s" << endl;
+	cout << "2. Afficher le catalogue de trajets proposes" << endl;
 	cout << "3. Rechercher un parcours" << endl;
 	cout << "4. Quitter" << endl;
 	cin >> choix1;
@@ -109,7 +109,7 @@ void menuTrajet(Catalogue *monCatalogue) {
 	{
 		cout << "Quel est le type de trajet ?" << endl;
 		cout << "1. Simple" << endl;
-		cout << "2. Compos�" << endl;
+		cout << "2. Compose" << endl;
 		cout << "3. Retour au menu" << endl;
 		cin >> choix2;
 
@@ -120,7 +120,7 @@ void menuTrajet(Catalogue *monCatalogue) {
 			ajoutSimple(monCatalogue);
 			break;
 		case 2:
-			cout << "Ajout d'un trajet compos�" << endl;
+			cout << "Ajout d'un trajet compose" << endl;
 			ajoutCompose(monCatalogue);
 			break;
 		case 3:
