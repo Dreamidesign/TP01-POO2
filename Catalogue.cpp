@@ -57,7 +57,7 @@ void Catalogue::RechercheSimple(char* a, char* b) const
 	{
 		if (!strcmp(trajet[i]->getVilleDepart(), a) && !strcmp(trajet[i]->getVilleArrive(),b))
 		{
-			trajet[i]->Affichage();
+			cout << "Trajet : ", trajet[i]->Affichage();
 		}
 	}
 }
