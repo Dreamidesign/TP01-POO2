@@ -46,7 +46,7 @@ void ajoutSimple(Catalogue* monCatalogue)
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
 	else{
-		delete t;
+		//delete t;
 	}
 
 	/*delete[] depart;
@@ -98,13 +98,8 @@ void ajoutCompose(Catalogue* monCatalogue)
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-<<<<<<< HEAD
-	delete []tabVilleTemp[0];
-	delete []tabVille[nbVilles-1];
-=======
-	delete[] tabVilleTemp[0];
-	delete[] tabVille[nbVilles-1];
->>>>>>> cc2ef743094e490421167ba21b0101335763aabf
+	delete [] tabVilleTemp[0];
+	delete [] tabVille[nbVilles-1];
 	delete [] tabVilleTemp;
 	delete [] tabVille;
 	delete [] tabMT;
@@ -123,8 +118,6 @@ void rechercher(Catalogue* monCatalogue)
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 	monCatalogue->RechercheSimple(depart, arrivee);
 
-	delete depart;
-	delete arrivee;
 }
 
 
