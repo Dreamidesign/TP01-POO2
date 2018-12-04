@@ -2,5 +2,5 @@
 *.vcxproj.user
 *.vcxproj.filters
 *.o
-
+./voyage
 Debug/

@@ -91,13 +91,13 @@ void ajoutCompose(Catalogue* monCatalogue)
 
 /*	for (int i = 0; i < nbVilles; i++) {
 		delete [] tabVille[i];
-	}
+	} */
 	delete [] tabVille;
-
+/*
 	for (int i = 1; i < nbVilles; i++) {
 		delete [] tabMT[i];
-	}
-	delete [] tabMT; */
+	}*/
+	delete [] tabMT; 
 }
 
 void rechercher(Catalogue* monCatalogue)
