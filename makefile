@@ -12,7 +12,7 @@ TrajetSimple.o: TrajetSimple.cpp TrajetSimple.h
 TrajetCompose.o: TrajetSimple.cpp TrajetCompose.h
 	g++ -c TrajetCompose.cpp;
 
-Catalogue.o: Catalogue.cpp Catalogue.h
+Catalogue.o: Catalogue.cpp Catalogue.h Trajet.h
 	g++ -c Catalogue.cpp;
 
 main.o: main.cpp

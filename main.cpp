@@ -163,6 +163,7 @@ void menu(Catalogue* monCatalogue)
 		case 1:
 			cout << "*Ajout d'un trajet*" << endl;
 			menuTrajet(monCatalogue);
+			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
 			monCatalogue->Affichage();
@@ -185,6 +186,8 @@ int main()
 
 	Catalogue * c = new Catalogue();
 	menu(c);
+
+	delete c;
 
 	return 0;
 }
