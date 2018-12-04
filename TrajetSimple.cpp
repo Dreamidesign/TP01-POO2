@@ -62,11 +62,11 @@ TrajetSimple::TrajetSimple ( const char* a , const char* b , const char* mT) : T
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
 
-  moyenTransport = new char [strlen(mT)];
-
+  moyenTransport = mT;
+/*
   for (unsigned int i = 0; i < strlen(mT); i++) {
     moyenTransport[i] = mT[i];
-  }
+  }*/
 } //----- Fin de TrajetSimple
 
 

@@ -28,7 +28,7 @@ using namespace std;
 		//
 	{
 		cout << c << "de " << villeDepart << " a " << villeArrive << " ";
-	} //----- Fin de Affichage 
+	} //----- Fin de Affichage
 
 
 	char* Trajet::getVilleDepart() const
@@ -40,7 +40,7 @@ using namespace std;
 
 	char* Trajet::getVilleArrive() const
 		// Algorithme :
-		// 
+		//
 	{
 		return villeArrive;
 	} //----- Fin de getVilleDepart
@@ -59,16 +59,17 @@ using namespace std;
 	} //----- Fin de Trajet (constructeur de copie)
 	*/
 
-	Trajet::Trajet(const char* a, const char* b) 
+	Trajet::Trajet(const char* a, const char* b)
 		// Algorithme :
 		//
 	{
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
-		villeDepart = new char[strlen(a)];
-		villeArrive = new char[strlen(b)];
+		villeDepart = a;
+		villeArrive = b;
 
+/*
 		for (unsigned int i = 0; i < strlen(a); i++) {
 			if (a[i] == '\0')
 			{
@@ -76,7 +77,7 @@ using namespace std;
 				break;
 			}
 			villeDepart[i] = a[i];
-			
+
 		}
 
 		for (unsigned int i = 0; i < strlen(b); i++) {
@@ -87,7 +88,7 @@ using namespace std;
 			}
 			villeArrive[i] = b[i];
 		}
-
+*/
 	} //----- Fin de Trajet
 
 
@@ -98,12 +99,11 @@ using namespace std;
 	#ifdef MAP
 		cout << "Appel au destructeur de <Trajet>" << endl;
 	#endif
-		delete[] villeDepart; 
-		delete[] villeArrive; 
+		delete[] villeDepart;
+		delete[] villeArrive;
 	} //----- Fin de ~Trajet
 
 
 	//------------------------------------------------------------------ PRIVE
 
 	//----------------------------------------------------- Méthodes protégées
-

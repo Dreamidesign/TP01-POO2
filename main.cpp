@@ -27,9 +27,9 @@ void ajoutSimple(Catalogue* monCatalogue)
 	monCatalogue->AjoutTrajet(t);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-	delete[] depart;
+	/*delete[] depart;
 	delete[] arrivee;
-	delete[] mt;
+	delete[] mt;*/
 }
 
 void ajoutCompose(Catalogue* monCatalogue)
@@ -67,7 +67,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-	for (int i = 0; i < nbVilles; i++) {
+/*	for (int i = 0; i < nbVilles; i++) {
 		delete [] tabVille[i];
 	}
 	delete [] tabVille;
@@ -75,7 +75,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 	for (int i = 1; i < nbVilles; i++) {
 		delete [] tabMT[i];
 	}
-	delete [] tabMT;
+	delete [] tabMT; */
 }
 
 void rechercher(Catalogue* monCatalogue)
