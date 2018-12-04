@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -53,7 +54,7 @@ char* TrajetSimple::getMoyenTransport() const
 } //----- Fin de TrajetSimple (constructeur de copie)
 */
 
-TrajetSimple::TrajetSimple ( char* a , char* b , char* mT)
+TrajetSimple::TrajetSimple ( const char* a , const char* b , const char* mT) : Trajet (a , b)
 // Algorithme :
 //
 {
@@ -61,16 +62,8 @@ TrajetSimple::TrajetSimple ( char* a , char* b , char* mT)
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
 
-  villeDepart = new char [strlen(a)];
-  villeArrive = new char [strlen(b)];
   moyenTransport = new char [strlen(mT)];
 
-  for (unsigned int i = 0; i < strlen(a); i++) {
-    villeDepart[i] = a[i];
-  }
-  for (unsigned int i = 0; i < strlen(b); i++) {
-    villeArrive[i] = a[i];
-  }
   for (unsigned int i = 0; i < strlen(mT); i++) {
     moyenTransport[i] = mT[i];
   }
@@ -84,6 +77,8 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
+	Trajet ::~Trajet();
+	delete[] moyenTransport;
 } //----- Fin de ~TrajetSimple
 
 

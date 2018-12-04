@@ -46,7 +46,7 @@ public:
     // Contrat :
     //
 
-    TrajetSimple ( char* a, char* b , char* mT);
+    TrajetSimple ( const char* a, const char* b , const char* mT);
     // Mode d'emploi :
     //
     // Contrat :

@@ -11,7 +11,6 @@
 #define TrajetCompose_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <cstring>
 #include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
@@ -36,7 +35,8 @@ public:
     //
     // Contrat :
     //
-
+	Trajet ** getListeTrajetComp();
+	int getNbTrajets (); 
 	void ajouterTrajet(Trajet ** t, int nb);
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -46,7 +46,7 @@ public:
     // Contrat :
     //
 
-    TrajetCompose ( char* a, char* b , int nb , Trajet ** t);
+    TrajetCompose ( const char* a, const char* b , int nb , Trajet ** t);
     // Mode d'emploi :
     //
     // Contrat :
@@ -57,7 +57,7 @@ public:
     //
     // Contrat :
     //
-	Trajet ** trajet;
+	//Trajet ** trajet;
 //------------------------------------------------------------------ PRIVE
 
 protected:
@@ -65,7 +65,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 	int nbTrajets;
-	//Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
+	Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetCompose>

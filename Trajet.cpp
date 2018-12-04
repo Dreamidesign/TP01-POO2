@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -46,7 +47,7 @@ using namespace std;
 
 
 	//-------------------------------------------- Constructeurs - destructeur
-	Trajet::Trajet(const Trajet & unTrajet)
+	/*Trajet::Trajet(const Trajet & unTrajet)
 		// Algorithme :
 		//
 	{
@@ -56,15 +57,26 @@ using namespace std;
 		villeDepart = unTrajet.villeDepart;
 		villeArrive = unTrajet.villeArrive;
 	} //----- Fin de Trajet (constructeur de copie)
+	*/
 
-
-	Trajet::Trajet(char* a, char* b) : villeDepart(a), villeArrive(b)
+	Trajet::Trajet(const char* a, const char* b) 
 		// Algorithme :
 		//
 	{
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
+		villeDepart = new char[strlen(a)];
+		villeArrive = new char[strlen(b)];
+
+		for (unsigned int i = 0; i < strlen(a); i++) {
+			villeDepart[i] = a[i];
+		}
+
+		for (unsigned int i = 0; i < strlen(b); i++) {
+			villeArrive[i] = b[i];
+		}
+
 	} //----- Fin de Trajet
 
 
@@ -72,9 +84,11 @@ using namespace std;
 		// Algorithme :
 		//
 	{
-#ifdef MAP
+	#ifdef MAP
 		cout << "Appel au destructeur de <Trajet>" << endl;
-#endif
+	#endif
+		delete[] villeDepart; 
+		delete[] villeArrive; 
 	} //----- Fin de ~Trajet
 
 
