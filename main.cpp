@@ -44,7 +44,7 @@ void ajoutSimple(Catalogue* monCatalogue)
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
 	else{
-		delete t;
+		//delete t;
 	}
 
 	/*delete[] depart;

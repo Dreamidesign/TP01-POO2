@@ -36,7 +36,6 @@ public:
     // Contrat :
     //
     char* getMoyenTransport() const ;
-
     const char* getType();
 
 
@@ -54,7 +53,7 @@ public:
     // Contrat :
     //
 
-    virtual ~TrajetSimple ( );
+    virtual ~TrajetSimple ();
     // Mode d'emploi :
     //
     // Contrat :
