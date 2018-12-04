@@ -60,7 +60,10 @@ void ajoutCompose(Catalogue* monCatalogue)
 	cout << "Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
 	cin >> nbVilles;
 	char** tabVille = new char *[nbVilles];
+	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
+	char * departTC = new char[20];
+	char * arriveeTC = new char[20];
 	Trajet ** tabTrajets;
 	tabTrajets = new Trajet *[nbVilles - 1];
 
@@ -71,33 +74,33 @@ void ajoutCompose(Catalogue* monCatalogue)
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
 		tabVille[i] = new char[20];
 		cin >> tabVille[i];
+
+		//On veut éviter la libération double des villes
+		tabVilleTemp[i] = new char[20];
+		*tabVilleTemp[i] = *tabVille[i];
+
 		if (i != 0)
 		{
-			// cout << "soucis1" << endl;
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
 			tabMT[i] = new char[20];
 			cin >> tabMT[i]; //Le moyen de transport est stocke e l'adresse de la ville d'arrivee, aucun moyen de transport en 0
 
 
-			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVille[i], tabMT[i]);
+			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
 			tabTrajets[i - 1] = t;
 		}
 	}
+	*departTC = *tabVille[0];
+	*arriveeTC = *tabVille[nbVilles - 1];
 
-	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles - 1], nbVilles - 1, tabTrajets);
+	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTrajets);
 
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-/*	for (int i = 0; i < nbVilles; i++) {
-		delete [] tabVille[i];
-	} */
+	delete [] tabVilleTemp;
 	delete [] tabVille;
-/*
-	for (int i = 1; i < nbVilles; i++) {
-		delete [] tabMT[i];
-	}*/
-	delete [] tabMT; 
+	delete [] tabMT;
 }
 
 void rechercher(Catalogue* monCatalogue)
