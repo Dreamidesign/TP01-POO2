@@ -40,7 +40,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 	char** tabVille = new char *[nbVilles];
 	char** tabMT = new char *[1000];
 	Trajet ** tabTrajets;
-	tabTrajets = (Trajet**)malloc(sizeof(Trajet*)* (nbVilles - 1));
+	tabTrajets = new Trajet *(nbVilles - 1));
 
 
 	cout << nbVilles << endl;
@@ -51,7 +51,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 		cin >> tabVille[i];
 		if (i != 0)
 		{
-			cout << "soucis1" << endl;
+			// cout << "soucis1" << endl;
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
 			tabMT[i] = new char[20];
 			cin >> tabMT[i]; //Le moyen de transport est stock� � l'adresse de la ville d'arriv�e, aucun moyen de transport en 0
@@ -70,9 +70,11 @@ void ajoutCompose(Catalogue* monCatalogue)
 	for (int i = 0; i < 1000; i++) {
 		delete [] tabVille[i];
 	}
+	delete [] tabVille;
 	for (int i = 0; i < 1000; i++) {
 		delete [] tabMT[i];
 	}
+	delete [] tabMT;
 }
 
 void rechercher(Catalogue* monCatalogue)
