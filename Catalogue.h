@@ -60,6 +60,7 @@ protected:
 	//----------------------------------------------------- Attributs prot�g�s
 	Trajet ** trajet; //Liste de trajets
 	int nbTrajets = 0; //Nombre de trajets dans le catalogue
+	int nbAllocated = 100; //Espace alloué 
 
 private:
 	//------------------------------------------------------- Attributs priv�s

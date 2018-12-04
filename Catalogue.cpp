@@ -31,14 +31,34 @@ using namespace std;
 
 void Catalogue::AjoutTrajet(Trajet *t)
 {
-	if (trajet == nullptr)
+
+
+	if (nbTrajets = 0)
+	{
 		*trajet = t;
+	}
+	else if(nbAllocated == nbTrajets)
+	{
+		Trajet ** temp;
+		nbAllocated += 30;
+		temp = new Trajet *[nbAllocated];
+
+		for (int i = 0; i < nbTrajets; i++) {
+			temp[i] = Trajet[i];
+		}
+
+		Trajet = temp;
+
+		*Trajet[nbTrajets + 1] = t;
+		nbTrajets++;
+	}
 	else
 	{
 		trajet++;
 		*trajet = t;
 		nbTrajets++;
 	}
+
 }
 
 void Catalogue::RechercheSimple(char* a, char* b) const
@@ -72,8 +92,8 @@ Catalogue::Catalogue (const Catalogue &unCatalogue)
 #ifdef MAP
 	cout << "Appel au constructeur de copie de <CATALOGUE>" << endl;
 #endif
-	nbTrajets = unCatalogue.nbTrajets;
-	trajet = unCatalogue.trajet;
+	// nbTrajets = unCatalogue.nbTrajets;
+	// trajet = unCatalogue.trajet;
 
 } //----- Fin de CATALOGUE (constructeur de copie)
 
@@ -86,7 +106,7 @@ Catalogue::Catalogue ()
 	cout << "Appel au constructeur de <CATALOGUE>" << endl;
 #endif
 
-	trajet = new Trajet*[nbTrajets];
+	trajet = new Trajet*[nbAllocated];
 } //----- Fin de CATALOGUE
 
 
