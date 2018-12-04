@@ -61,7 +61,7 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	Trajet(const char* a, const char* b);
+	Trajet(char* a, char* b);
 	// Mode d'emploi :
 	//
 	// Contrat :

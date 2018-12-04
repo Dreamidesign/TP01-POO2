@@ -28,20 +28,20 @@ void TrajetCompose::Affichage (const char* c = "") const
 //
 {
 	Trajet::Affichage(c);
-	cout << "Le trajet est composé des trajets suivants :" << endl;
+	cout << "Le trajet est compose des trajets suivants :" << endl;
 	for (int i = 0; i < nbTrajets; i++)
 	{
-		trajet[i]->Affichage(); 
+		trajet[i]->Affichage();
 	}
 } //----- Fin de Méthode
 
 /*void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
 {
-	nbTrajets = nb; 
+	nbTrajets = nb;
 	trajet = new Trajet* [nbTrajets];
 	for(int i = 0; i < nbTrajets; i++)
 	{
-		trajet[i] = new Trajet* ; 
+		trajet[i] = new Trajet* ;
 		trajet[i] = t[i];
 	}
 }*/
@@ -62,15 +62,15 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose ( const char* a , const char* b , int nb  , Trajet ** t ) : Trajet (a, b)
+TrajetCompose::TrajetCompose (  char* a ,  char* b , int nb  , Trajet ** t ) : Trajet (a, b)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-	nbTrajets = nb; 
-	trajet = t; 
+	nbTrajets = nb;
+	trajet = t;
 } //----- Fin de TrajetCompose
 
 
@@ -81,7 +81,7 @@ TrajetCompose::~TrajetCompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
-	Trajet::~Trajet(); 
+	Trajet::~Trajet();
 	for (int i = 0; i < nbTrajets; i++)
 	{
 		delete[] trajet[i];

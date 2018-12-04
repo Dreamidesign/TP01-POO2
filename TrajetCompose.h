@@ -46,7 +46,7 @@ public:
     // Contrat :
     //
 
-    TrajetCompose ( const char* a, const char* b , int nb , Trajet ** t);
+    TrajetCompose (  char* a,  char* b , int nb , Trajet ** t);
     // Mode d'emploi :
     //
     // Contrat :

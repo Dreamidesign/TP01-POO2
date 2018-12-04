@@ -54,7 +54,7 @@ char* TrajetSimple::getMoyenTransport() const
 } //----- Fin de TrajetSimple (constructeur de copie)
 */
 
-TrajetSimple::TrajetSimple ( const char* a , const char* b , const char* mT) : Trajet (a , b)
+TrajetSimple::TrajetSimple (  char* a ,  char* b ,  char* mT) : Trajet (a , b)
 // Algorithme :
 //
 {

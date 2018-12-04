@@ -27,7 +27,7 @@ using namespace std;
 		// Algorithme :
 		//
 	{
-		cout << c << "de " << villeDepart << " a " << villeArrive << " ";
+		cout << c << "De " << villeDepart << " a " << villeArrive << " ";
 	} //----- Fin de Affichage
 
 
@@ -59,7 +59,7 @@ using namespace std;
 	} //----- Fin de Trajet (constructeur de copie)
 	*/
 
-	Trajet::Trajet(const char* a, const char* b)
+	Trajet::Trajet(char* a, char* b)
 		// Algorithme :
 		//
 	{
