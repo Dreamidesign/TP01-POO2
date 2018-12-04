@@ -22,24 +22,24 @@
 //
 //------------------------------------------------------------------------
 
-class Trajet 
+class Trajet
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    virtual void Affichage ( const char * c = "") const = 0; 
+
+    virtual void Affichage ( const char * c = "") const = 0;
     // Mode d'emploi :
     //
     // Contrat :
-    // il s'agit d'un méthode virtuelle pure ( =0) on définit ainsi une classe abstraite 
+    // il s'agit d'un méthode virtuelle pure ( =0) on définit ainsi une classe abstraite
 	// son constructeur est déclaré en protected pour bien eviter la création d'instances
-	//de trajet ce qui n'a aucun sens 
+	//de trajet ce qui n'a aucun sens
 
     char * getVilleDepart () const;
-    char * getVilleArrive() const ; 
-
+    char * getVilleArrive() const ;
+    const char * getType(); // Renvoie le type du trajet
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -67,11 +67,10 @@ protected:
 	// Contrat :
 	//
 //----------------------------------------------------- Attributs protégés
-	char * villeDepart; 
-	char * villeArrive; 
+	char * villeDepart;
+	char * villeArrive;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajet>
 
 #endif // Trajet_H
-

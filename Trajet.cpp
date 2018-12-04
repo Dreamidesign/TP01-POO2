@@ -45,6 +45,11 @@ using namespace std;
 		return villeArrive;
 	} //----- Fin de getVilleDepart
 
+	const char* Trajet::getType()
+	{
+		return "";
+	}
+
 
 	//-------------------------------------------- Constructeurs - destructeur
 	/*Trajet::Trajet(const Trajet & unTrajet)

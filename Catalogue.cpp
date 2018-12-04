@@ -29,9 +29,18 @@ using namespace std;
 
 //----------------------------------------------------- M�thodes publiques
 
+Trajet** Catalogue::getTabTrajet() const
+{
+	return trajet;
+}
+
+int Catalogue::getNbTrajets() const
+{
+	return nbTrajets;
+}
+
 void Catalogue::AjoutTrajet(Trajet *t)
 {
-
 
 if(nbAllocated == nbTrajets)
 	{

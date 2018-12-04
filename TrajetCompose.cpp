@@ -35,6 +35,12 @@ void TrajetCompose::Affichage (const char* c = "") const
 	}
 } //----- Fin de Méthode
 
+const char* TrajetCompose::getType()
+{
+	return "TC";
+}//--Fin de getType()
+
+
 /*void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
 {
 	nbTrajets = nb;

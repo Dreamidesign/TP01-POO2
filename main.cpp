@@ -24,8 +24,20 @@ void ajoutSimple(Catalogue* monCatalogue)
 	cin >> mt;
 	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
 
-	monCatalogue->AjoutTrajet(t);
-	cout << "\n" << "Trajet ajoute !" << endl;
+	bool canBeAdded = true;
+	for(int i=0; i<monCatalogue->getNbTrajets(); i++)
+	{
+		if(!strcmp(t->getType(), monCatalogue->getTabTrajet()[i]->getType()) && !strcmp(monCatalogue->getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(monCatalogue->getTabTrajet()[i]->getVilleArrive(), arrivee) )
+			canBeAdded = false;
+			cout << "\n" << "Trajet existant" << endl;
+			break;
+	}
+
+	if(canBeAdded == true)
+	{
+		monCatalogue->AjoutTrajet(t);
+		cout << "\n" << "Trajet ajoute !" << endl;
+	}
 
 	/*delete[] depart;
 	delete[] arrivee;

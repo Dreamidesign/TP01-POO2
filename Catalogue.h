@@ -27,6 +27,8 @@ public:
 	void RechercheSimple(char* a, char* b) const;
 	//Catalogue RechercheComposee(char* a, char* b) const;
 	void Affichage() const;
+	Trajet** getTabTrajet() const;
+	int getNbTrajets() const;
 
 //-------------------------------------------- Constructeurs - destructeur
 	Catalogue (const Catalogue &unCatalogue);
@@ -60,7 +62,7 @@ protected:
 	//----------------------------------------------------- Attributs prot�g�s
 	Trajet ** trajet; //Liste de trajets
 	int nbTrajets = 0; //Nombre de trajets dans le catalogue
-	int nbAllocated = 100; //Espace alloué 
+	int nbAllocated = 100; //Espace alloué
 
 private:
 	//------------------------------------------------------- Attributs priv�s

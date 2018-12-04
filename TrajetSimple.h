@@ -12,7 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 
-#include "Trajet.h" 
+#include "Trajet.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -29,17 +29,19 @@ class TrajetSimple : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    void Affichage (const char* c = "" ) const; 
+
+    void Affichage (const char* c = "" ) const;
     // Mode d'emploi :
     //
     // Contrat :
     //
-    char* getMoyenTransport() const ; 
+    char* getMoyenTransport() const ;
+
+    const char* getType();
 
 
 //-------------------------------------------- Constructeurs - destructeur
-   // TrajetSimple ( const TrajetSimple & unTrajetSimple ); // A revoi pour le constructeur de copie 
+   // TrajetSimple ( const TrajetSimple & unTrajetSimple ); // A revoi pour le constructeur de copie
 
     // Mode d'emploi (constructeur de copie) :
     //
@@ -64,7 +66,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-     char* moyenTransport ; 
+     char* moyenTransport ;
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetSimple>

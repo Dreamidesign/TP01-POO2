@@ -38,6 +38,11 @@ char* TrajetSimple::getMoyenTransport() const
     return moyenTransport;
 } //----- Fin de Méthode
 
+const char* TrajetSimple::getType()
+{
+	return "TS";
+}//--Fin de getType()
+
 
 //-------------------------------------------- Constructeurs - destructeur
 /*TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
