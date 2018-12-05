@@ -104,7 +104,7 @@ void ajoutCompose(Catalogue* monCatalogue)
 	delete [] tabVille;
 	delete [] tabMT;
 }
- 
+
 void rechercher(Catalogue* monCatalogue)
 {
 	char* depart = new char[100];
