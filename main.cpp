@@ -98,8 +98,14 @@ void ajoutCompose(Catalogue* monCatalogue)
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
+<<<<<<< HEAD
 	delete [] tabVilleTemp[0];
 	delete [] tabVille[nbVilles-1];
+=======
+
+	delete[] tabVilleTemp[0];
+	delete[] tabVille[nbVilles-1];
+>>>>>>> da8c6ef827ee06eac6eb338efd6337b45e054ca3
 	delete [] tabVilleTemp;
 	delete [] tabVille;
 	delete [] tabMT;
