@@ -27,17 +27,18 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-Trajet** getTabTrajet() const
+
+Trajet** Structure::getTabTrajet() const
 {
   return trajet;
 }
 
-int getNbTrajets() const
+int Structure::getNbTrajets() const
 {
   return nbTrajets;
 }
 
-void Affichage() const
+void Structure::Affichage() const
 {
   for (int i = 0; i < nbTrajets; i++)
 	{
@@ -45,6 +46,45 @@ void Affichage() const
 	}
 }
 
+void Structure::ajouterTabTrajet(Structure * s)
+{
+  // nbTrajets = nb;
+  // trajet = new Trajet* [nbTrajets];
+  for(int i = 0; i < s->getNbTrajets(); i++)
+  {
+    // trajet[i] = new Trajet*;
+    // trajet[i] = t[i];
+    ajouterTrajet(s->getTabTrajet()[i]);
+
+  }
+}
+
+
+
+void Structure::ajouterTrajet(Trajet *t)
+{
+
+if(nbAllocated == nbTrajets)
+	{
+		Trajet ** temp;
+		nbAllocated += 30;
+		temp = new Trajet *[nbAllocated];
+
+		for (int i = 0; i < nbTrajets; i++) {
+			temp[i] = trajet[i];
+		}
+		trajet = temp;
+		delete temp ; //depend de la structure
+	}
+	nbTrajets++;
+	trajet[nbTrajets - 1] = t;
+}
+
+
+Trajet** Structure::getTabTrajet() const
+{
+  return trajet;
+}
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
