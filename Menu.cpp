@@ -72,9 +72,10 @@ void Menu::ajoutSimple(Catalogue* monCatalogue)
 		//delete t;
 	}
 
-	/*delete[] depart;
+	delete[] depart;
 	delete[] arrivee;
-	delete[] mt;*/
+	delete[] mt;
+	delete t ;
 }
 
 void Menu::ajoutCompose(Catalogue* monCatalogue)
@@ -126,7 +127,11 @@ void Menu::ajoutCompose(Catalogue* monCatalogue)
 	delete [] tabVilleTemp;
 	delete [] tabVille;
 	delete [] tabMT;
+	freeTab (tabMT , nbVilles);
+	delete[] departTC;
+	delete[] arriveeTC;
 }
+
 
 void Menu::rechercher(Catalogue* monCatalogue)
 {
@@ -243,7 +248,14 @@ Menu::~Menu ( )
 #endif
 } //----- Fin de ~Menu
 
-
+void Menu::freeTab ( char ** tab , int size )
+{
+	for ( int i = 0 ; i<size ; i++ )
+	{
+		delete[] tab[i] ;
+	}
+	delete [] tab ;
+}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
