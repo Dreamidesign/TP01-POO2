@@ -112,11 +112,7 @@ void Menu::ajoutCompose()
 		}
 	}
 
-<<<<<<< HEAD
 	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTS);
-=======
-	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles - 1], nbVilles - 1, tabTrajets);
->>>>>>> f13f2e336d0557e8926d3341be4b0b7d276a4214
 
 	liste->ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
