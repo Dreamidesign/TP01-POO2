@@ -1,59 +1,53 @@
 /*************************************************************************
-                           TrajetSimple  -  description
+                           Structure  -  description
                              -------------------
-    début                : 23/11/18
+    début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----------------
-#if ! defined ( TrajetSimple_H )
-#define TrajetSimple_H
+//---------- Interface de la classe <Structure> (fichier Structure.h) ----------------
+#if ! defined ( Structure_H )
+#define Structure_H
 
 //--------------------------------------------------- Interfaces utilisées
-
 #include "Trajet.h"
+#include <cstring>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <TrajetSimple>
+// Rôle de la classe <Structure>
 //
 //
 //------------------------------------------------------------------------
 
-class TrajetSimple : public Trajet
+class Structure
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
-    void Affichage (const char* c = "" ) const;
+    // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
-    char* getMoyenTransport() const ;
-    const char* getType();
+    Trajet** getTabTrajet() const;
+  	int getNbTrajets() const;
+    void Affichage() const;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-   // TrajetSimple ( const TrajetSimple & unTrajetSimple ); // A revoi pour le constructeur de copie
 
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    TrajetSimple ( const char*  uneVilleDepart,  const char*  uneVilleArrive , const char* unMoyenTransport);
+    Structure ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~TrajetSimple ();
+    virtual ~Structure ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,9 +59,11 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-     char* moyenTransport ;
+Trajet ** trajet;  //Liste de trajets
+int nbTrajets;    //Nombre de trajets dans le catalogue
+int nbAllocated; //Espace alloué
 };
 
-//-------------------------------- Autres définitions dépendantes de <TrajetSimple>
+//-------------------------------- Autres définitions dépendantes de <Structure>
 
-#endif // TrajetSimple_H
+#endif // Structure_H

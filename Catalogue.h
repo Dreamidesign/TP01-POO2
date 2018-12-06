@@ -5,11 +5,11 @@
 
 //--------------------------------------------------- Interfaces utilis�es
 #include "Trajet.h"
+#include <cstring>
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-#include <cstring>
 
 //------------------------------------------------------------------------
 // R�le de la classe <Catalogue>
@@ -61,8 +61,8 @@ private:
 protected:
 	//----------------------------------------------------- Attributs prot�g�s
 	Trajet ** trajet; //Liste de trajets
-	int nbTrajets = 0; //Nombre de trajets dans le catalogue
-	int nbAllocated = 100; //Espace alloué
+	int nbTrajets; //Nombre de trajets dans le catalogue
+	int nbAllocated; //Espace alloué
 
 private:
 	//------------------------------------------------------- Attributs priv�s

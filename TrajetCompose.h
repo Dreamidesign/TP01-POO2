@@ -47,7 +47,7 @@ public:
     // Contrat :
     //
 
-    TrajetCompose (  char* a,  char* b , int nb , Trajet ** t);
+    TrajetCompose ( const char*  uneVilleDepart, const char*uneVilleArrive , int nb , Trajet ** t);
     // Mode d'emploi :
     //
     // Contrat :

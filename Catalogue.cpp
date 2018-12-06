@@ -18,7 +18,7 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
 //------------------------------------------------------------- Constantes
-
+#define TAILLE 100
 //---------------------------------------------------- Variables de classe
 
 //----------------------------------------------------------- Types priv�s
@@ -51,9 +51,8 @@ if(nbAllocated == nbTrajets)
 		for (int i = 0; i < nbTrajets; i++) {
 			temp[i] = trajet[i];
 		}
-
 		trajet = temp;
-
+		delete temp ; //depend de la structure  
 	}
 	nbTrajets++;
 	trajet[nbTrajets - 1] = t;
@@ -104,8 +103,9 @@ Catalogue::Catalogue ()
 #ifdef MAP
 	cout << "Appel au constructeur de <CATALOGUE>" << endl;
 #endif
-
-	trajet = new Trajet*[nbAllocated];
+	nbTrajets= 0 ;
+	nbAllocated = TAILLE;
+	trajet = new Trajet*[TAILLE];
 } //----- Fin de CATALOGUE
 
 

@@ -17,6 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
+#include <cstring>
 
 //------------------------------------------------------------- Constantes
 
@@ -69,36 +70,17 @@ using namespace std;
 	} //----- Fin de Trajet (constructeur de copie)
 	*/
 
-	Trajet::Trajet(char* a, char* b)
+	Trajet::Trajet(const char* uneVilleDepart , const char* uneVilleArrive)
 		// Algorithme :
 		//
 	{
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
-		villeDepart = a;
-		villeArrive = b;
-
-/*
-		for (unsigned int i = 0; i < strlen(a); i++) {
-			if (a[i] == '\0')
-			{
-				villeDepart[i] = '\0';
-				break;
-			}
-			villeDepart[i] = a[i];
-
-		}
-
-		for (unsigned int i = 0; i < strlen(b); i++) {
-			if (b[i] == '\0')
-			{
-				villeArrive[i] = '\0';
-				break;
-			}
-			villeArrive[i] = b[i];
-		}
-*/
+		villeDepart = new char * [strlen( uneVilleDepart)+1];
+		villeDepart = strcpy (VilleDepart, uneVilleDepart) ;
+		villeArrive = new char * [strlen(uneVilleArrive)+1];
+		villeArrive = strcpy (uneVilleArrive,b);
 	} //----- Fin de Trajet
 
 

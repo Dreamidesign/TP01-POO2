@@ -59,7 +59,8 @@ const char* TrajetSimple::getType()
 } //----- Fin de TrajetSimple (constructeur de copie)
 */
 
-TrajetSimple::TrajetSimple (  char* a ,  char* b ,  char* mT) : Trajet (a , b)
+TrajetSimple::TrajetSimple ( const char*  uneVilleDepart,  const char*  uneVilleArrive , const char* unMoyenTransport) :
+Trajet (uneVilleDepart , uneVilleArrive)
 // Algorithme :
 //
 {
@@ -67,7 +68,8 @@ TrajetSimple::TrajetSimple (  char* a ,  char* b ,  char* mT) : Trajet (a , b)
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
 
-  moyenTransport = mT;
+  moyenTransport = new char* [strlen(unMoyenTransport)];
+  moyenTransport = strcpy(moyenTransport, unMoyenTransport);
 /*
   for (unsigned int i = 0; i < strlen(mT); i++) {
     moyenTransport[i] = mT[i];
