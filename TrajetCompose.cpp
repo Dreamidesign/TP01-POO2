@@ -41,7 +41,7 @@ const char* TrajetCompose::getType()
 }//--Fin de getType()
 
 
-/*void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
+void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
 {
 	nbTrajets = nb;
 	trajet = new Trajet* [nbTrajets];
@@ -50,7 +50,7 @@ const char* TrajetCompose::getType()
 		trajet[i] = new Trajet* ;
 		trajet[i] = t[i];
 	}
-}*/
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -68,15 +68,15 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose (  char* a ,  char* b , int nb  , Trajet ** t ) : Trajet (a, b)
+TrajetCompose::TrajetCompose (  const char*  uneVilleDepart, const char*uneVilleArrive , int nb  , Trajet ** t ) :
+Trajet (uneVilleArrive,uneVilleDepart)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-	nbTrajets = nb;
-	trajet = t;
+ajouterTrajet (t,nb) ; 
 } //----- Fin de TrajetCompose
 
 
@@ -88,7 +88,7 @@ TrajetCompose::~TrajetCompose ( )
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
 	//Trajet::~Trajet();
-	
+
 	for (int i = 0; i < nbTrajets; i++)
 	{
 		delete trajet[i];
