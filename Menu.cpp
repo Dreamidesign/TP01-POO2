@@ -75,7 +75,6 @@ void Menu::ajoutSimple()
 	delete[] depart;
 	delete[] arrivee;
 	delete[] mt;
-	delete t ;
 }
 
 void Menu::ajoutCompose()
@@ -86,8 +85,6 @@ void Menu::ajoutCompose()
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
-	char * departTC = new char[20];
-	char * arriveeTC = new char[20];
 	Trajet ** tabTrajets;
 	// tabTrajets = new Trajet *[nbVilles - 1];
 	Structure tabTS();
@@ -101,8 +98,7 @@ void Menu::ajoutCompose()
 
 		//On veut éviter la libération double des villes
 		tabVilleTemp[i] = new char[20];
-		*tabVilleTemp[i] = *tabVille[i];
-
+		strcpy(tabVilleTemp[i],tabVille[i]);
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
@@ -115,22 +111,19 @@ void Menu::ajoutCompose()
 			tabTS.ajouterTrajet(t);
 		}
 	}
-	*departTC = *tabVille[0];
-	*arriveeTC = *tabVille[nbVilles - 1];
 
+<<<<<<< HEAD
 	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTS);
+=======
+	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles - 1], nbVilles - 1, tabTrajets);
+>>>>>>> f13f2e336d0557e8926d3341be4b0b7d276a4214
 
 	liste->ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-	delete [] tabVilleTemp[0];
-	delete [] tabVille[nbVilles-1];
-	delete [] tabVilleTemp;
-	delete [] tabVille;
-	delete [] tabMT;
 	freeTab (tabMT , nbVilles);
-	delete[] departTC;
-	delete[] arriveeTC;
+	freeTab ( tabVille , nbVilles) ;
+	freeTab ( tabVilleTemp , nbVilles) ;
 }
 
 void Menu::rechercher()
@@ -152,6 +145,9 @@ void Menu::rechercher()
 			cout << "Trajet : ", trajet[i]->Affichage();
 		}
 	}
+
+	delete [] depart ;
+	delete [] arrivee ;
 
 }
 
@@ -177,7 +173,8 @@ void Menu::menuTrajet() {
 		case 3:
 			break;
 		default:
-			break;
+		cout << "Choix invalide. Attendu : 1-2-3" << endl;
+
 		}
 	} while (choix2 != 3);
 

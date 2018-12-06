@@ -59,8 +59,8 @@ const char* TrajetSimple::getType()
 } //----- Fin de TrajetSimple (constructeur de copie)
 */
 
-TrajetSimple::TrajetSimple ( const char*  uneVilleDepart,  const char*  uneVilleArrive , const char* unMoyenTransport) :
-Trajet (uneVilleDepart , uneVilleArrive)
+TrajetSimple::TrajetSimple ( const char* uneVilleDepart,  const char* uneVilleArrive , const char* unMoyenTransport) :
+Trajet (uneVilleDepart,uneVilleArrive)
 // Algorithme :
 //
 {
