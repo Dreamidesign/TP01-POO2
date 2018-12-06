@@ -52,7 +52,7 @@ if(nbAllocated == nbTrajets)
 			temp[i] = trajet[i];
 		}
 		trajet = temp;
-		delete temp ; //depend de la structure  
+		delete temp ; //depend de la structure
 	}
 	nbTrajets++;
 	trajet[nbTrajets - 1] = t;
@@ -61,12 +61,18 @@ if(nbAllocated == nbTrajets)
 
 void Catalogue::RechercheSimple(char* a, char* b) const
 {
+	int count = 0;
 	for (int i=0; i<nbTrajets; i++)
 	{
 		if (!strcmp(trajet[i]->getVilleDepart(), a) && !strcmp(trajet[i]->getVilleArrive(),b))
 		{
 			cout << "Trajet : ", trajet[i]->Affichage();
+			count ++ ;
 		}
+	}
+	if ( count == 0 )
+	{
+			cout << "Désolé , ce trajet n'est pas disponible!" << endl ;
 	}
 }
 

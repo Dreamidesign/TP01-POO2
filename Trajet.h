@@ -62,7 +62,7 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	Trajet( const char*  uneVilleDepart, const char*uneVilleArrive);
+	Trajet( const char*uneVilleDepart, const char*uneVilleArrive);
 	// Mode d'emploi :
 	//
 	// Contrat :

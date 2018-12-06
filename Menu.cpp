@@ -69,13 +69,12 @@ void Menu::ajoutSimple(Catalogue* monCatalogue)
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
 	else{
-		//delete t;
+		delete t;
 	}
 
 	delete[] depart;
 	delete[] arrivee;
 	delete[] mt;
-	delete t ;
 }
 
 void Menu::ajoutCompose(Catalogue* monCatalogue)
@@ -86,8 +85,6 @@ void Menu::ajoutCompose(Catalogue* monCatalogue)
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
-	char * departTC = new char[20];
-	char * arriveeTC = new char[20];
 	Trajet ** tabTrajets;
 	tabTrajets = new Trajet *[nbVilles - 1];
 
@@ -101,8 +98,7 @@ void Menu::ajoutCompose(Catalogue* monCatalogue)
 
 		//On veut éviter la libération double des villes
 		tabVilleTemp[i] = new char[20];
-		*tabVilleTemp[i] = *tabVille[i];
-
+		strcpy(tabVilleTemp[i],tabVille[i]);
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
@@ -114,22 +110,15 @@ void Menu::ajoutCompose(Catalogue* monCatalogue)
 			tabTrajets[i - 1] = t;
 		}
 	}
-	*departTC = *tabVille[0];
-	*arriveeTC = *tabVille[nbVilles - 1];
 
-	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTrajets);
+	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles - 1], nbVilles - 1, tabTrajets);
 
 	monCatalogue->AjoutTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-	delete [] tabVilleTemp[0];
-	delete [] tabVille[nbVilles-1];
-	delete [] tabVilleTemp;
-	delete [] tabVille;
-	delete [] tabMT;
 	freeTab (tabMT , nbVilles);
-	delete[] departTC;
-	delete[] arriveeTC;
+	freeTab ( tabVille , nbVilles) ;
+	freeTab ( tabVilleTemp , nbVilles) ;
 }
 
 
@@ -145,6 +134,9 @@ void Menu::rechercher(Catalogue* monCatalogue)
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 	monCatalogue->RechercheSimple(depart, arrivee);
+
+	delete [] depart ;
+	delete [] arrivee ;
 
 }
 
@@ -170,7 +162,8 @@ void Menu::menuTrajet(Catalogue* monCatalogue) {
 		case 3:
 			break;
 		default:
-			break;
+		cout << "Choix invalide. Attendu : 1-2-3" << endl;
+
 		}
 	} while (choix2 != 3);
 

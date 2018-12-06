@@ -68,8 +68,8 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose (  const char*  uneVilleDepart, const char*uneVilleArrive , int nb  , Trajet ** t ) :
-Trajet (uneVilleArrive,uneVilleDepart)
+TrajetCompose::TrajetCompose (  const char*uneVilleDepart, const char*uneVilleArrive , int nb  , Trajet ** t ) :
+Trajet (uneVilleDepart,uneVilleArrive)
 // Algorithme :
 //
 {
