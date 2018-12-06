@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <TrajetSimple> (fichier TrajetSimple.cpp) ------------
+//---------- Réalisation de la classe <TrajetSimple> (fichier TrajetSimple.cpp)
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -45,21 +45,11 @@ const char* TrajetSimple::getType()
 
 
 //-------------------------------------------- Constructeurs - destructeur
-/*TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
-// Algorithme :
-//
 
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
-#endif
-	villeDepart = unTrajetSimple.villeArrive;
-	villeArrive = unTrajetSimple.villeDepart;
-    moyenTransport = unTrajetSimple.moyenTransport;
-} //----- Fin de TrajetSimple (constructeur de copie)
-*/
 
-TrajetSimple::TrajetSimple ( const char* uneVilleDepart,  const char* uneVilleArrive , const char* unMoyenTransport) :
+TrajetSimple::TrajetSimple ( const char* uneVilleDepart,
+                             const char* uneVilleArrive,
+                             const char* unMoyenTransport):
 Trajet (uneVilleDepart,uneVilleArrive)
 // Algorithme :
 //
@@ -67,13 +57,8 @@ Trajet (uneVilleDepart,uneVilleArrive)
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
-
   moyenTransport = new char [strlen(unMoyenTransport)];
   moyenTransport = strcpy(moyenTransport, unMoyenTransport);
-/*
-  for (unsigned int i = 0; i < strlen(mT); i++) {
-    moyenTransport[i] = mT[i];
-  }*/
 } //----- Fin de TrajetSimple
 
 
@@ -84,7 +69,6 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-	//Trajet::~Trajet();
 	delete[] moyenTransport;
 } //----- Fin de ~TrajetSimple
 

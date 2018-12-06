@@ -44,13 +44,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-   // Trajet ( const Trajet & unTrajet ); // a priori on s'en sert pas pour l'instant
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-
 
     virtual ~Trajet ( );
     // Mode d'emploi :

@@ -58,17 +58,6 @@ using namespace std;
 
 
 	//-------------------------------------------- Constructeurs - destructeur
-	/*Trajet::Trajet(const Trajet & unTrajet)
-		// Algorithme :
-		//
-	{
-	#ifdef MAP
-		cout << "Appel au constructeur de copie de <Trajet>" << endl;
-	#endif
-		villeDepart = unTrajet.villeDepart;
-		villeArrive = unTrajet.villeArrive;
-	} //----- Fin de Trajet (constructeur de copie)
-	*/
 
 	Trajet::Trajet(const char* uneVilleDepart , const char* uneVilleArrive)
 		// Algorithme :

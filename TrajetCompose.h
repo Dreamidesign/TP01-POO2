@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
+//------ Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ------
 #if ! defined ( TrajetCompose_H )
 #define TrajetCompose_H
 
@@ -36,19 +36,18 @@ public:
     //
     // Contrat :
     //
-	// Trajet ** getListeTrajetComp();
-	const char* getType();
-	// int getNbTrajets ();
-	//void ajouterTrajet(Trajet ** t, int nb);
+
+	   const char* getType();
+     // Mode d'emploi :
+     //
+     // Contrat :
+     //
 
 //-------------------------------------------- Constructeurs - destructeur
-   // TrajetCompose ( const TrajetCompose & unTrajetCompose );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
-    TrajetCompose ( const char* uneVilleDepart, const char* uneVilleArrive , Structure *s);
+    TrajetCompose ( const char* uneVilleDepart,
+                    const char* uneVilleArrive,
+                    Structure *s);
     // Mode d'emploi :
     //
     // Contrat :
@@ -59,18 +58,16 @@ public:
     //
     // Contrat :
     //
-	//Trajet ** trajet;
+
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	// int nbTrajets;
-	// Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
   Structure * tabTC;
 };
 
-//-------------------------------- Autres définitions dépendantes de <TrajetCompose>
+//--------------------------- Autres définitions dépendantes de <TrajetCompose>
 
 #endif // TrajetCompose_H

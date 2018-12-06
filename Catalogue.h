@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Menu  -  description
+                           Catalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Menu> (fichier Menu.h) ----------------
-#if ! defined ( Menu_H )
-#define Menu_H
+//---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------
+#if ! defined ( Catalogue_H )
+#define Catalogue_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Structure.h"
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Menu>
+// Rôle de la classe <Catalogue>
 //
 //
 //------------------------------------------------------------------------
 
-class Menu
+class Catalogue
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -46,38 +46,34 @@ public:
     // Contrat :
     //
 
-    void menuTrajet();
+    void CatalogueTrajet();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void mainMenu();
+    void mainCatalogue();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-
-
-
-//------------------------------------------------- Surcharge d'opérateurs
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Menu ( const Menu & unMenu );
+    Catalogue ( const Catalogue & unCatalogue );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Menu ();
+    Catalogue ();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Menu ( );
+    virtual ~Catalogue ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -93,11 +89,11 @@ void freeTab(char ** tab , int size);
 // Contrat :
 //
 //----------------------------------------------------- Attributs protégés
-  int choix1 ; //Choix du premier menu
-  int choix2 ; //choix du sous menu d'ajout de trajets
+  int choix1 ; //Choix du premier Catalogue
+  int choix2 ; //choix du sous Catalogue d'ajout de trajets
   Structure liste;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Menu>
+//-------------------------------- Autres définitions dépendantes de <Catalogue>
 
-#endif // Menu_H
+#endif // Catalogue_H

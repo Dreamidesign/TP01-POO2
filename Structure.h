@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Structure> (fichier Structure.h) ----------------
+//---------- Interface de la classe <Structure> (fichier Structure.h) ----------
 #if ! defined ( Structure_H )
 #define Structure_H
 

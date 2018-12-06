@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp) ------------
+//-------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp)
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -69,17 +69,16 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose (const char* uneVilleDepart, const char* uneVilleArrive, Structure *tab ) : Trajet (uneVilleArrive,uneVilleDepart)
+TrajetCompose::TrajetCompose (const char* uneVilleDepart,
+															const char* uneVilleArrive,
+															Structure *tab ) :
+Trajet (uneVilleArrive,uneVilleDepart)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-// nbTrajets = nb;
-// trajet = t;
-// tabTC = new Structure();
-// tabTC->ajouterTabTrajet(tab);
 tabTC = tab;
 } //----- Fin de TrajetCompose
 

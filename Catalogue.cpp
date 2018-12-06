@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Menu  -  description
+                           Catalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Menu> (fichier Menu.cpp) ------------
+//---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -16,7 +16,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Menu.h"
+#include "Catalogue.h"
 #include "Structure.h"
 #include "Trajet.h"
 #include "TrajetSimple.h"
@@ -28,13 +28,13 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Menu::Méthode ( liste des paramètres )
+// type Catalogue::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-void Menu::ajoutSimple()
+void Catalogue::ajoutSimple()
 {
 	char* depart = new char [100];
 	char* arrivee = new char[100];
@@ -55,7 +55,8 @@ void Menu::ajoutSimple()
 			if(!strcmp(liste.getTabTrajet()[i]->getType(), t->getType())
 			&& !strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart)
 			&& !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee)
-			&& !strcmp(liste.getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
+			&& !strcmp(liste.getTabTrajet()[i]->getMoyenTransport(),
+			t->getMoyenTransport()))
 			{
 				canBeAdded = false;
 				cout << "\n" << "Trajet existant" << "\n" << endl;
@@ -76,16 +77,15 @@ void Menu::ajoutSimple()
 	delete[] mt;
 }
 
-void Menu::ajoutCompose()
+void Catalogue::ajoutCompose()
 {
 	int nbVilles = 0;
-	cout << "Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
+	cout <<"Combien d'etapes comporte votre trajet (nombre de villes total)" ;
+	cout <<endl;
 	cin >> nbVilles;
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
-	//Trajet ** tabTrajets;
-	//tabTrajets = new Trajet *[nbVilles - 1];
 	Structure *tabTS = new Structure();
 
 	cout << nbVilles << endl;
@@ -100,17 +100,19 @@ void Menu::ajoutCompose()
 		strcpy(tabVilleTemp[i],tabVille[i]);
 		if (i != 0)
 		{
-			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] << " et " << tabVille[i] << " ?" << endl;
+			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
+			 " et " << tabVille[i] << " ?" << endl;
 			tabMT[i] = new char[20];
-			cin >> tabMT[i]; //Le moyen de transport est stocke e l'adresse de la ville d'arrivee, aucun moyen de transport en 0
+			cin >> tabMT[i];
+			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
+			// aucun moyen de transport en 0
 
 			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
-						// tabTrajets[i - 1] = t;
 			tabTS->ajouterTrajet(t);
 		}
 	}
 
-TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
+TrajetCompose* tc = new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS);
 
 	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
@@ -120,7 +122,7 @@ TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
 	freeTab ( tabVilleTemp , nbVilles);
 }
 
-void Menu::rechercher()
+void Catalogue::rechercher()
 {
 	char* depart = new char[100];
 	char* arrivee = new char[100];
@@ -134,7 +136,8 @@ void Menu::rechercher()
 
 	for (int i=0; i<liste.getNbTrajets(); i++)
 	{
-		if (!strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee))
+		if (!strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) &&
+		 	  !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee))
 		{
 			cout << "Trajet : ", liste.getTabTrajet()[i]->Affichage();
 			count++;
@@ -142,7 +145,7 @@ void Menu::rechercher()
 	}
 	if ( count ==0)
 	{
-		cout << "Désolé, ce trajet n'est pas disponible!" << endl ; 
+		cout << "Désolé, ce trajet n'est pas disponible!" << endl ;
 	}
 
 	delete [] depart ;
@@ -150,13 +153,13 @@ void Menu::rechercher()
 
 }
 
-void Menu::menuTrajet() {
+void Catalogue::CatalogueTrajet() {
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
 		cout << "1. Simple" << endl;
 		cout << "2. Compose" << endl;
-		cout << "3. Retour au menu" << endl;
+		cout << "3. Retour au Catalogue" << endl;
 		cin >> choix2;
 
 		switch (choix2)
@@ -179,14 +182,14 @@ void Menu::menuTrajet() {
 
 }
 
-void Menu::mainMenu()
+void Catalogue::mainCatalogue()
 {
 	do
 	{
 		choix2 = 0;
 
-		cout << "\n" << "\n" << "------Bienvenue sur FlexiTrip------" << "\n" << endl;
-  	cout << "         Menu         " << endl;
+		cout <<"\n"<<"\n"<< "------Bienvenue sur FlexiTrip------" <<"\n"<< endl;
+  	cout << "         Catalogue         " << endl;
   	cout << "1. Ajouter un trajet" << endl;
   	cout << "2. Afficher le catalogue de trajets proposes" << endl;
   	cout << "3. Rechercher un parcours" << endl;
@@ -197,7 +200,7 @@ void Menu::mainMenu()
 		{
 		case 1:
 			cout << "*Ajout d'un trajet*" << endl;
-			menuTrajet();
+			CatalogueTrajet();
 			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
@@ -220,43 +223,43 @@ void Menu::mainMenu()
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Menu::Menu ( const Menu & unMenu )
+Catalogue::Catalogue ( const Catalogue & unCatalogue )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Menu>" << endl;
+    cout << "Appel au constructeur de copie de <Catalogue>" << endl;
 #endif
-} //----- Fin de Menu (constructeur de copie)
+} //----- Fin de Catalogue (constructeur de copie)
 
 
-Menu::Menu ()
+Catalogue::Catalogue ()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Menu>" << endl;
+    cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
   // Structure s();
 	// liste = s;
 	//liste = new Structure();
-  // mainMenu();
+  // mainCatalogue();
 	 choix1 = 0;
 	 choix2 = 3;
-} //----- Fin de Menu
+} //----- Fin de Catalogue
 
 
-Menu::~Menu ( )
+Catalogue::~Catalogue ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Menu>" << endl;
+    cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
 
-} //----- Fin de ~Menu
+} //----- Fin de ~Catalogue
 
-void Menu::freeTab ( char ** tab , int size )
+void Catalogue::freeTab ( char ** tab , int size )
 {
 	for ( int i = 0 ; i<size ; i++ )
 	{

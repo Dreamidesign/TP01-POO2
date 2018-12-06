@@ -6,7 +6,7 @@
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----------------
+//---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----
 #if ! defined ( TrajetSimple_H )
 #define TrajetSimple_H
 
@@ -40,14 +40,10 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-   // TrajetSimple ( const TrajetSimple & unTrajetSimple ); // A revoi pour le constructeur de copie
 
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    TrajetSimple ( const char*  uneVilleDepart,  const char*  uneVilleArrive , const char* unMoyenTransport);
+    TrajetSimple ( const char*  uneVilleDepart,
+                   const char*  uneVilleArrive ,
+                   const char* unMoyenTransport);
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +64,6 @@ protected:
      char* moyenTransport ;
 };
 
-//-------------------------------- Autres définitions dépendantes de <TrajetSimple>
+//---------------------------- Autres définitions dépendantes de <TrajetSimple>
 
 #endif // TrajetSimple_H

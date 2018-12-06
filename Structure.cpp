@@ -51,22 +51,6 @@ void Structure::Affichage() const
 }
 
 
-/*
-void Structure::ajouterTabTrajet(Structure * s)
->>>>>>> 62a1537fed8a496398a3bcb1a6719f34c9e7ace3
-{
-  // nbTrajets = nb;
-  // trajet = new Trajet* [nbTrajets];
-  for(int i = 0; i < s->getNbTrajets(); i++)
-  {
-    // trajet[i] = new Trajet*;
-    // trajet[i] = t[i];
-    ajouterTrajet(s->getTabTrajet()[i]);
-
-  }
-}*/
-
-
 
 void Structure::ajouterTrajet(Trajet *t)
 {
@@ -92,7 +76,6 @@ if(nbAllocated == nbTrajets)
 	trajet[nbTrajets - 1] = t;
 }
 
-//------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
