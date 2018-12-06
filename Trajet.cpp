@@ -77,10 +77,10 @@ using namespace std;
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
-		villeDepart = new char * [strlen( uneVilleDepart)+1];
-		villeDepart = strcpy (VilleDepart, uneVilleDepart) ;
-		villeArrive = new char * [strlen(uneVilleArrive)+1];
-		villeArrive = strcpy (uneVilleArrive,b);
+		villeDepart = new char [strlen( uneVilleDepart)+1];
+		villeDepart = strcpy (villeDepart, uneVilleDepart) ;
+		villeArrive = new char [strlen(uneVilleArrive)+1];
+		villeArrive = strcpy (villeArrive,uneVilleDepart);
 	} //----- Fin de Trajet
 
 

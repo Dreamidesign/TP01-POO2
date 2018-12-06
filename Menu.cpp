@@ -72,9 +72,10 @@ void Menu::ajoutSimple()
 		delete t;
 	}
 
-	/*delete[] depart;
+	delete[] depart;
 	delete[] arrivee;
-	delete[] mt;*/
+	delete[] mt;
+	delete t ;
 }
 
 void Menu::ajoutCompose()
@@ -126,6 +127,9 @@ void Menu::ajoutCompose()
 	delete [] tabVilleTemp;
 	delete [] tabVille;
 	delete [] tabMT;
+	freeTab (tabMT , nbVilles);
+	delete[] departTC;
+	delete[] arriveeTC;
 }
 
 void Menu::rechercher()
@@ -245,7 +249,14 @@ Menu::~Menu ( )
 #endif
 } //----- Fin de ~Menu
 
-
+void Menu::freeTab ( char ** tab , int size )
+{
+	for ( int i = 0 ; i<size ; i++ )
+	{
+		delete[] tab[i] ;
+	}
+	delete [] tab ;
+}
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées

@@ -68,7 +68,7 @@ Trajet (uneVilleDepart , uneVilleArrive)
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
 
-  moyenTransport = new char* [strlen(unMoyenTransport)];
+  moyenTransport = new char [strlen(unMoyenTransport)];
   moyenTransport = strcpy(moyenTransport, unMoyenTransport);
 /*
   for (unsigned int i = 0; i < strlen(mT); i++) {

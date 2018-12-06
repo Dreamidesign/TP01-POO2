@@ -38,7 +38,7 @@ public:
 	Trajet ** getListeTrajetComp();
 	const char* getType();
 	int getNbTrajets ();
-	void ajouterTrajet(Trajet ** t, int nb);
+	//void ajouterTrajet(Trajet ** t, int nb);
 
 //-------------------------------------------- Constructeurs - destructeur
    // TrajetCompose ( const TrajetCompose & unTrajetCompose );
