@@ -85,8 +85,8 @@ void Menu::ajoutCompose()
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
-	// Trajet ** tabTrajets;
-	// tabTrajets = new Trajet *[nbVilles - 1];
+	//Trajet ** tabTrajets;
+	//tabTrajets = new Trajet *[nbVilles - 1];
 	Structure *tabTS = new Structure();
 
 	cout << nbVilles << endl;
@@ -105,14 +105,13 @@ void Menu::ajoutCompose()
 			tabMT[i] = new char[20];
 			cin >> tabMT[i]; //Le moyen de transport est stocke e l'adresse de la ville d'arrivee, aucun moyen de transport en 0
 
-
-			 Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
-			// tabTrajets[i - 1] = t;
+			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
+						// tabTrajets[i - 1] = t;
 			tabTS->ajouterTrajet(t);
 		}
 	}
 
-	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
+TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
 
 	liste->ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;

@@ -46,7 +46,8 @@ void Structure::Affichage() const
 	}
 }
 
-void Structure::ajouterTabTrajet(Structure * s)
+
+void Structure::ajouterTabTrajet(Trajet **)
 {
   // nbTrajets = nb;
   // trajet = new Trajet* [nbTrajets];
@@ -74,7 +75,12 @@ if(nbAllocated == nbTrajets)
 			temp[i] = trajet[i];
 		}
 		trajet = temp;
-		delete temp ; //depend de la structure
+
+    for (int i = 0; i < nbAllocated; i++)
+    {
+      delete temp[i];
+    }
+    delete[] temp;
 	}
 	nbTrajets++;
 	trajet[nbTrajets - 1] = t;

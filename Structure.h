@@ -60,7 +60,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-Trajet ** trajet;  //Liste de trajets
+Trajet** trajet ;  //Liste de trajets
 int nbTrajets;    //Nombre de trajets dans le catalogue
 int nbAllocated; //Espace alloué
 };
