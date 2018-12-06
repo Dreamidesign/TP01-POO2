@@ -36,9 +36,9 @@ public:
     //
     // Contrat :
     //
-	Trajet ** getListeTrajetComp();
+	// Trajet ** getListeTrajetComp();
 	const char* getType();
-	int getNbTrajets ();
+	// int getNbTrajets ();
 	//void ajouterTrajet(Trajet ** t, int nb);
 
 //-------------------------------------------- Constructeurs - destructeur
