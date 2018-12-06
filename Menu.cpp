@@ -50,12 +50,12 @@ void Menu::ajoutSimple()
 	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
 
 	bool canBeAdded = true;
-	for(int i=0; i<liste->getNbTrajets(); i++)
+	for(int i=0; i<liste.getNbTrajets(); i++)
 	{
-			if(!strcmp(liste->getTabTrajet()[i]->getType(), t->getType())
-			&& !strcmp(liste->getTabTrajet()[i]->getVilleDepart(), depart)
-			&& !strcmp(liste->getTabTrajet()[i]->getVilleArrive(), arrivee)
-			&& !strcmp(liste->getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
+			if(!strcmp(liste.getTabTrajet()[i]->getType(), t->getType())
+			&& !strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart)
+			&& !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee)
+			&& !strcmp(liste.getTabTrajet()[i]->getMoyenTransport(), t->getMoyenTransport()))
 			{
 				canBeAdded = false;
 				cout << "\n" << "Trajet existant" << "\n" << endl;
@@ -64,7 +64,7 @@ void Menu::ajoutSimple()
 	}
 	if(canBeAdded == true)
 	{
-		liste->ajouterTrajet(t);
+		liste.ajouterTrajet(t);
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
 	else{
@@ -112,7 +112,7 @@ void Menu::ajoutCompose()
 
 TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
 
-	liste->ajouterTrajet(tc);
+	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
 	freeTab (tabMT , nbVilles);
@@ -124,7 +124,7 @@ void Menu::rechercher()
 {
 	char* depart = new char[100];
 	char* arrivee = new char[100];
-
+	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
 	cin >> depart;
 	cout << "Et votre ville d'arrivee" << endl;
@@ -132,12 +132,17 @@ void Menu::rechercher()
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
-	for (int i=0; i<liste->getNbTrajets(); i++)
+	for (int i=0; i<liste.getNbTrajets(); i++)
 	{
-		if (!strcmp(liste->getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(liste->getTabTrajet()[i]->getVilleArrive(), arrivee))
+		if (!strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee))
 		{
-			cout << "Trajet : ", liste->getTabTrajet()[i]->Affichage();
+			cout << "Trajet : ", liste.getTabTrajet()[i]->Affichage();
+			count++;
 		}
+	}
+	if ( count ==0)
+	{
+		cout << "Désolé, ce trajet n'est pas disponible!" << endl ; 
 	}
 
 	delete [] depart ;
@@ -196,7 +201,7 @@ void Menu::mainMenu()
 			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
-			liste->Affichage();
+			liste.Affichage();
 			break;
 		case 3:
 			cout << "*Recherche...*" << endl;
@@ -234,9 +239,10 @@ Menu::Menu ()
 #endif
   // Structure s();
 	// liste = s;
-	liste = new Structure();
+	//liste = new Structure();
   // mainMenu();
-
+	 choix1 = 0;
+	 choix2 = 3;
 } //----- Fin de Menu
 
 
@@ -247,7 +253,7 @@ Menu::~Menu ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Menu>" << endl;
 #endif
-	delete liste;
+
 } //----- Fin de ~Menu
 
 void Menu::freeTab ( char ** tab , int size )

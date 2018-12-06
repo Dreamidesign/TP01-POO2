@@ -93,9 +93,9 @@ void freeTab(char ** tab , int size);
 // Contrat :
 //
 //----------------------------------------------------- Attributs protégés
-  int choix1 = 0; //Choix du premier menu
-  int choix2 = 3; //choix du sous menu d'ajout de trajets
-  Structure * liste;
+  int choix1 ; //Choix du premier menu
+  int choix2 ; //choix du sous menu d'ajout de trajets
+  Structure liste;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Menu>

@@ -40,6 +40,10 @@ int Structure::getNbTrajets() const
 
 void Structure::Affichage() const
 {
+  if (nbTrajets == 0)
+  {
+    cout << "Le catalogue est vide!" << endl;
+  }
   for (int i = 0; i < nbTrajets; i++)
 	{
 		trajet[i]->Affichage();
