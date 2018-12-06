@@ -41,7 +41,6 @@ public:
     void ajouterTrajet(Trajet *t);
 
 //-------------------------------------------- Constructeurs - destructeur
-
     Structure ( );
     // Mode d'emploi :
     //

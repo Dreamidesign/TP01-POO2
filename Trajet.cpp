@@ -58,7 +58,6 @@ using namespace std;
 
 
 	//-------------------------------------------- Constructeurs - destructeur
-
 	Trajet::Trajet(const char* uneVilleDepart , const char* uneVilleArrive)
 		// Algorithme :
 		//

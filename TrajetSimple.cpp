@@ -46,7 +46,6 @@ const char* TrajetSimple::getType()
 
 //-------------------------------------------- Constructeurs - destructeur
 
-
 TrajetSimple::TrajetSimple ( const char* uneVilleDepart,
                              const char* uneVilleArrive,
                              const char* unMoyenTransport):

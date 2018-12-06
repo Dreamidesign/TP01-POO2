@@ -42,31 +42,7 @@ const char* TrajetCompose::getType()
 }//--Fin de getType()
 
 
-/*void TrajetCompose::ajouterTrajet(Trajet ** t, int nb)
-{
-	nbTrajets = nb;
-	trajet = new Trajet* [nbTrajets];
-	for(int i = 0; i < nbTrajets; i++)
-	{
-		trajet[i] = new TrajetSimple () ;
-		trajet[i] = t[i];
-	}
-}*/
-
 //-------------------------------------------- Constructeurs - destructeur
-
-/*
-TrajetCompose::TrajetCompose(const Trajet & unTrajet)
-// Algorithme :
-//
-{
-	#ifdef MAP
-	cout << "Appel au constructeur de copie  de <TrajetCompose>" << endl;
-	#endif
-	//ajouterTrajet(t, nb);
-	nbTrajets = unTrajet.nbTrajets;
-	trajet = unTrajet.trajet;
-} //----- Fin de TrajetCompose*/
 
 
 TrajetCompose::TrajetCompose (const char* uneVilleDepart,

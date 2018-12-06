@@ -40,7 +40,7 @@ public:
     char * getVilleDepart () const;
     char * getVilleArrive() const ;
     virtual const char * getType(); // Renvoie le type du trajet
-    virtual char* getMoyenTransport() const ; //BOF
+    virtual char* getMoyenTransport() const ; //renvoie le moyen de transport
 
 
 //-------------------------------------------- Constructeurs - destructeur

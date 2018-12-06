@@ -80,15 +80,20 @@ void Catalogue::ajoutSimple()
 void Catalogue::ajoutCompose()
 {
 	int nbVilles = 0;
-	cout <<"Combien d'etapes comporte votre trajet (nombre de villes total)" ;
-	cout <<endl;
+	cout <<"Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
 	cin >> nbVilles;
+
+	while(nbVilles <= 2) //On ne prend en compte que les trajets composés
+	{
+		cout << "Erreur : Le nombre d'etapes minimum est 3" << endl;
+		cout << "Combien d'étapes comporte votre trajet ? (nombre de villes total)" << endl;
+		cin >> nbVilles;
+	}
+
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
 	Structure *tabTS = new Structure();
-
-	cout << nbVilles << endl;
 	for (int i = 0; i < nbVilles; i++)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
@@ -223,16 +228,6 @@ void Catalogue::mainCatalogue()
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue ( const Catalogue & unCatalogue )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Catalogue>" << endl;
-#endif
-} //----- Fin de Catalogue (constructeur de copie)
-
-
 Catalogue::Catalogue ()
 // Algorithme :
 //
@@ -240,10 +235,6 @@ Catalogue::Catalogue ()
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
-  // Structure s();
-	// liste = s;
-	//liste = new Structure();
-  // mainCatalogue();
 	 choix1 = 0;
 	 choix2 = 3;
 } //----- Fin de Catalogue

@@ -61,12 +61,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Catalogue ( const Catalogue & unCatalogue );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     Catalogue ();
     // Mode d'emploi :
     //
