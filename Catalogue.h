@@ -23,11 +23,11 @@ class Catalogue
 
 public:
 	//----------------------------------------------------- M�thodes publiques
-	void AjoutTrajet(Trajet* t);
+	// void AjoutTrajet(Trajet* t);
 	void RechercheSimple(char* a, char* b) const;
 	//Catalogue RechercheComposee(char* a, char* b) const;
 	void Affichage() const;
-	Trajet** getTabTrajet() const;
+	Structure getTab() const;
 	int getNbTrajets() const;
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -60,9 +60,9 @@ private:
 
 protected:
 	//----------------------------------------------------- Attributs prot�g�s
-	Trajet ** trajet; //Liste de trajets
-	int nbTrajets; //Nombre de trajets dans le catalogue
-	int nbAllocated; //Espace alloué
+	Structure tableau; //Liste de trajets
+	//int nbTrajets; //Nombre de trajets dans le catalogue
+	//int nbAllocated; //Espace alloué
 
 private:
 	//------------------------------------------------------- Attributs priv�s

@@ -28,31 +28,31 @@ class Menu
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void ajoutSimple(Catalogue* monCatalogue);
+    void ajoutSimple();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void ajoutCompose(Catalogue* monCatalogue);
+    void ajoutCompose();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void rechercher(Catalogue* monCatalogue);
+    void rechercher();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void menuTrajet(Catalogue* monCatalogue);
+    void menuTrajet();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void mainMenu(Catalogue* monCatalogue);
+    void mainMenu();
     // Mode d'emploi :
     //
     // Contrat :
@@ -89,7 +89,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
   int choix1 = 0; //Choix du premier menu
   int choix2 = 3; //choix du sous menu d'ajout de trajets
-  Catalogue * monCatalogue;
+  Structure liste;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Menu>
