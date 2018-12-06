@@ -46,6 +46,7 @@ void Structure::Affichage() const
 	}
 }
 
+/*
 void Structure::ajouterTabTrajet(Structure * s)
 {
   // nbTrajets = nb;
@@ -57,7 +58,7 @@ void Structure::ajouterTabTrajet(Structure * s)
     ajouterTrajet(s->getTabTrajet()[i]);
 
   }
-}
+}*/
 
 
 

@@ -48,7 +48,6 @@ void Menu::ajoutSimple()
 	cin >> mt;
 
 	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
-	cout << sizeof(t) << endl ;
 
 	bool canBeAdded = true;
 	for(int i=0; i<liste->getNbTrajets(); i++)
@@ -119,7 +118,7 @@ void Menu::ajoutCompose()
 
 	freeTab (tabMT , nbVilles);
 	freeTab ( tabVille , nbVilles) ;
-	freeTab ( tabVilleTemp , nbVilles) ;
+	freeTab ( tabVilleTemp , nbVilles);
 }
 
 void Menu::rechercher()

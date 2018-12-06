@@ -78,8 +78,9 @@ TrajetCompose::TrajetCompose (const char* uneVilleDepart, const char* uneVilleAr
 #endif
 // nbTrajets = nb;
 // trajet = t;
-tabTC = new Structure();
-tabTC->ajouterTabTrajet(tab);
+// tabTC = new Structure();
+// tabTC->ajouterTabTrajet(tab);
+tabTC = tab;
 } //----- Fin de TrajetCompose
 
 
