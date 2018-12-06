@@ -17,7 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Menu.h"
-#include "Catalogue.h"
+#include "Structure.h"
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
@@ -51,7 +51,7 @@ void Menu::ajoutSimple()
 	cout << sizeof(t) << endl ;
 
 	bool canBeAdded = true;
-	for(int i=0; i<monCatalogue->getNbTrajets(); i++)
+	for(int i=0; i<liste->getNbTrajets(); i++)
 	{
 			if(!strcmp(liste->getTabTrajet()[i]->getType(), t->getType())
 			&& !strcmp(liste->getTabTrajet()[i]->getVilleDepart(), depart)
@@ -85,9 +85,9 @@ void Menu::ajoutCompose()
 	char** tabVille = new char *[nbVilles];
 	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
-	Trajet ** tabTrajets;
+	// Trajet ** tabTrajets;
 	// tabTrajets = new Trajet *[nbVilles - 1];
-	Structure tabTS();
+	Structure *tabTS = new Structure();
 
 	cout << nbVilles << endl;
 	for (int i = 0; i < nbVilles; i++)
@@ -106,13 +106,13 @@ void Menu::ajoutCompose()
 			cin >> tabMT[i]; //Le moyen de transport est stocke e l'adresse de la ville d'arrivee, aucun moyen de transport en 0
 
 
-			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
+			 Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
 			// tabTrajets[i - 1] = t;
-			tabTS.ajouterTrajet(t);
+			tabTS->ajouterTrajet(t);
 		}
 	}
 
-	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTS);
+	TrajetCompose* tc = new TrajetCompose(tabVille[0], tabVille[nbVilles-1], tabTS);
 
 	liste->ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
@@ -134,11 +134,11 @@ void Menu::rechercher()
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
-	for (int i=0; i<nbTrajets; i++)
+	for (int i=0; i<liste->getNbTrajets(); i++)
 	{
-		if (!strcmp(liste->getTabTrajet()[i]->getVilleDepart(), a) && !strcmp(liste->getTabTrajet()[i]->getVilleArrive(),b))
+		if (!strcmp(liste->getTabTrajet()[i]->getVilleDepart(), depart) && !strcmp(liste->getTabTrajet()[i]->getVilleArrive(), arrivee))
 		{
-			cout << "Trajet : ", trajet[i]->Affichage();
+			cout << "Trajet : ", liste->getTabTrajet()[i]->Affichage();
 		}
 	}
 
@@ -198,7 +198,7 @@ void Menu::mainMenu()
 			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
-			monCatalogue->Affichage();
+			liste->Affichage();
 			break;
 		case 3:
 			cout << "*Recherche...*" << endl;
@@ -234,10 +234,11 @@ Menu::Menu ()
 #ifdef MAP
     cout << "Appel au constructeur de <Menu>" << endl;
 #endif
-  Structure s = new Structure();
-	liste = c;
-  mainMenu();
-	delete s;
+  // Structure s();
+	// liste = s;
+	liste = new Structure();
+  // mainMenu();
+
 } //----- Fin de Menu
 
 
@@ -248,6 +249,7 @@ Menu::~Menu ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Menu>" << endl;
 #endif
+	delete liste;
 } //----- Fin de ~Menu
 
 void Menu::freeTab ( char ** tab , int size )

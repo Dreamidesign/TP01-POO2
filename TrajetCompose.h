@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
+#include "Structure.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -47,7 +48,7 @@ public:
     // Contrat :
     //
 
-    TrajetCompose ( const char*  uneVilleDepart, const char*uneVilleArrive , int nb , Trajet ** t);
+    TrajetCompose ( const char* uneVilleDepart, const char* uneVilleArrive, Structure* s);
     // Mode d'emploi :
     //
     // Contrat :

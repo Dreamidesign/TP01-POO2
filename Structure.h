@@ -37,9 +37,8 @@ public:
     Trajet** getTabTrajet() const;
   	int getNbTrajets() const;
     void Affichage() const;
-    void ajouterTabTrajet(Structure s);
+    void ajouterTabTrajet(Structure* s);
     void ajouterTrajet(Trajet *t);
-    Trajet** getTabTrajet() const;
 
 //-------------------------------------------- Constructeurs - destructeur
 

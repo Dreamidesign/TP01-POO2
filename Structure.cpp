@@ -46,7 +46,7 @@ void Structure::Affichage() const
 	}
 }
 
-void Structure::ajouterTabTrajet(Structure s)
+void Structure::ajouterTabTrajet(Structure * s)
 {
   // nbTrajets = nb;
   // trajet = new Trajet* [nbTrajets];
@@ -80,23 +80,19 @@ if(nbAllocated == nbTrajets)
 	trajet[nbTrajets - 1] = t;
 }
 
-
-Trajet** Structure::getTabTrajet() const
-{
-  return trajet;
-}
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Structure::Structure ( )
+Structure::Structure ()
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Structure>" << endl;
 #endif
+nbTrajets = 0;
 nbAllocated = TAILLE ;
 trajet = new Trajet*[TAILLE];
 } //----- Fin de Structure

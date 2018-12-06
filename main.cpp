@@ -1,7 +1,7 @@
 // #include "Trajet.h"
 // #include "TrajetSimple.h"
 //#include "TrajetCompose.h"
-#include "Catalogue.h"
+// #include "Catalogue.h"
 #include "Menu.h"
 // #include <iostream>
 // #include <cstring>
@@ -198,10 +198,10 @@ void menu(Catalogue* monCatalogue)
 int main()
 {
 
-	Catalogue * c = new Catalogue();
-	Menu m(c);
-
-	delete c;
-
+	// Catalogue * c = new Catalogue();
+	Menu* m = new Menu();
+	m->mainMenu();
+	delete m;
+	
 	return 0;
 }

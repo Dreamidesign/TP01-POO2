@@ -17,6 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "TrajetCompose.h"
+// #include "Structure.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -31,7 +32,7 @@ void TrajetCompose::Affichage (const char* c = "") const
 	cout << "Le trajet est compose des trajets suivants :" << endl;
 	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
-		trajet[i]->Affichage();
+		tabTC->getTabTrajet()[i]->Affichage();
 	}
 } //----- Fin de Méthode
 
@@ -68,8 +69,7 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose (const char* uneVilleDepart, const char* uneVilleArrive , int nb  , Structure tab ) :
-Trajet (uneVilleArrive,uneVilleDepart)
+TrajetCompose::TrajetCompose (const char* uneVilleDepart, const char* uneVilleArrive, Structure* tab ) : Trajet (uneVilleArrive,uneVilleDepart)
 // Algorithme :
 //
 {
@@ -92,11 +92,7 @@ TrajetCompose::~TrajetCompose ( )
 #endif
 	//Trajet::~Trajet();
 
-	for (int i = 0; i < tabTC->getNbTrajets(); i++)
-	{
-		delete trajet[i];
-	}
-	delete[] trajet;
+	delete tabTC;
 } //----- Fin de ~TrajetCompose
 
 

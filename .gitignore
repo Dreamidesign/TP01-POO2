@@ -5,3 +5,5 @@
 ./voyage
 Debug/
 voyage
+Catalogue.h
+Catalogue.cpp
