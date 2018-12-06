@@ -29,7 +29,7 @@ void TrajetCompose::Affichage (const char* c = "") const
 {
 	Trajet::Affichage(c);
 	cout << "Le trajet est compose des trajets suivants :" << endl;
-	for (int i = 0; i < nbTrajets; i++)
+	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
 		trajet[i]->Affichage();
 	}
@@ -68,7 +68,7 @@ TrajetCompose::TrajetCompose(const Trajet & unTrajet)
 } //----- Fin de TrajetCompose*/
 
 
-TrajetCompose::TrajetCompose (  const char*  uneVilleDepart, const char*uneVilleArrive , int nb  , Trajet ** t ) :
+TrajetCompose::TrajetCompose (const char* uneVilleDepart, const char* uneVilleArrive , int nb  , Structure tab ) :
 Trajet (uneVilleArrive,uneVilleDepart)
 // Algorithme :
 //
@@ -76,8 +76,10 @@ Trajet (uneVilleArrive,uneVilleDepart)
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-nbTrajets = nb;
-trajet = t;
+// nbTrajets = nb;
+// trajet = t;
+tabTC = new Structure();
+tabTC->ajouterTabTrajet(tab);
 } //----- Fin de TrajetCompose
 
 
@@ -90,7 +92,7 @@ TrajetCompose::~TrajetCompose ( )
 #endif
 	//Trajet::~Trajet();
 
-	for (int i = 0; i < nbTrajets; i++)
+	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
 		delete trajet[i];
 	}

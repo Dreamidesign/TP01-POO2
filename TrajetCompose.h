@@ -65,8 +65,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	int nbTrajets;
-	Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
+	// int nbTrajets;
+	// Trajet ** trajet;  // on a pas le droit de creer des trajets, on doit crer un tableau de pointeurs
+  Structure * tabTC;
 };
 
 //-------------------------------- Autres définitions dépendantes de <TrajetCompose>

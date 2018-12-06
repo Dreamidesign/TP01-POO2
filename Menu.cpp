@@ -89,8 +89,8 @@ void Menu::ajoutCompose()
 	char * departTC = new char[20];
 	char * arriveeTC = new char[20];
 	Trajet ** tabTrajets;
-	tabTrajets = new Trajet *[nbVilles - 1];
-
+	// tabTrajets = new Trajet *[nbVilles - 1];
+	Structure tabTS();
 
 	cout << nbVilles << endl;
 	for (int i = 0; i < nbVilles; i++)
@@ -111,15 +111,16 @@ void Menu::ajoutCompose()
 
 
 			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
-			tabTrajets[i - 1] = t;
+			// tabTrajets[i - 1] = t;
+			tabTS.ajouterTrajet(t);
 		}
 	}
 	*departTC = *tabVille[0];
 	*arriveeTC = *tabVille[nbVilles - 1];
 
-	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTrajets);
+	TrajetCompose* tc = new TrajetCompose(departTC, arriveeTC, nbVilles - 1, tabTS);
 
-	monCatalogue->AjoutTrajet(tc);
+	liste->ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
 	delete [] tabVilleTemp[0];
@@ -143,7 +144,14 @@ void Menu::rechercher()
 	cin >> arrivee;
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
-	monCatalogue->RechercheSimple(depart, arrivee);
+
+	for (int i=0; i<nbTrajets; i++)
+	{
+		if (!strcmp(liste->getTabTrajet()[i]->getVilleDepart(), a) && !strcmp(liste->getTabTrajet()[i]->getVilleArrive(),b))
+		{
+			cout << "Trajet : ", trajet[i]->Affichage();
+		}
+	}
 
 }
 
