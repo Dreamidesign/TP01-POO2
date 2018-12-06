@@ -1,12 +1,13 @@
-#include "Trajet.h"
-#include "TrajetSimple.h"
-#include "TrajetCompose.h"
+// #include "Trajet.h"
+// #include "TrajetSimple.h"
+//#include "TrajetCompose.h"
 #include "Catalogue.h"
-#include <iostream>
-#include <cstring>
+#include "Menu.h"
+// #include <iostream>
+// #include <cstring>
 
-using namespace std;
-
+//using namespace std;
+/*
 int choix1 = 0; //Choix du premier menu
 int choix2 = 3; //choix du sous menu d'ajout de trajets
 
@@ -49,9 +50,7 @@ void ajoutSimple(Catalogue* monCatalogue)
 		//delete t;
 	}
 
-	/*delete[] depart;
-	delete[] arrivee;
-	delete[] mt;*/
+	/
 }
 
 void ajoutCompose(Catalogue* monCatalogue)
@@ -194,12 +193,12 @@ void menu(Catalogue* monCatalogue)
 
 	} while (choix1 != 4);
 }
-
+*/
 int main()
 {
 
 	Catalogue * c = new Catalogue();
-	menu(c);
+	Menu m(c);
 
 	delete c;
 
