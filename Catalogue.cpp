@@ -103,16 +103,16 @@ void Catalogue::ajoutCompose()
 		//On veut éviter la libération double des villes
 		tabVilleTemp[i] = new char[20];
 		strcpy(tabVilleTemp[i],tabVille[i]);
+		if(i != nbVilles - 1) tabMT[i] = new char[20]; //On a moins de moyens de transport que de villes 
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
 			 " et " << tabVille[i] << " ?" << endl;
-			tabMT[i] = new char[20];
-			cin >> tabMT[i];
+			cin >> tabMT[i-1];
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
 
-			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i]);
+			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i-1]);
 			tabTS->ajouterTrajet(t);
 		}
 	}
@@ -122,7 +122,7 @@ TrajetCompose* tc = new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS);
 	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
-	freeTab (tabMT , nbVilles);
+	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
 	freeTab ( tabVilleTemp , nbVilles);
 }

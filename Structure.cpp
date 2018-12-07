@@ -101,7 +101,7 @@ Structure::~Structure ( )
     cout << "Appel au destructeur de <Structure>" << endl;
 #endif
 
-	for (int i = 0; i < nbAllocated; i++)
+	for (int i = 0; i < nbTrajets; i++)
 	{
 		delete trajet[i];
 	}

@@ -56,7 +56,7 @@ Trajet (uneVilleDepart,uneVilleArrive)
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
-  moyenTransport = new char [strlen(unMoyenTransport)];
+  moyenTransport = new char [strlen(unMoyenTransport)+1];
   moyenTransport = strcpy(moyenTransport, unMoyenTransport);
 } //----- Fin de TrajetSimple
 
