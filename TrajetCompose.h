@@ -37,11 +37,12 @@ public:
     // Contrat :
     //
 
-	   const char* getType();
+	  // const char* getType();
      // Mode d'emploi :
      //
      // Contrat :
      //
+     char* getMoyenTransport() const ; 
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -66,6 +67,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
   Structure * tabTC;
+  char* moyenTransport;
 };
 
 //--------------------------- Autres définitions dépendantes de <TrajetCompose>

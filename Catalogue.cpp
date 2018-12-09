@@ -36,9 +36,9 @@ using namespace std;
 
 void Catalogue::ajoutSimple()
 {
-	char* depart = new char [100];
-	char* arrivee = new char[100];
-	char* mt = new char[100];
+	char* depart (new char [100]);
+	char* arrivee (new char[100]);
+	char* mt (new char[100]);
 
 	cout << "Quel est le depart du trajet" << endl;
 	cin >> depart;
@@ -47,16 +47,17 @@ void Catalogue::ajoutSimple()
 	cout << "Quel est le moyen de transport employe ?" << endl;
 	cin >> mt;
 
-	TrajetSimple* t = new TrajetSimple(depart, arrivee, mt);
+	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
 	bool canBeAdded = true;
 	for(int i=0; i<liste.getNbTrajets(); i++)
 	{
-			if(!strcmp(liste.getTabTrajet()[i]->getType(), t->getType())
+			/*if(!strcmp(liste.getTabTrajet()[i]->getType(), t->getType())
 			&& !strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart)
 			&& !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee)
 			&& !strcmp(liste.getTabTrajet()[i]->getMoyenTransport(),
-			t->getMoyenTransport()))
+			t->getMoyenTransport()))*/
+			if (t->doublon(liste.getTabTrajet()[i]))
 			{
 				canBeAdded = false;
 				cout << "\n" << "Trajet existant" << "\n" << endl;
@@ -68,7 +69,8 @@ void Catalogue::ajoutSimple()
 		liste.ajouterTrajet(t);
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
-	else{
+	else
+	{
 		delete t;
 	}
 
@@ -90,16 +92,16 @@ void Catalogue::ajoutCompose()
 		cin >> nbVilles;
 	}
 
-	char** tabVille = new char *[nbVilles];
-	char** tabMT = new char *[nbVilles];
-	Structure *tabTS = new Structure();
+	char** tabVille (new char *[nbVilles]);
+	char** tabMT (new char *[nbVilles]);
+	Structure *tabTS (new Structure());
 	for (int i = 0; i < nbVilles; i++)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
 		tabVille[i] = new char[20];
 		cin >> tabVille[i];
 
-		if(i != nbVilles - 1) tabMT[i] = new char[20];
+		if(i != nbVilles - 1) tabMT[i]=new char[20];
 		//On a moins de moyens de transport que de villes
 		if (i != 0)
 		{
@@ -108,13 +110,13 @@ void Catalogue::ajoutCompose()
 			cin >> tabMT[i-1];
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
-			
+
 			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVille[i], tabMT[i-1]);
 			tabTS->ajouterTrajet(t);
 		}
 	}
 
-	TrajetCompose* tc = new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS);
+	TrajetCompose* tc(new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS));
 
 	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
@@ -125,8 +127,8 @@ void Catalogue::ajoutCompose()
 
 void Catalogue::rechercher()
 {
-	char* depart = new char[100];
-	char* arrivee = new char[100];
+	char* depart (new char[100]);
+	char* arrivee (new char[100]);
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
 	cin >> depart;

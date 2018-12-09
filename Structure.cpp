@@ -87,7 +87,7 @@ Structure::Structure ()
 #ifdef MAP
     cout << "Appel au constructeur de <Structure>" << endl;
 #endif
-nbTrajets = 0;
+nbTrajets =0;
 nbAllocated = TAILLE ;
 trajet = new Trajet*[TAILLE];
 } //----- Fin de Structure

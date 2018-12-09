@@ -46,14 +46,16 @@ using namespace std;
 		return villeArrive;
 	} //----- Fin de getVilleDepart
 
-	const char* Trajet::getType()
+	bool Trajet::doublon (const Trajet * t) const
 	{
-		return "";
-	}
-
-	char* Trajet::getMoyenTransport() const
-	{
-		return villeArrive;
+		if (!strcmp(villeDepart,t->villeDepart) && !strcmp(villeArrive,t->villeArrive))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 

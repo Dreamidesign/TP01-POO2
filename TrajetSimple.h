@@ -36,7 +36,7 @@ public:
     // Contrat :
     //
     char* getMoyenTransport() const ;
-    const char* getType();
+    bool doublon (const Trajet * t) const ;
 
 
 //-------------------------------------------- Constructeurs - destructeur

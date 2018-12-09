@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -W -ansi -Wall -Wextra -std=c++11 -pedantic -O2
+CXXFLAGS=-g -W -ansi -Wall -Wextra -std=c++11 -pedantic -O2 -DMAP
 LDFLAGS=
 EXEC=voyage
 
@@ -7,7 +7,6 @@ all : $(EXEC)
 
 voyage: Structure.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o
 	 $(CXX) -o voyage Structure.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o $(LDFLAGS)
-
 Trajet.o: Trajet.cpp Trajet.h
 	 $(CXX) -c Trajet.cpp $(CXXFLAGS)
 

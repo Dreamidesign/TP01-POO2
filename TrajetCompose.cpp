@@ -36,10 +36,15 @@ void TrajetCompose::Affichage (const char* c = "") const
 	}
 } //----- Fin de Méthode
 
-const char* TrajetCompose::getType()
+/*const char* TrajetCompose::getType()
 {
 	return "TC";
-}//--Fin de getType()
+}//--Fin de getType()*/
+char* TrajetCompose::getMoyenTransport() const
+{
+	return moyenTransport;
+}
+
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -56,6 +61,12 @@ Trajet (uneVilleArrive,uneVilleDepart)
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
 tabTC = tab;
+moyenTransport = new char [(tab->getNbTrajets()+1)*30];
+strcpy(moyenTransport,"MT:");
+for (int i = 0 ; i < tab->getNbTrajets(); i ++)
+{
+	moyenTransport= strcat(moyenTransport, tab->getTabTrajet()[i]->getMoyenTransport());
+}
 } //----- Fin de TrajetCompose
 
 
@@ -69,6 +80,7 @@ TrajetCompose::~TrajetCompose ( )
 	//Trajet::~Trajet();
 
 	delete tabTC;
+	delete[] moyenTransport;
 } //----- Fin de ~TrajetCompose
 
 

@@ -38,10 +38,24 @@ char* TrajetSimple::getMoyenTransport() const
     return moyenTransport;
 } //----- Fin de Méthode
 
-const char* TrajetSimple::getType()
+bool TrajetSimple :: doublon (const Trajet * t) const
 {
-	return "TS";
-}//--Fin de getType()
+  if (Trajet::doublon(t))
+  {
+    if (!strcmp(moyenTransport,t->getMoyenTransport()))
+    {
+      return true;
+    }
+    else
+    {
+      return false ;
+    }
+  }
+  else
+  {
+    return false;
+  }
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur
