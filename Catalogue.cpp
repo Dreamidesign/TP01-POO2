@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    e-mail               : $EMAIL$ v
 *************************************************************************/
 
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------
@@ -91,7 +91,6 @@ void Catalogue::ajoutCompose()
 	}
 
 	char** tabVille = new char *[nbVilles];
-	char** tabVilleTemp = new char *[nbVilles];
 	char** tabMT = new char *[nbVilles];
 	Structure *tabTS = new Structure();
 	for (int i = 0; i < nbVilles; i++)
@@ -100,10 +99,8 @@ void Catalogue::ajoutCompose()
 		tabVille[i] = new char[20];
 		cin >> tabVille[i];
 
-		//On veut éviter la libération double des villes
-		tabVilleTemp[i] = new char[20];
-		strcpy(tabVilleTemp[i],tabVille[i]);
-		if(i != nbVilles - 1) tabMT[i] = new char[20]; //On a moins de moyens de transport que de villes 
+		if(i != nbVilles - 1) tabMT[i] = new char[20];
+		//On a moins de moyens de transport que de villes
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
@@ -111,20 +108,19 @@ void Catalogue::ajoutCompose()
 			cin >> tabMT[i-1];
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
-
-			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVilleTemp[i], tabMT[i-1]);
+			
+			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVille[i], tabMT[i-1]);
 			tabTS->ajouterTrajet(t);
 		}
 	}
 
-TrajetCompose* tc = new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS);
+	TrajetCompose* tc = new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS);
 
 	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;
 
 	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
-	freeTab ( tabVilleTemp , nbVilles);
 }
 
 void Catalogue::rechercher()
