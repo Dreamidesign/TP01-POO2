@@ -37,9 +37,9 @@ public:
 	// son constructeur est déclaré en protected pour bien eviter la création d'instances
 	//de trajet ce qui n'a aucun sens
 
-    char * getVilleDepart () const;
-    char * getVilleArrive() const ;
-    virtual char* getMoyenTransport() const =0 ; //renvoie le moyen de transport
+    char * getVilleDepart (void) const;
+    char * getVilleArrive(void) const ;
+    virtual char* getMoyenTransport(void) const =0 ; //renvoie le moyen de transport
     virtual bool doublon (const Trajet * t) const ;
 
 

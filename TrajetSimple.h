@@ -35,7 +35,7 @@ public:
     //
     // Contrat :
     //
-    char* getMoyenTransport() const ;
+    char* getMoyenTransport(void) const ;
     bool doublon (const Trajet * t) const ;
 
 

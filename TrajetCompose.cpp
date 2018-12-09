@@ -40,7 +40,7 @@ void TrajetCompose::Affichage (const char* c = "") const
 {
 	return "TC";
 }//--Fin de getType()*/
-char* TrajetCompose::getMoyenTransport() const
+char* TrajetCompose::getMoyenTransport(void) const
 {
 	return moyenTransport;
 }

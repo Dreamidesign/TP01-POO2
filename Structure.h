@@ -34,14 +34,14 @@ public:
     //
     // Contrat :
     //
-    Trajet** getTabTrajet() const;
-  	int getNbTrajets() const;
-    void Affichage() const;
+    Trajet** getTabTrajet(void) const;
+  	int getNbTrajets(void) const;
+    void Affichage(void) const;
     // void ajouterTabTrajet(Structure* s);
     void ajouterTrajet(Trajet *t);
 
 //-------------------------------------------- Constructeurs - destructeur
-    Structure ( );
+    Structure (void );
     // Mode d'emploi :
     //
     // Contrat :

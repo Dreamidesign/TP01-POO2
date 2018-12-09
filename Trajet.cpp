@@ -32,14 +32,14 @@ using namespace std;
 	} //----- Fin de Affichage
 
 
-	char* Trajet::getVilleDepart() const
+	char* Trajet::getVilleDepart(void) const
 		// Algorithme :
 		//
 	{
 		return villeDepart;
 	} //----- Fin de getVilleDepart
 
-	char* Trajet::getVilleArrive() const
+	char* Trajet::getVilleArrive(void) const
 		// Algorithme :
 		//
 	{

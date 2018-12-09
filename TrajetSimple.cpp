@@ -31,7 +31,7 @@ void TrajetSimple::Affichage (const char* c) const
     cout << "en "<< moyenTransport << endl;
 } //----- Fin de Méthode
 
-char* TrajetSimple::getMoyenTransport() const
+char* TrajetSimple::getMoyenTransport(void) const
 // Algorithme :
 //
 {

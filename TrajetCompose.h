@@ -42,7 +42,7 @@ public:
      //
      // Contrat :
      //
-     char* getMoyenTransport() const ; 
+     char* getMoyenTransport(void) const ;
 
 //-------------------------------------------- Constructeurs - destructeur
 

@@ -28,17 +28,17 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-Trajet** Structure::getTabTrajet() const
+Trajet** Structure::getTabTrajet(void) const
 {
   return trajet;
 }
 
-int Structure::getNbTrajets() const
+int Structure::getNbTrajets(void) const
 {
   return nbTrajets;
 }
 
-void Structure::Affichage() const
+void Structure::Affichage(void) const
 {
   if (nbTrajets == 0)
   {
@@ -80,7 +80,7 @@ if(nbAllocated == nbTrajets)
 //-------------------------------------------- Constructeurs - destructeur
 
 
-Structure::Structure ()
+Structure::Structure (void)
 // Algorithme :
 //
 {

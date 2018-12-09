@@ -28,31 +28,31 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void ajoutSimple();
+    void ajoutSimple(void);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void ajoutCompose();
+    void ajoutCompose(void);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void rechercher();
+    void rechercher(void);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void CatalogueTrajet();
+    void CatalogueTrajet(void);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void mainCatalogue();
+    void mainCatalogue(void);
     // Mode d'emploi :
     //
     // Contrat :
@@ -61,7 +61,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Catalogue ();
+    Catalogue (void);
     // Mode d'emploi :
     //
     // Contrat :

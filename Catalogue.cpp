@@ -34,7 +34,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-void Catalogue::ajoutSimple()
+void Catalogue::ajoutSimple(void)
 {
 	char* depart (new char [100]);
 	char* arrivee (new char[100]);
@@ -79,7 +79,7 @@ void Catalogue::ajoutSimple()
 	delete[] mt;
 }
 
-void Catalogue::ajoutCompose()
+void Catalogue::ajoutCompose(void)
 {
 	int nbVilles = 0;
 	cout <<"Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
@@ -125,7 +125,7 @@ void Catalogue::ajoutCompose()
 	freeTab ( tabVille , nbVilles) ;
 }
 
-void Catalogue::rechercher()
+void Catalogue::rechercher(void)
 {
 	char* depart (new char[100]);
 	char* arrivee (new char[100]);
@@ -156,7 +156,7 @@ void Catalogue::rechercher()
 
 }
 
-void Catalogue::CatalogueTrajet() {
+void Catalogue::CatalogueTrajet(void) {
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
@@ -179,13 +179,13 @@ void Catalogue::CatalogueTrajet() {
 			break;
 		default:
 		cout << "Choix invalide. Attendu : 1-2-3" << endl;
-
+			break;
 		}
 	} while (choix2 != 3);
 
 }
 
-void Catalogue::mainCatalogue()
+void Catalogue::mainCatalogue(void)
 {
 	do
 	{
@@ -216,6 +216,7 @@ void Catalogue::mainCatalogue()
 		case 4:
 			break;
 		default:
+		 cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
 			break;
 		}
 
@@ -226,7 +227,7 @@ void Catalogue::mainCatalogue()
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue ()
+Catalogue::Catalogue (void)
 // Algorithme :
 //
 {
@@ -238,7 +239,7 @@ Catalogue::Catalogue ()
 } //----- Fin de Catalogue
 
 
-Catalogue::~Catalogue ( )
+Catalogue::~Catalogue ()
 // Algorithme :
 //
 {
