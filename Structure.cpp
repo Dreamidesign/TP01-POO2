@@ -22,23 +22,25 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Structure::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 
 Trajet** Structure::getTabTrajet(void) const
+// Algorithme :
+//
 {
   return trajet;
-}
+} //-- Fin getTabTrajet
 
 int Structure::getNbTrajets(void) const
+// Algorithme :
+//
 {
   return nbTrajets;
-}
+} //-- Fin getNbTrajets
 
 void Structure::Affichage(void) const
+// Algorithme :
+//
 {
   if (nbTrajets == 0)
   {
@@ -48,13 +50,16 @@ void Structure::Affichage(void) const
 	{
 		trajet[i]->Affichage();
 	}
-}
+} //-- Fin Affichage
 
 
 
 void Structure::ajouterTrajet(Trajet *t)
+// Algorithme :
+//
 {
 
+//Réallocation dynamique du tableau de pointeur de trajet si il est plein
 if(nbAllocated == nbTrajets)
 	{
 		Trajet ** temp;
@@ -72,9 +77,10 @@ if(nbAllocated == nbTrajets)
     }
     delete[] temp;
 	}
+  //Ajout du trajet au tableau
 	nbTrajets++;
 	trajet[nbTrajets - 1] = t;
-}
+} //-- Fin ajouterTrajet
 
 
 //-------------------------------------------- Constructeurs - destructeur

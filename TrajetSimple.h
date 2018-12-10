@@ -19,8 +19,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetSimple>
-//
-//
+// Implemente un trajet direct entre une uneVilleDepart et uneVilleArrive
+// avec unMoyenTransport.
 //------------------------------------------------------------------------
 
 class TrajetSimple : public Trajet
@@ -31,13 +31,23 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     void Affichage (const char* c = "" ) const;
-    // Mode d'emploi :
+    // Mode d'emploi : AFfiche les caractéristiques du trajet
+    //                 Redéfinition de Affichage de Trajet
+    //                  char* c permet d'afficher un texte avec l'affichage
+    // Contrat : Affichage est purement virtuelle dans Trajet
+    //           Affichage doit donc etre redéfinie ici.
+
+    char* getMoyenTransport(void) const ;
+    // Mode d'emploi : retourne le moyen de transport employé
     //
     // Contrat :
     //
-    char* getMoyenTransport(void) const ;
-    bool doublon (const Trajet * t) const ;
 
+    bool doublon (const Trajet * t) const ;
+    // Mode d'emploi : Compare t et this
+    //                 Redéfinition de doublon de Trajet
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
 

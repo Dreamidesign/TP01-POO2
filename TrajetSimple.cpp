@@ -39,6 +39,8 @@ char* TrajetSimple::getMoyenTransport(void) const
 } //----- Fin de Méthode
 
 bool TrajetSimple :: doublon (const Trajet * t) const
+// Algorithme :
+//
 {
   if (Trajet::doublon(t))
   {
@@ -55,7 +57,7 @@ bool TrajetSimple :: doublon (const Trajet * t) const
   {
     return false;
   }
-}
+} //-- Fin de doublon
 
 
 //-------------------------------------------- Constructeurs - destructeur
