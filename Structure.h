@@ -19,8 +19,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Structure>
-//
-//
+//  Implémente un tableau dynamique de pointeur de trajet pour en stocker une liste
+//  ordonnée par ordre d'ajout.
 //------------------------------------------------------------------------
 
 class Structure
@@ -34,21 +34,40 @@ public:
     //
     // Contrat :
     //
+
     Trajet** getTabTrajet(void) const;
+    // Mode d'emploi : Renvoie le tableau de pointeur de trajets contenus dans la structure
+    //
+    // Contrat :
+    //
+
   	int getNbTrajets(void) const;
+    // Mode d'emploi : Renvoie le nombre de trajets pointés par la structure
+    //
+    // Contrat :
+    //
+
     void Affichage(void) const;
-    // void ajouterTabTrajet(Structure* s);
+    // Mode d'emploi : Parcours le tableau de pointeur de trajet et appelle
+    //                 leur méthode affichage
+    // Contrat :
+    //
+
     void ajouterTrajet(Trajet *t);
+    // Mode d'emploi : Ajoute *t au tableau de pointeur de trajets de la structure
+    //
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Structure (void );
-    // Mode d'emploi :
+    Structure (void);
+    // Mode d'emploi : Création d'une structure.
     //
     // Contrat :
     //
 
     virtual ~Structure ( );
-    // Mode d'emploi :
+    // Mode d'emploi : Libéraation mémoire de la structure et de ses attributs
     //
     // Contrat :
     //
@@ -59,9 +78,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-Trajet** trajet ;  //Liste de trajets
-int nbTrajets;    //Nombre de trajets dans le catalogue
-int nbAllocated; //Espace alloué
+  Trajet** trajet ;  //Liste de trajets
+  int nbTrajets;    //Nombre de trajets dans le catalogue
+  int nbAllocated; //Espace alloué
 };
 
 //-------------------------------- Autres définitions dépendantes de <Structure>

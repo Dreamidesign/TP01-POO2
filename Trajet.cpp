@@ -47,6 +47,8 @@ using namespace std;
 	} //----- Fin de getVilleDepart
 
 	bool Trajet::doublon (const Trajet * t) const
+		// Algorithme :
+		//
 	{
 		if (!strcmp(villeDepart,t->villeDepart) && !strcmp(villeArrive,t->villeArrive))
 		{
@@ -56,7 +58,7 @@ using namespace std;
 		{
 			return false;
 		}
-	}
+	} //-- Fin de doublon
 
 
 	//-------------------------------------------- Constructeurs - destructeur
@@ -67,6 +69,7 @@ using namespace std;
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
+	//Allocation et copie des paramètres pour l'encapsulation
 		villeDepart = new char [strlen(uneVilleDepart)+1];
 		villeDepart = strcpy (villeDepart,uneVilleDepart);
 		villeArrive = new char [strlen(uneVilleArrive)+1];
