@@ -26,9 +26,9 @@ using namespace std;
 
 void Catalogue::ajoutSimple(void)
 {
-	char* depart (new char [100]);
-	char* arrivee (new char[100]);
-	char* mt (new char[100]);
+	char depart [100];
+	char arrivee [100];
+	char mt [100];
 
 	cout << "Quel est le depart du trajet" << endl;
 	cin >> depart;
@@ -60,9 +60,6 @@ void Catalogue::ajoutSimple(void)
 		delete t;
 	}
 
-	delete[] depart;
-	delete[] arrivee;
-	delete[] mt;
 } //----- Fin de ajoutSimple
 
 void Catalogue::ajoutCompose(void)
@@ -113,8 +110,8 @@ void Catalogue::ajoutCompose(void)
 
 void Catalogue::rechercher(void)
 {
-	char* depart (new char[100]);
-	char* arrivee (new char[100]);
+	char depart [100];
+	char arrivee[100];
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
 	cin >> depart;
@@ -136,9 +133,6 @@ void Catalogue::rechercher(void)
 	{
 		cout << "Désolé, ce trajet n'est pas disponible!" << endl ;
 	}
-
-	delete [] depart ;
-	delete [] arrivee ;
 
 } //----- Fin de Rechercher
 
