@@ -10,12 +10,6 @@
 #if ! defined ( Trajet_H )
 #define Trajet_H
 
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
 // Implémente un trajet entre uneVilleDepart et uneVilleArrive
@@ -40,34 +34,23 @@ public:
     char * getVilleDepart (void) const;
     // Mode d'emploi : Renvoi la ville de départ
     //
-    // Contrat :
-    //
 
     char * getVilleArrive(void) const ;
     // Mode d'emploi : Renvoi la ville d'arrivee
-    //
-    // Contrat :
     //
 
     virtual char* getMoyenTransport(void) const =0 ;
     // Mode d'emploi : Renvoi le moyen de transport employé
     //
-    // Contrat :
-    //
 
-    virtual bool doublon (const Trajet * t) const ;
+    virtual bool estEgal (const Trajet * t) const ;
     // Mode d'emploi : Verifie si le trajet *t est egal a this
     //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
     virtual ~Trajet ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
+    // Mode d'emploi : libère toutes les allocations dynamiques effectuées
     //
 
 //------------------------------------------------------------------ PRIVE
@@ -77,8 +60,9 @@ protected:
 	Trajet( const char*uneVilleDepart, const char*uneVilleArrive);
 	// Mode d'emploi :
 	//
-	// Contrat :
-	//
+	// Contrat : constructeur protégé - interdicteion de création d'instance
+  //           car classe abstraite 
+  //
 //----------------------------------------------------- Attributs protégés
 	char * villeDepart;
 	char * villeArrive;

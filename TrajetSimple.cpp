@@ -14,35 +14,26 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
 //------------------------------------------------------ Include personnel
 #include "TrajetSimple.h"
 
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
 //----------------------------------------------------- Méthodes publiques
+
 void TrajetSimple::Affichage (const char* c) const
-// Algorithme :
-//
 {
     Trajet::Affichage("TS : ");
     cout << "en "<< moyenTransport << endl;
 } //----- Fin de Méthode
 
 char* TrajetSimple::getMoyenTransport(void) const
-// Algorithme :
-//
 {
     return moyenTransport;
 } //----- Fin de Méthode
 
-bool TrajetSimple :: doublon (const Trajet * t) const
-// Algorithme :
-//
+bool TrajetSimple :: estEgal(const Trajet * t) const
+
 {
-  if (Trajet::doublon(t))
+  if (Trajet::estEgal(t))
   {
     if (!strcmp(moyenTransport,t->getMoyenTransport()))
     {
@@ -57,8 +48,7 @@ bool TrajetSimple :: doublon (const Trajet * t) const
   {
     return false;
   }
-} //-- Fin de doublon
-
+} //-- Fin estEgal
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -66,8 +56,6 @@ TrajetSimple::TrajetSimple ( const char* uneVilleDepart,
                              const char* uneVilleArrive,
                              const char* unMoyenTransport):
 Trajet (uneVilleDepart,uneVilleArrive)
-// Algorithme :
-//
 {
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
@@ -78,16 +66,9 @@ Trajet (uneVilleDepart,uneVilleArrive)
 
 
 TrajetSimple::~TrajetSimple ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
 	delete[] moyenTransport;
 } //----- Fin de ~TrajetSimple
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

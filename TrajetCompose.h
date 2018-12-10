@@ -34,7 +34,7 @@ public:
 
      char* getMoyenTransport(void) const ;
      // Mode d'emploi : getter de l'attribut protected moyenTransport
-     //                 sert uniquement à éviter l'existence de doublon  
+     //                 sert uniquement à éviter l'existence de doublon
      //
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -51,7 +51,6 @@ public:
 
     virtual ~TrajetCompose ( );
     // Mode d'emploi : libère les allocations dynamiques réalisées
-    //
     //
 
 protected:

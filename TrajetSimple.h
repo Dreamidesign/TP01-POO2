@@ -11,12 +11,7 @@
 #define TrajetSimple_H
 
 //--------------------------------------------------- Interfaces utilisées
-
 #include "Trajet.h"
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetSimple>
 // Implemente un trajet direct entre une uneVilleDepart et uneVilleArrive
@@ -40,40 +35,26 @@ public:
     char* getMoyenTransport(void) const ;
     // Mode d'emploi : retourne le moyen de transport employé
     //
-    // Contrat :
-    //
 
-    bool doublon (const Trajet * t) const ;
+    bool estEgal (const Trajet * t) const ;
     // Mode d'emploi : Compare t et this
-    //                 Redéfinition de doublon de Trajet
-    // Contrat :
-    //
+    //                 Redéfinition de estEgal de Trajet
 
 //-------------------------------------------- Constructeurs - destructeur
 
     TrajetSimple ( const char*  uneVilleDepart,
                    const char*  uneVilleArrive ,
                    const char* unMoyenTransport);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual ~TrajetSimple ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
-//------------------------------------------------------------------ PRIVE
+//------------------------------------------------------------------ Protégé
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
      char* moyenTransport ;
 };
-
 //---------------------------- Autres définitions dépendantes de <TrajetSimple>
 
 #endif // TrajetSimple_H

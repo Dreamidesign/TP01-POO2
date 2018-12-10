@@ -22,17 +22,7 @@ using namespace std;
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
 
-
-//------------------------------------------------------------- Constantes
-
-//----------------------------------------------------------------- PUBLIC
-
 //----------------------------------------------------- Méthodes publiques
-// type Catalogue::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Catalogue::ajoutSimple(void)
 {
@@ -52,12 +42,8 @@ void Catalogue::ajoutSimple(void)
 	bool canBeAdded = true;
 	for(int i=0; i<liste.getNbTrajets(); i++)
 	{
-			/*if(!strcmp(liste.getTabTrajet()[i]->getType(), t->getType())
-			&& !strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart)
-			&& !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee)
-			&& !strcmp(liste.getTabTrajet()[i]->getMoyenTransport(),
-			t->getMoyenTransport()))*/
-			if (t->doublon(liste.getTabTrajet()[i]))
+
+			if (t->estEgal(liste.getTabTrajet()[i]))
 			{
 				canBeAdded = false;
 				cout << "\n" << "Trajet existant" << "\n" << endl;
@@ -77,7 +63,7 @@ void Catalogue::ajoutSimple(void)
 	delete[] depart;
 	delete[] arrivee;
 	delete[] mt;
-}
+} //----- Fin de ajoutSimple
 
 void Catalogue::ajoutCompose(void)
 {
@@ -123,7 +109,7 @@ void Catalogue::ajoutCompose(void)
 
 	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
-}
+} //----- Fin de ajoutCompose
 
 void Catalogue::rechercher(void)
 {
@@ -154,9 +140,9 @@ void Catalogue::rechercher(void)
 	delete [] depart ;
 	delete [] arrivee ;
 
-}
+} //----- Fin de Rechercher
 
-void Catalogue::CatalogueTrajet(void) {
+void Catalogue::menuTrajet(void) {
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
@@ -183,7 +169,7 @@ void Catalogue::CatalogueTrajet(void) {
 		}
 	} while (choix2 != 3);
 
-}
+} //----- Fin de menuTrajet
 
 void Catalogue::mainCatalogue(void)
 {
@@ -203,7 +189,7 @@ void Catalogue::mainCatalogue(void)
 		{
 		case 1:
 			cout << "*Ajout d'un trajet*" << endl;
-			CatalogueTrajet();
+			menuTrajet();
 			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
@@ -221,15 +207,10 @@ void Catalogue::mainCatalogue(void)
 		}
 
 	} while (choix1 != 4);
-}
-
-
-//------------------------------------------------- Surcharge d'opérateurs
+}//----- Fin de mainCatalogue
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue (void)
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
@@ -240,8 +221,6 @@ Catalogue::Catalogue (void)
 
 
 Catalogue::~Catalogue ()
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
@@ -256,7 +235,4 @@ void Catalogue::freeTab ( char ** tab , int size )
 		delete[] tab[i] ;
 	}
 	delete [] tab ;
-}
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
+}//----- Fin de freeTab

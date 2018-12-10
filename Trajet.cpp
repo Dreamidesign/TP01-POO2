@@ -14,12 +14,9 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
 #include <cstring>
-
-//------------------------------------------------------------- Constantes
 
 	//----------------------------------------------------------------- PUBLIC
 
@@ -46,7 +43,7 @@ using namespace std;
 		return villeArrive;
 	} //----- Fin de getVilleDepart
 
-	bool Trajet::doublon (const Trajet * t) const
+	bool Trajet::estEgal (const Trajet * t) const
 		// Algorithme :
 		//
 	{
@@ -58,10 +55,23 @@ using namespace std;
 		{
 			return false;
 		}
-	} //-- Fin de doublon
+	} //-- Fin de estEgal
 
 
 	//-------------------------------------------- Constructeurs - destructeur
+
+	Trajet::~Trajet()
+		// Algorithme :
+		//
+	{
+	#ifdef MAP
+		cout << "Appel au destructeur de <Trajet>" << endl;
+	#endif
+		delete[] villeDepart;
+		delete[] villeArrive;
+	} //----- Fin de ~Trajet
+
+	//------------------------------------------------------------------ PROTEGE
 	Trajet::Trajet(const char* uneVilleDepart , const char* uneVilleArrive)
 		// Algorithme :
 		//
@@ -75,20 +85,5 @@ using namespace std;
 		villeArrive = new char [strlen(uneVilleArrive)+1];
 		villeArrive = strcpy (villeArrive,uneVilleArrive);
 	} //----- Fin de Trajet
-
-
-	Trajet::~Trajet()
-		// Algorithme :
-		//
-	{
-	#ifdef MAP
-		cout << "Appel au destructeur de <Trajet>" << endl;
-	#endif
-		delete[] villeDepart;
-		delete[] villeArrive;
-	} //----- Fin de ~Trajet
-
-
-	//------------------------------------------------------------------ PRIVE
 
 	//----------------------------------------------------- Méthodes protégées

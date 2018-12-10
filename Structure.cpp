@@ -25,22 +25,16 @@ using namespace std;
 
 
 Trajet** Structure::getTabTrajet(void) const
-// Algorithme :
-//
 {
   return trajet;
 } //-- Fin getTabTrajet
 
 int Structure::getNbTrajets(void) const
-// Algorithme :
-//
 {
   return nbTrajets;
 } //-- Fin getNbTrajets
 
 void Structure::Affichage(void) const
-// Algorithme :
-//
 {
   if (nbTrajets == 0)
   {
@@ -52,13 +46,8 @@ void Structure::Affichage(void) const
 	}
 } //-- Fin Affichage
 
-
-
 void Structure::ajouterTrajet(Trajet *t)
-// Algorithme :
-//
 {
-
 //Réallocation dynamique du tableau de pointeur de trajet si il est plein
 if(nbAllocated == nbTrajets)
 	{
@@ -78,17 +67,13 @@ if(nbAllocated == nbTrajets)
     delete[] temp;
 	}
   //Ajout du trajet au tableau
-	nbTrajets++;
+  nbTrajets++;
 	trajet[nbTrajets - 1] = t;
 } //-- Fin ajouterTrajet
 
-
 //-------------------------------------------- Constructeurs - destructeur
 
-
 Structure::Structure (void)
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Structure>" << endl;
@@ -98,10 +83,7 @@ nbAllocated = TAILLE ;
 trajet = new Trajet*[TAILLE];
 } //----- Fin de Structure
 
-
 Structure::~Structure ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Structure>" << endl;
@@ -113,8 +95,5 @@ Structure::~Structure ( )
 	}
 	delete[] trajet;
 } //----- Fin de ~Structure
-
-
-//------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
