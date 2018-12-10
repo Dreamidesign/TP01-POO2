@@ -14,41 +14,30 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-
 //------------------------------------------------------ Include personnel
 #include "TrajetCompose.h"
-// #include "Structure.h"
-
-//------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetCompose::Affichage (const char* c = "") const
-// Algorithme :
-//
+
 {
-	Trajet::Affichage(c);
-	cout << "Le trajet est compose des trajets suivants :" << endl;
+	Trajet::Affichage("TC : ");
+	cout << "Le trajet est compose de " << tabTC->getNbTrajets() << "trajets : " << endl;
 	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
-		tabTC->getTabTrajet()[i]->Affichage();
+		tabTC->getTabTrajet()[i]->Affichage(c);
 	}
-} //----- Fin de Méthode
+} //----- Fin de Affichage
 
-/*const char* TrajetCompose::getType()
-{
-	return "TC";
-}//--Fin de getType()*/
 char* TrajetCompose::getMoyenTransport(void) const
 {
 	return moyenTransport;
-}
-
+} //----- Fin de getMoyenTrasport
 
 
 //-------------------------------------------- Constructeurs - destructeur
-
 
 TrajetCompose::TrajetCompose (const char* uneVilleDepart,
 															const char* uneVilleArrive,
@@ -82,8 +71,3 @@ TrajetCompose::~TrajetCompose ( )
 	delete tabTC;
 	delete[] moyenTransport;
 } //----- Fin de ~TrajetCompose
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

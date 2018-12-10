@@ -27,7 +27,7 @@ void TrajetSimple::Affichage (const char* c) const
 // Algorithme :
 //
 {
-    Trajet::Affichage(c);
+    Trajet::Affichage("TS : ");
     cout << "en "<< moyenTransport << endl;
 } //----- Fin de Méthode
 
