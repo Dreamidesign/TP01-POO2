@@ -18,7 +18,7 @@ using namespace std;
 #include "Structure.h"
 
 //------------------------------------------------------------- Constantes
-#define TAILLE 100
+#define TAILLE 20
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -50,7 +50,10 @@ void Structure::ajouterTrajet(Trajet *t)
 {
 //Réallocation dynamique du tableau de pointeur de trajet si il est plein
 if(nbAllocated == nbTrajets)
-	{
+{
+  #ifdef MAP
+      cout << "Reallocation de la structure" << endl;
+  #endif
 		Trajet ** temp;
 		nbAllocated += 30;
 		temp = new Trajet *[nbAllocated];
@@ -58,16 +61,20 @@ if(nbAllocated == nbTrajets)
 		for (int i = 0; i < nbTrajets; i++) {
 			temp[i] = trajet[i];
 		}
-		trajet = temp;
 
-    for (int i = 0; i < nbAllocated; i++)
-    {
-      delete temp[i];
-    }
-    delete[] temp;
+    delete[] trajet;
+    trajet = temp;
 	}
+
   //Ajout du trajet au tableau
   nbTrajets++;
+  #ifdef MAP
+      cout << "NbTrajets : " << nbTrajets << endl;
+      cout << "nbAllocated : " << nbAllocated << endl;
+      cout << "ajout en position : " << (nbTrajets-1) << endl;
+      cout << "Ajout du trajet à la structure" << endl;
+  #endif
+
 	trajet[nbTrajets - 1] = t;
 } //-- Fin ajouterTrajet
 
