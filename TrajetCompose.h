@@ -28,36 +28,50 @@ public:
     void Affichage (const char* c)const ;
     // Mode d'emploi : Affiche les caractéristiques du trajet avec la possibilité
     //                 d'ajouter des specifications grace au char * c
-    //
     //Contrat : Redéfinition de la méthode virtuelle pure de la classe mère Trajet
+    //
 
+  //   bool estEgal (const Trajet * t) const ;
+     // Mode d'emploi : Compare t et this
+     //                 Redéfinition de estEgal de Trajet
+     // Contrat : Aucun
+     //
 
+     char * getVilleArrive(void) const ;
+     // Mode d'emploi : Renvoi la ville d'arrivee
+     //
+     // Contrat : Aucun
+     //
+
+     char * getVilleDepart (void) const ;
+     // Mode d'emploi : Renvoi la ville de départ
+     //
+     // Contrat : Aucun
+     //
      char* getMoyenTransport(void) const ;
-     // Mode d'emploi : getter de l'attribut protected moyenTransport
-     //                 sert uniquement à éviter l'existence de doublon
+     // Mode d'emploi : retourne le moyen de transport employé
+     //
+     // Contrat : Aucun
      //
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose ( const char* uneVilleDepart,
-                    const char* uneVilleArrive,
-                    Structure *s);
+    TrajetCompose (Structure *s);
     // Mode d'emploi : définition des attributs des instances de trajet composé
     //                 à partir des paramètres formels du constructeur
-    //                 L'attribut moyenTransport est construit à partir de la
-    //                 concaténation des différents moyens de transport utilisés
-    //                 dans les trajets composants le trajet composé
+    // Contrat : Aucun
     //
 
     virtual ~TrajetCompose ( );
     // Mode d'emploi : libère les allocations dynamiques réalisées
+    //
+    // Contrat : Aucun
     //
 
 protected:
 
 //----------------------------------------------------- Attributs protégés
   Structure * tabTC;
-  char* moyenTransport;
 };
 
 //--------------------------- Autres définitions dépendantes de <TrajetCompose>

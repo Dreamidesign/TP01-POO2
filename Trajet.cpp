@@ -22,68 +22,24 @@ using namespace std;
 
 	//----------------------------------------------------- Méthodes publiques
 	void Trajet::Affichage(const char * c ) const
-		// Algorithme :
-		//
 	{
-		cout << c << "De " << villeDepart << " a " << villeArrive << " ";
+		cout << c << "De " << getVilleDepart() << " a " << getVilleArrive() << " ";
 	} //----- Fin de Affichage
-
-
-	char* Trajet::getVilleDepart(void) const
-		// Algorithme :
-		//
-	{
-		return villeDepart;
-	} //----- Fin de getVilleDepart
-
-	char* Trajet::getVilleArrive(void) const
-		// Algorithme :
-		//
-	{
-		return villeArrive;
-	} //----- Fin de getVilleDepart
-
-	bool Trajet::estEgal (const Trajet * t) const
-		// Algorithme :
-		//
-	{
-		if (!strcmp(villeDepart,t->villeDepart) && !strcmp(villeArrive,t->villeArrive))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	} //-- Fin de estEgal
-
 
 	//-------------------------------------------- Constructeurs - destructeur
 
 	Trajet::~Trajet()
-		// Algorithme :
-		//
 	{
 	#ifdef MAP
 		cout << "Appel au destructeur de <Trajet>" << endl;
 	#endif
-		delete[] villeDepart;
-		delete[] villeArrive;
 	} //----- Fin de ~Trajet
 
 	//------------------------------------------------------------------ PROTEGE
-	Trajet::Trajet(const char* uneVilleDepart , const char* uneVilleArrive)
-		// Algorithme :
-		//
+	Trajet::Trajet()
 	{
 	#ifdef MAP
 		cout << "Appel au constructeur de <Trajet>" << endl;
 	#endif
-	//Allocation et copie des paramètres pour l'encapsulation
-		villeDepart = new char [strlen(uneVilleDepart)+1];
-		villeDepart = strcpy (villeDepart,uneVilleDepart);
-		villeArrive = new char [strlen(uneVilleArrive)+1];
-		villeArrive = strcpy (villeArrive,uneVilleArrive);
-	} //----- Fin de Trajet
 
-	//----------------------------------------------------- Méthodes protégées
+	} //----- Fin de Trajet

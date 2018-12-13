@@ -25,24 +25,29 @@ void TrajetSimple::Affichage (const char* c) const
     cout << "en "<< moyenTransport << endl;
 } //----- Fin de Méthode
 
+char* TrajetSimple::getVilleDepart(void) const
+{
+  return villeDepart;
+} //----- Fin de getVilleDepart
+
+char* TrajetSimple::getVilleArrive(void) const
+{
+  return villeArrive;
+} //----- Fin de getVilleDepart
+
 char* TrajetSimple::getMoyenTransport(void) const
 {
     return moyenTransport;
 } //----- Fin de Méthode
 
 bool TrajetSimple :: estEgal(const Trajet * t) const
-
 {
-  if (Trajet::estEgal(t))
+  if (     !strcmp(villeDepart,t->getVilleDepart())
+        && !strcmp(villeArrive,t->getVilleArrive())
+        && !strcmp(moyenTransport,t->getMoyenTransport())
+     )
   {
-    if (!strcmp(moyenTransport,t->getMoyenTransport()))
-    {
       return true;
-    }
-    else
-    {
-      return false ;
-    }
   }
   else
   {
@@ -54,12 +59,16 @@ bool TrajetSimple :: estEgal(const Trajet * t) const
 
 TrajetSimple::TrajetSimple ( const char* uneVilleDepart,
                              const char* uneVilleArrive,
-                             const char* unMoyenTransport):
-Trajet (uneVilleDepart,uneVilleArrive)
+                             const char* unMoyenTransport)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetSimple>" << endl;
   #endif
+  //Allocation et copie des paramètres pour l'encapsulation
+  villeDepart = new char [strlen(uneVilleDepart)+1];
+  villeDepart = strcpy (villeDepart,uneVilleDepart);
+  villeArrive = new char [strlen(uneVilleArrive)+1];
+  villeArrive = strcpy (villeArrive,uneVilleArrive);
   moyenTransport = new char [strlen(unMoyenTransport)+1];
   moyenTransport = strcpy(moyenTransport, unMoyenTransport);
 } //----- Fin de TrajetSimple
@@ -70,5 +79,7 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
+  delete[] villeDepart;
+  delete[] villeArrive;
 	delete[] moyenTransport;
 } //----- Fin de ~TrajetSimple

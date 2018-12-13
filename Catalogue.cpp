@@ -42,7 +42,6 @@ void Catalogue::ajoutSimple(void)
 	bool canBeAdded = true;
 	for(int i=0; i<liste.getNbTrajets(); i++)
 	{
-
 			if (t->estEgal(liste.getTabTrajet()[i]))
 			{
 				canBeAdded = false;
@@ -99,7 +98,7 @@ void Catalogue::ajoutCompose(void)
 		}
 	}
 
-	TrajetCompose* tc(new TrajetCompose( tabVille[nbVilles-1],tabVille[0], tabTS));
+	TrajetCompose* tc(new TrajetCompose(tabTS));
 
 	liste.ajouterTrajet(tc);
 	cout << "\n" << "Trajet ajoute !" << endl;

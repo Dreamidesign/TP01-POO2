@@ -21,41 +21,56 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetCompose::Affichage (const char* c = "") const
-
 {
 	Trajet::Affichage("TC : ");
-	cout << "Le trajet est compose de " << tabTC->getNbTrajets() << "trajets : " << endl;
+	cout << "Le trajet est compose de " << tabTC->getNbTrajets()
+			 << "trajets : " << endl;
 	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
 		tabTC->getTabTrajet()[i]->Affichage(c);
 	}
 } //----- Fin de Affichage
 
+/*bool estEgal (const Trajet * t) const
+{
+	for (int i = 0 ; i < tabTC->getNbTrajets(); i++)
+	{
+		if (!(t->getTabTrajet()[i]->estEgal(tabTC[i])))
+		{
+			return false;
+		}
+	}
+	return true ;
+} //----- Fin de estEgal*/
+
+char* TrajetCompose::getVilleDepart(void) const
+{
+  return tabTC->getTabTrajet()[0]->getVilleDepart();
+} //----- Fin de getVilleDepart
+
+char* TrajetCompose::getVilleArrive(void) const
+{
+  return tabTC->getTabTrajet()[tabTC->getNbTrajets()-1]->getVilleArrive();
+} //----- Fin de getVilleDepart
+
+
 char* TrajetCompose::getMoyenTransport(void) const
 {
+	char * moyenTransport = new char [20] ;
+	strcpy(moyenTransport,"MT");
 	return moyenTransport;
 } //----- Fin de getMoyenTrasport
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
-TrajetCompose::TrajetCompose (const char* uneVilleDepart,
-															const char* uneVilleArrive,
-															Structure *tab ) :
-Trajet (uneVilleArrive,uneVilleDepart)
+TrajetCompose::TrajetCompose (Structure *tab) : tabTC (tab)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-tabTC = tab;
-moyenTransport = new char [(tab->getNbTrajets()+1)*30];
-strcpy(moyenTransport,"MT:");
-for (int i = 0 ; i < tab->getNbTrajets(); i ++)
-{
-	moyenTransport= strcat(moyenTransport, tab->getTabTrajet()[i]->getMoyenTransport());
-}
 } //----- Fin de TrajetCompose
 
 
@@ -69,5 +84,4 @@ TrajetCompose::~TrajetCompose ( )
 	//Trajet::~Trajet();
 
 	delete tabTC;
-	delete[] moyenTransport;
 } //----- Fin de ~TrajetCompose

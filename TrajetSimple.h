@@ -35,15 +35,32 @@ public:
     char* getMoyenTransport(void) const ;
     // Mode d'emploi : retourne le moyen de transport employé
     //
+    // Contrat : Aucun
+    //
+
+    char * getVilleArrive(void) const ;
+    // Mode d'emploi : Renvoi la ville d'arrivee
+    //
+    // Contrat : Aucun
+    //
+
+    char * getVilleDepart (void) const ;
+    // Mode d'emploi : Renvoi la ville de départ
+    //
+    // Contrat : Aucun
+    //
 
     bool estEgal (const Trajet * t) const ;
     // Mode d'emploi : Compare t et this
     //                 Redéfinition de estEgal de Trajet
+    // Contrat : Aucun
+    //
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
     TrajetSimple ( const char*  uneVilleDepart,
-                   const char*  uneVilleArrive ,
+                   const char*  uneVilleArrive,
                    const char* unMoyenTransport);
 
     virtual ~TrajetSimple ();
@@ -53,6 +70,8 @@ public:
 protected:
 
 //----------------------------------------------------- Attributs protégés
+     char* villeDepart;
+     char* villeArrive;
      char* moyenTransport ;
 };
 //---------------------------- Autres définitions dépendantes de <TrajetSimple>

@@ -31,20 +31,22 @@ public:
 	  // son constructeur est déclaré en protected pour bien eviter la création d'instances
 	  // de trajet ce qui n'a aucun sens
 
-    char * getVilleDepart (void) const;
+    virtual char * getVilleDepart (void) const = 0;
     // Mode d'emploi : Renvoi la ville de départ
     //
+    // Contrat : Aucun
+    //
 
-    char * getVilleArrive(void) const ;
+    virtual char * getVilleArrive(void) const = 0;
     // Mode d'emploi : Renvoi la ville d'arrivee
     //
-
-    virtual char* getMoyenTransport(void) const =0 ;
-    // Mode d'emploi : Renvoi le moyen de transport employé
+    // Contrat : Aucun
     //
 
-    virtual bool estEgal (const Trajet * t) const ;
-    // Mode d'emploi : Verifie si le trajet *t est egal a this
+    virtual char* getMoyenTransport(void) const = 0 ;
+    // Mode d'emploi : retourne le moyen de transport employé
+    //
+    // Contrat : Aucun
     //
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -52,20 +54,20 @@ public:
     virtual ~Trajet ( );
     // Mode d'emploi : libère toutes les allocations dynamiques effectuées
     //
+    // Contrat : Aucun
+    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	Trajet( const char*uneVilleDepart, const char*uneVilleArrive);
+	Trajet();
 	// Mode d'emploi :
 	//
 	// Contrat : constructeur protégé - interdicteion de création d'instance
-  //           car classe abstraite 
+  //           car classe abstraite
   //
 //----------------------------------------------------- Attributs protégés
-	char * villeDepart;
-	char * villeArrive;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajet>
