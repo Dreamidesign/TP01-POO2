@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ v
+    e-mail               : $EMAIL$ 
 *************************************************************************/
 
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------

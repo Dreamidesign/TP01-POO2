@@ -3,7 +3,7 @@
 
 int main()
 {
-	//Creation du catalogue de trajets
+	//Creation du catalogue de trajets 
 	Catalogue c;
 	//Lancement du menu
 	c.mainCatalogue();

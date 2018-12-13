@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    e-mail               : $EMAIL$ 
 *************************************************************************/
 
 //-------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp)

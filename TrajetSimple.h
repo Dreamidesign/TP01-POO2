@@ -3,7 +3,7 @@
                              -------------------
     début                : 23/11/18
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    e-mail               : $EMAIL$ 
 *************************************************************************/
 
 //---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----

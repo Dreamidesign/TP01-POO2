@@ -42,9 +42,15 @@ char* TrajetSimple::getMoyenTransport(void) const
 
 bool TrajetSimple :: estEgal(const Trajet * t) const
 {
+  char * mT = t->getMoyenTransport() ;
+  if (!strcmp(mT,"MT"))
+  {
+    delete[] mT ;
+    return false ;
+  }
   if (     !strcmp(villeDepart,t->getVilleDepart())
         && !strcmp(villeArrive,t->getVilleArrive())
-        && !strcmp(moyenTransport,t->getMoyenTransport())
+        && !strcmp(moyenTransport,mT)
      )
   {
       return true;
