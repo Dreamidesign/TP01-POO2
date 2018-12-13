@@ -24,15 +24,15 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 
-Trajet** TabTrajet::getTabTrajet(void) const
+Trajet** TabTrajet::GetTabTrajet(void) const
 {
   return trajet;
-} //-- Fin getTabTrajet
+} //-- Fin GetTabTrajet
 
-int TabTrajet::getNbTrajets(void) const
+int TabTrajet::GetNbTrajets(void) const
 {
   return nbTrajets;
-} //-- Fin getNbTrajets
+} //-- Fin GetNbTrajets
 
 void TabTrajet::Affichage(void) const
 {
@@ -46,7 +46,7 @@ void TabTrajet::Affichage(void) const
 	}
 } //-- Fin Affichage
 
-void TabTrajet::ajouterTrajet(Trajet *t)
+void TabTrajet::AjouterTrajet(Trajet *t)
 {
 //Réallocation dynamique du tableau de pointeur de trajet si il est plein
 if(nbAllocated == nbTrajets)
@@ -77,7 +77,7 @@ if(nbAllocated == nbTrajets)
   #endif
 
 	trajet[nbTrajets - 1] = t;
-} //-- Fin ajouterTrajet
+} //-- Fin AjouterTrajet
 
 //-------------------------------------------- Constructeurs - destructeur
 

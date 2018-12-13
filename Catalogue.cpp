@@ -24,7 +24,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::ajoutSimple(void)
+void Catalogue::AjoutSimple(void)
 {
 	char depart [100];
 	char arrivee [100];
@@ -40,9 +40,9 @@ void Catalogue::ajoutSimple(void)
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
 	bool canBeAdded = true;
-	for(int i=0; i<liste.getNbTrajets(); i++)
+	for(int i=0; i<liste.GetNbTrajets(); i++)
 	{
-			if (t->estEgal(liste.getTabTrajet()[i]))
+			if (t->EstEgal(liste.GetTabTrajet()[i]))
 			{
 				canBeAdded = false;
 				cout << "\n" << "Trajet existant" << "\n" << endl;
@@ -51,17 +51,17 @@ void Catalogue::ajoutSimple(void)
 	}
 	if(canBeAdded == true)
 	{
-		liste.ajouterTrajet(t);
-		cout << "\n" << "Trajet ajoute !" << endl;
+		liste.AjouterTrajet(t);
+		cout << "\n" << "Trajet Ajoute !" << endl;
 	}
 	else
 	{
 		delete t;
 	}
 
-} //----- Fin de ajoutSimple
+} //----- Fin de AjoutSimple
 
-void Catalogue::ajoutCompose(void)
+void Catalogue::AjoutCompose(void)
 {
 	int nbVilles = 0;
 	cout <<"Combien d'etapes comporte votre trajet (nombre de villes total)" << endl;
@@ -94,20 +94,20 @@ void Catalogue::ajoutCompose(void)
 			// aucun moyen de transport en 0
 
 			Trajet* t = new TrajetSimple(tabVille[i - 1], tabVille[i], tabMT[i-1]);
-			tabTS->ajouterTrajet(t);
+			tabTS->AjouterTrajet(t);
 		}
 	}
 
 	TrajetCompose* tc(new TrajetCompose(tabTS));
 
-	liste.ajouterTrajet(tc);
-	cout << "\n" << "Trajet ajoute !" << endl;
+	liste.AjouterTrajet(tc);
+	cout << "\n" << "Trajet Ajoute !" << endl;
 
 	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
-} //----- Fin de ajoutCompose
+} //----- Fin de AjoutCompose
 
-void Catalogue::rechercher(void)
+void Catalogue::Rechercher(void)
 {
 	char depart [100];
 	char arrivee[100];
@@ -119,12 +119,12 @@ void Catalogue::rechercher(void)
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
-	for (int i=0; i<liste.getNbTrajets(); i++)
+	for (int i=0; i<liste.GetNbTrajets(); i++)
 	{
-		if (!strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) &&
-		 	  !strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee))
+		if (!strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) &&
+		 	  !strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee))
 		{
-			cout << "Trajet : ", liste.getTabTrajet()[i]->Affichage();
+			cout << "Trajet : ", liste.GetTabTrajet()[i]->Affichage();
 			count++;
 		}
 	}
@@ -135,7 +135,7 @@ void Catalogue::rechercher(void)
 
 } //----- Fin de Rechercher
 
-void Catalogue::menuTrajet(void) {
+void Catalogue::MenuTrajet(void) {
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
@@ -148,11 +148,11 @@ void Catalogue::menuTrajet(void) {
 		{
 		case 1:
 			cout << "Ajout d'un trajet simple" << endl;
-			ajoutSimple();
+			AjoutSimple();
 			break;
 		case 2:
 			cout << "Ajout d'un trajet compose" << endl;
-			ajoutCompose();
+			AjoutCompose();
 			break;
 		case 3:
 			break;
@@ -162,9 +162,9 @@ void Catalogue::menuTrajet(void) {
 		}
 	} while (choix2 != 3);
 
-} //----- Fin de menuTrajet
+} //----- Fin de MenuTrajet
 
-void Catalogue::mainCatalogue(void)
+void Catalogue::MenuCatalogue(void)
 {
 	do
 	{
@@ -182,7 +182,7 @@ void Catalogue::mainCatalogue(void)
 		{
 		case 1:
 			cout << "*Ajout d'un trajet*" << endl;
-			menuTrajet();
+			MenuTrajet();
 			break;
 		case 2:
 			cout << "*------Catalogue-------*" << endl;
@@ -190,7 +190,7 @@ void Catalogue::mainCatalogue(void)
 			break;
 		case 3:
 			cout << "*Recherche...*" << endl;
-			rechercher();
+			Rechercher();
 			break;
 		case 4:
 			break;
@@ -200,7 +200,7 @@ void Catalogue::mainCatalogue(void)
 		}
 
 	} while (choix1 != 4);
-}//----- Fin de mainCatalogue
+}//----- Fin de MenuCatalogue
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue (void)

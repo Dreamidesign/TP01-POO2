@@ -26,31 +26,31 @@ void TrajetSimple::Affichage (const char* c) const
     cout << "\n";
 } //----- Fin de Méthode
 
-char* TrajetSimple::getVilleDepart(void) const
+char* TrajetSimple::GetVilleDepart(void) const
 {
   return villeDepart;
-} //----- Fin de getVilleDepart
+} //----- Fin de GetVilleDepart
 
-char* TrajetSimple::getVilleArrive(void) const
+char* TrajetSimple::GetVilleArrive(void) const
 {
   return villeArrive;
-} //----- Fin de getVilleDepart
+} //----- Fin de GetVilleDepart
 
-char* TrajetSimple::getMoyenTransport(void) const
+char* TrajetSimple::GetMoyenTransport(void) const
 {
     return moyenTransport;
 } //----- Fin de Méthode
 
-bool TrajetSimple :: estEgal(const Trajet * t) const
+bool TrajetSimple :: EstEgal(const Trajet * t) const
 {
-  char * mT = t->getMoyenTransport() ;
+  char * mT = t->GetMoyenTransport() ;
   if (!strcmp(mT,"MT"))
   {
     delete[] mT ;
     return false ;
   }
-  if (     !strcmp(villeDepart,t->getVilleDepart())
-        && !strcmp(villeArrive,t->getVilleArrive())
+  if (     !strcmp(villeDepart,t->GetVilleDepart())
+        && !strcmp(villeArrive,t->GetVilleArrive())
         && !strcmp(moyenTransport,mT)
      )
   {
@@ -60,7 +60,7 @@ bool TrajetSimple :: estEgal(const Trajet * t) const
   {
     return false;
   }
-} //-- Fin estEgal
+} //-- Fin EstEgal
 
 //-------------------------------------------- Constructeurs - destructeur
 

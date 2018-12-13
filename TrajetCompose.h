@@ -31,24 +31,24 @@ public:
     //Contrat : Redéfinition de la méthode virtuelle pure de la classe mère Trajet
     //
 
-  //   bool estEgal (const Trajet * t) const ;
+  //   bool EstEgal (const Trajet * t) const ;
      // Mode d'emploi : Compare t et this
-     //                 Redéfinition de estEgal de Trajet
+     //                 Redéfinition de EstEgal de Trajet
      // Contrat : Aucun
      //
 
-     char * getVilleArrive(void) const ;
+     char * GetVilleArrive(void) const ;
      // Mode d'emploi : Renvoi la ville d'arrivee
      //
      // Contrat : Aucun
      //
 
-     char * getVilleDepart (void) const ;
+     char * GetVilleDepart (void) const ;
      // Mode d'emploi : Renvoi la ville de départ
      //
      // Contrat : Aucun
      //
-     char* getMoyenTransport(void) const ;
+     char* GetMoyenTransport(void) const ;
      // Mode d'emploi : retourne le moyen de transport employé
      //
      // Contrat : Aucun

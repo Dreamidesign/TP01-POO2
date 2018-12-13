@@ -14,7 +14,7 @@
 #include "TabTrajet.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
-//Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'ajout
+//Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
 // - la  recherche de trajets ainsi que l'interface utilisateur
 //------------------------------------------------------------------------
 
@@ -24,29 +24,29 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void ajoutSimple(void);
-    // Mode d'emploi : ajoute un trajet simple au catalogue à partir des infos
+    void AjoutSimple(void);
+    // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin
-    //                 avec vérificatin  des contraintes d'ajout (doublons)
+    //                 avec vérificatin  des contraintes d'Ajout (doublons)
 
-    void ajoutCompose(void);
-    // Mode d'emploi : ajoute un trajet simple au catalogue à partir des infos
+    void AjoutCompose(void);
+    // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin
     // Contrat : l'utilisateur saisit les villes composant le trajet, vérification
     //           de la validité du trajet à la saisie
 
-    void rechercher(void);
+    void Rechercher(void);
     // Mode d'emploi : recherche un trajet dans le catalogue à partir d'une ville
     //                 de départ et ville d'arrivé saisies par l'utilisateur,
     //                 utilisation du polymorphisme
 
 
-    void menuTrajet(void);
-    // Mode d'emploi : implémente l'interface d'ajout des trajets
+    void MenuTrajet(void);
+    // Mode d'emploi : implémente l'interface d'Ajout des trajets
     //
 
 
-    void mainCatalogue(void);
+    void MenuCatalogue(void);
     // Mode d'emploi : implémente l'interface principale du catalogue
     //
 
@@ -70,7 +70,7 @@ void freeTab(char ** tab , int size);
 
 //----------------------------------------------------- Attributs protégés
   int choix1 ; //Choix du premier Catalogue
-  int choix2 ; //choix du sous Catalogue d'ajout de trajets
+  int choix2 ; //choix du sous Catalogue d'Ajout de trajets
   TabTrajet liste;
 };
 

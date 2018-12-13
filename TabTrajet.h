@@ -27,11 +27,11 @@ class TabTrajet
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    Trajet** getTabTrajet(void) const;
+    Trajet** GetTabTrajet(void) const;
     // Mode d'emploi : Renvoie le tableau de pointeur de trajets contenus dans TabTrajet
     //
 
-  	int getNbTrajets(void) const;
+  	int GetNbTrajets(void) const;
     // Mode d'emploi : Renvoie le nombre de trajets pointés par la TabTrajet
     //
 
@@ -39,7 +39,7 @@ public:
     // Mode d'emploi : Parcours le tableau de pointeur de trajet et appelle
     //                 leur méthode affichage
 
-    void ajouterTrajet(Trajet *t);
+    void AjouterTrajet(Trajet *t);
     // Mode d'emploi : Ajoute *t au tableau de pointeur de trajets
     //
 //-------------------------------------------- Constructeurs - destructeur

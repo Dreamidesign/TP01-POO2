@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <Trajet> (fichier Trajet.cpp) ------------
@@ -23,7 +23,7 @@ using namespace std;
 	//----------------------------------------------------- Méthodes publiques
 	void Trajet::Affichage(const char * c ) const
 	{
-		cout << c << "De " << getVilleDepart() << " a " << getVilleArrive() << " ";
+		cout << c << "De " << GetVilleDepart() << " a " << GetVilleArrive() << " ";
 	} //----- Fin de Affichage
 
 	//-------------------------------------------- Constructeurs - destructeur

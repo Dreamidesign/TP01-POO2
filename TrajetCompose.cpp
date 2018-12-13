@@ -23,44 +23,44 @@ using namespace std;
 void TrajetCompose::Affichage (const char* c = "") const
 {
 	Trajet::Affichage("TC : ");
-	cout << "Le trajet est compose de " << tabTC->getNbTrajets()
+	cout << "Le trajet est compose de " << tabTC->GetNbTrajets()
 			 << "trajets : " << endl;
-	for (int i = 0; i < tabTC->getNbTrajets(); i++)
+	for (int i = 0; i < tabTC->GetNbTrajets(); i++)
 	{
-		tabTC->getTabTrajet()[i]->Affichage(c);
+		tabTC->GetTabTrajet()[i]->Affichage(c);
 	}
 	cout << "\n";
 } //----- Fin de Affichage
 
-/*bool estEgal (const Trajet * t) const
+/*bool EstEgal (const Trajet * t) const
 {
-	for (int i = 0 ; i < tabTC->getNbTrajets(); i++)
+	for (int i = 0 ; i < tabTC->GetNbTrajets(); i++)
 	{
-		if (!(t->getTabTrajet()[i]->estEgal(tabTC[i])))
+		if (!(t->GetTabTrajet()[i]->EstEgal(tabTC[i])))
 		{
 			return false;
 		}
 	}
 	return true ;
-} //----- Fin de estEgal*/
+} //----- Fin de EstEgal*/
 
-char* TrajetCompose::getVilleDepart(void) const
+char* TrajetCompose::GetVilleDepart(void) const
 {
-  return tabTC->getTabTrajet()[0]->getVilleDepart();
-} //----- Fin de getVilleDepart
+  return tabTC->GetTabTrajet()[0]->GetVilleDepart();
+} //----- Fin de GetVilleDepart
 
-char* TrajetCompose::getVilleArrive(void) const
+char* TrajetCompose::GetVilleArrive(void) const
 {
-  return tabTC->getTabTrajet()[tabTC->getNbTrajets()-1]->getVilleArrive();
-} //----- Fin de getVilleDepart
+  return tabTC->GetTabTrajet()[tabTC->GetNbTrajets()-1]->GetVilleArrive();
+} //----- Fin de GetVilleDepart
 
 
-char* TrajetCompose::getMoyenTransport(void) const
+char* TrajetCompose::GetMoyenTransport(void) const
 {
 	char * moyenTransport = new char [20] ;
 	strcpy(moyenTransport,"MT");
 	return moyenTransport;
-} //----- Fin de getMoyenTrasport
+} //----- Fin de GetMoyenTrasport
 
 
 //-------------------------------------------- Constructeurs - destructeur
