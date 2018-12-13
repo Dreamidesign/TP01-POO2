@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //-------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp)
@@ -29,6 +29,7 @@ void TrajetCompose::Affichage (const char* c = "") const
 	{
 		tabTC->getTabTrajet()[i]->Affichage(c);
 	}
+	cout << "\n";
 } //----- Fin de Affichage
 
 /*bool estEgal (const Trajet * t) const
@@ -64,7 +65,7 @@ char* TrajetCompose::getMoyenTransport(void) const
 
 //-------------------------------------------- Constructeurs - destructeur
 
-TrajetCompose::TrajetCompose (Structure *tab) : tabTC (tab)
+TrajetCompose::TrajetCompose (TabTrajet *tab) : tabTC (tab)
 // Algorithme :
 //
 {

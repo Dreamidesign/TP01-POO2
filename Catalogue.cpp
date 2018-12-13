@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------
@@ -17,7 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
-#include "Structure.h"
+#include "TabTrajet.h"
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
@@ -76,7 +76,7 @@ void Catalogue::ajoutCompose(void)
 
 	char** tabVille (new char *[nbVilles]);
 	char** tabMT (new char *[nbVilles]);
-	Structure *tabTS (new Structure());
+	TabTrajet *tabTS (new TabTrajet());
 	for (int i = 0; i < nbVilles; i++)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;

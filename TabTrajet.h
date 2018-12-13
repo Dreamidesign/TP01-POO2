@@ -1,26 +1,26 @@
 /*************************************************************************
-                           Structure  -  description
+                           TabTrajet  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Structure> (fichier Structure.h) ----------
-#if ! defined ( Structure_H )
-#define Structure_H
+//---------- Interface de la classe <TabTrajet> (fichier TabTrajet.h) ----------
+#if ! defined ( TabTrajet_H )
+#define TabTrajet_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
 #include <cstring>
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Structure>
+// Rôle de la classe <TabTrajet>
 //  Implémente un tableau dynamique de pointeur de trajet pour en stocker une liste
 //  ordonnée par ordre d'ajout.
 //------------------------------------------------------------------------
 
-class Structure
+class TabTrajet
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -28,11 +28,11 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
     Trajet** getTabTrajet(void) const;
-    // Mode d'emploi : Renvoie le tableau de pointeur de trajets contenus dans la structure
+    // Mode d'emploi : Renvoie le tableau de pointeur de trajets contenus dans TabTrajet
     //
 
   	int getNbTrajets(void) const;
-    // Mode d'emploi : Renvoie le nombre de trajets pointés par la structure
+    // Mode d'emploi : Renvoie le nombre de trajets pointés par la TabTrajet
     //
 
     void Affichage(void) const;
@@ -40,15 +40,15 @@ public:
     //                 leur méthode affichage
 
     void ajouterTrajet(Trajet *t);
-    // Mode d'emploi : Ajoute *t au tableau de pointeur de trajets de la structure
+    // Mode d'emploi : Ajoute *t au tableau de pointeur de trajets
     //
 //-------------------------------------------- Constructeurs - destructeur
-    Structure (void);
-    // Mode d'emploi : Création d'une structure.
+    TabTrajet (void);
+    // Mode d'emploi : Création d'une TabTrajet.
     //
 
-    virtual ~Structure ( );
-    // Mode d'emploi : Libéraation mémoire de la structure et de ses attributs
+    virtual ~TabTrajet ( );
+    // Mode d'emploi : Libéraation mémoire de la TabTrajet et de ses attributs
     //
 
 //------------------------------------------------------------------ PROTEGE
@@ -60,4 +60,4 @@ protected:
   int nbAllocated; //Espace alloué
 };
 
-#endif // Structure_H
+#endif // TabTrajet_H

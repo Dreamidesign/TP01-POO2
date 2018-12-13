@@ -3,7 +3,7 @@
                              -------------------
     début                : 23/11/18
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //------ Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ------
@@ -11,7 +11,7 @@
 #define TrajetCompose_H
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
-#include "Structure.h"
+#include "TabTrajet.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
 // Implémente un trajet compose de n trajets (éventuellement simple ou composé)
@@ -56,7 +56,7 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (Structure *s);
+    TrajetCompose (TabTrajet *s);
     // Mode d'emploi : définition des attributs des instances de trajet composé
     //                 à partir des paramètres formels du constructeur
     // Contrat : Aucun
@@ -71,7 +71,7 @@ public:
 protected:
 
 //----------------------------------------------------- Attributs protégés
-  Structure * tabTC;
+  TabTrajet * tabTC;
 };
 
 //--------------------------- Autres définitions dépendantes de <TrajetCompose>

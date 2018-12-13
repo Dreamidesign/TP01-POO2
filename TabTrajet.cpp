@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Structure  -  description
+                           TabTrajet  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Structure> (fichier Structure.cpp) ------------
+//---------- Réalisation de la classe <TabTrajet> (fichier TabTrajet.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,7 +15,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Structure.h"
+#include "TabTrajet.h"
 
 //------------------------------------------------------------- Constantes
 #define TAILLE 20
@@ -24,17 +24,17 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 
-Trajet** Structure::getTabTrajet(void) const
+Trajet** TabTrajet::getTabTrajet(void) const
 {
   return trajet;
 } //-- Fin getTabTrajet
 
-int Structure::getNbTrajets(void) const
+int TabTrajet::getNbTrajets(void) const
 {
   return nbTrajets;
 } //-- Fin getNbTrajets
 
-void Structure::Affichage(void) const
+void TabTrajet::Affichage(void) const
 {
   if (nbTrajets == 0)
   {
@@ -46,13 +46,13 @@ void Structure::Affichage(void) const
 	}
 } //-- Fin Affichage
 
-void Structure::ajouterTrajet(Trajet *t)
+void TabTrajet::ajouterTrajet(Trajet *t)
 {
 //Réallocation dynamique du tableau de pointeur de trajet si il est plein
 if(nbAllocated == nbTrajets)
 {
   #ifdef MAP
-      cout << "Reallocation de la structure" << endl;
+      cout << "Reallocation de la TabTrajet" << endl;
   #endif
 		Trajet ** temp;
 		nbAllocated += 30;
@@ -72,7 +72,8 @@ if(nbAllocated == nbTrajets)
       cout << "NbTrajets : " << nbTrajets << endl;
       cout << "nbAllocated : " << nbAllocated << endl;
       cout << "ajout en position : " << (nbTrajets-1) << endl;
-      cout << "Ajout du trajet à la structure" << endl;
+      cout << "Ajout du trajet à la TabTrajet" << endl;
+      cout << "\n";
   #endif
 
 	trajet[nbTrajets - 1] = t;
@@ -80,20 +81,20 @@ if(nbAllocated == nbTrajets)
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Structure::Structure (void)
+TabTrajet::TabTrajet (void)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Structure>" << endl;
+    cout << "Appel au constructeur de <TabTrajet>" << endl;
 #endif
 nbTrajets =0;
 nbAllocated = TAILLE ;
 trajet = new Trajet*[TAILLE];
-} //----- Fin de Structure
+} //----- Fin de TabTrajet
 
-Structure::~Structure ( )
+TabTrajet::~TabTrajet ( )
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Structure>" << endl;
+    cout << "Appel au destructeur de <TabTrajet>" << endl;
 #endif
 
 	for (int i = 0; i < nbTrajets; i++)
@@ -101,6 +102,6 @@ Structure::~Structure ( )
 		delete trajet[i];
 	}
 	delete[] trajet;
-} //----- Fin de ~Structure
+} //----- Fin de ~TabTrajet
 
 //----------------------------------------------------- Méthodes protégées

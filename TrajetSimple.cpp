@@ -23,6 +23,7 @@ void TrajetSimple::Affichage (const char* c) const
 {
     Trajet::Affichage("TS : ");
     cout << "en "<< moyenTransport << endl;
+    cout << "\n";
 } //----- Fin de Méthode
 
 char* TrajetSimple::getVilleDepart(void) const

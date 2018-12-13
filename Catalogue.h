@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------
@@ -11,7 +11,7 @@
 #define Catalogue_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Structure.h"
+#include "TabTrajet.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'ajout
@@ -71,7 +71,7 @@ void freeTab(char ** tab , int size);
 //----------------------------------------------------- Attributs protégés
   int choix1 ; //Choix du premier Catalogue
   int choix2 ; //choix du sous Catalogue d'ajout de trajets
-  Structure liste;
+  TabTrajet liste;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Catalogue>
