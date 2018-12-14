@@ -37,8 +37,8 @@ public:
      // Contrat : Aucun
      //
 
-     Structure* getTab(void);
-     // Mode d'emploi : Renvoie la structure de trajets constituant le trajet composé
+     TabTrajet* GetTab(void);
+     // Mode d'emploi : Renvoie la TabTrajet de trajets constituant le trajet composé
      //
      // Contrat : Aucun
      //

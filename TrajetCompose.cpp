@@ -24,9 +24,9 @@ using namespace std;
 void TrajetCompose::Affichage (const char* c) const
 {
 	Trajet::Affichage("TC : ");
-	cout << "Le trajet est compose de " << tabTC->getNbTrajets()
+	cout << "Le trajet est compose de " << tabTC->GetNbTrajets()
 			 << " trajets : " << endl;
-	for (int i = 0; i < tabTC->getNbTrajets(); i++)
+	for (int i = 0; i < tabTC->GetNbTrajets(); i++)
 	{
 		tabTC->GetTabTrajet()[i]->Affichage(c);
 	}
@@ -37,9 +37,9 @@ char * TrajetCompose::toString(void)
 {
 	char * description = new char[1000];
 	description[0]='\0';
-	for(int i=0; i<tabTC->getNbTrajets(); i++)
+	for(int i=0; i<tabTC->GetNbTrajets(); i++)
 	{
-		char * t_S =tabTC->getTabTrajet()[i]->toString();
+		char * t_S =tabTC->GetTabTrajet()[i]->toString();
 		strcat(description, t_S);
 		delete [] t_S;
 	}
@@ -64,10 +64,10 @@ char* TrajetCompose::GetMoyenTransport(void) const
 	return moyenTransport;
 } //----- Fin de GetMoyenTrasport
 
-Structure* TrajetCompose::getTab(void)
+TabTrajet* TrajetCompose::GetTab(void)
 {
 	return tabTC;
-}//-- Fin getTab
+}//-- Fin GetTab
 
 //-------------------------------------------- Constructeurs - destructeur
 

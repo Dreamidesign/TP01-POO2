@@ -24,15 +24,15 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, Structure* res)
+void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, TabTrajet* res)
 {
-	for(int i = 0; i < liste.getNbTrajets(); i++)
+	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
 		bool used = false;
-		for(int j = 0; j < branche->getTab()->getNbTrajets(); j++)
+		for(int j = 0; j < branche->GetTab()->GetNbTrajets(); j++)
 		{
-			char * desBranche = branche->getTab()->getTabTrajet()[j]->toString();
-			char * desCurr = liste.getTabTrajet()[i]->toString();
+			char * desBranche = branche->GetTab()->GetTabTrajet()[j]->toString();
+			char * desCurr = liste.GetTabTrajet()[i]->toString();
 
 			if(strcmp(desCurr, desBranche) == 0)
 			{
@@ -44,28 +44,28 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, S
 			delete [] desBranche;
 			delete [] desCurr;
 		}
-    if(!used && (strcmp(liste.getTabTrajet()[i]->getVilleDepart(), branche->getVilleArrive()) == 0))
+    if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
     {
-			Structure * temp_S = new Structure();
-			for(int k = 0; k < branche->getTab()->getNbTrajets(); k++)
+			TabTrajet * temp_S = new TabTrajet();
+			for(int k = 0; k < branche->GetTab()->GetNbTrajets(); k++)
 			{
-				temp_S->ajouterTrajet(branche->getTab()->getTabTrajet()[k]);
+				temp_S->AjouterTrajet(branche->GetTab()->GetTabTrajet()[k]);
 			}
-			temp_S->ajouterTrajet(liste.getTabTrajet()[i]);
+			temp_S->AjouterTrajet(liste.GetTabTrajet()[i]);
 			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
-			res->ajouterTrajet(temp);
+			res->AjouterTrajet(temp);
 
 
 			#ifdef MAP
 			cout << "analyse POUSSEE trajet suivant:" << endl;
-			liste.getTabTrajet()[i]->Affichage();
+			liste.GetTabTrajet()[i]->Affichage();
 			cout << endl;
 			cout << "Construction branche :" << endl;
 			temp->Affichage();
 			#endif
 
 
-      if(strcmp(liste.getTabTrajet()[i]->getVilleArrive(), recherche) == 0)
+      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), recherche) == 0)
       {
 				cout << "- Trajet :" << endl;
         temp->Affichage();
@@ -90,32 +90,32 @@ void Catalogue::rechercheAvancee(){
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
-	Structure* resultats = new Structure();
+	TabTrajet* resultats = new TabTrajet();
 
-	for(int i = 0; i < liste.getNbTrajets(); i++)
+	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
 		#ifdef MAP
 				cout << "Debut recherche avancee" << endl;
-				cout << "Nombre de trajets TOTAL : " << liste.getNbTrajets() << '\n';
+				cout << "Nombre de trajets TOTAL : " << liste.GetNbTrajets() << '\n';
 		#endif
 
-    if(strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) == 0)
+    if(strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) == 0)
     {
 		#ifdef MAP
 			cout << "analyse trajet suivant :" << endl;
-			liste.getTabTrajet()[i]->Affichage();
+			liste.GetTabTrajet()[i]->Affichage();
 			cout << endl;
 		#endif
 
-		Structure *tabT (new Structure());
-		tabT->ajouterTrajet(liste.getTabTrajet()[i]);
+		TabTrajet *tabT (new TabTrajet());
+		tabT->AjouterTrajet(liste.GetTabTrajet()[i]);
 		TrajetCompose* temp = new TrajetCompose(tabT); //On va remplir le trajetComposé au fur et à mesure du parcours
-		resultats->ajouterTrajet(temp);
+		resultats->AjouterTrajet(temp);
 
-      if(strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee) == 0)
+      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee) == 0)
       {
 				cout << "- Trajet :" << endl;
-        liste.getTabTrajet()[i]->Affichage("");
+        liste.GetTabTrajet()[i]->Affichage("");
       }
 			else{
 				rechercheEnProfondeur(arrivee, temp, resultats);
@@ -131,7 +131,7 @@ void Catalogue::rechercheAvancee(){
 
 
 
-void Catalogue::ajoutSimple(void)
+void Catalogue::AjoutSimple(void)
 {
 	char depart [100];
 	char arrivee [100];
@@ -147,10 +147,10 @@ void Catalogue::ajoutSimple(void)
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
 	bool used = false;
-	for(int j = 0; j < liste.getNbTrajets(); j++)
+	for(int j = 0; j < liste.GetNbTrajets(); j++)
 	{
 		char * t_S =t->toString();
-		char * l_S = liste.getTabTrajet()[j]->toString();
+		char * l_S = liste.GetTabTrajet()[j]->toString();
 
 		if(strcmp(t_S, l_S) == 0)
 		{
@@ -216,10 +216,10 @@ void Catalogue::AjoutCompose(void)
 	TrajetCompose* tc(new TrajetCompose(tabTS));
 
 	bool used = false;
-	for(int j = 0; j < liste.getNbTrajets(); j++)
+	for(int j = 0; j < liste.GetNbTrajets(); j++)
 	{
 		char * t_S =tc->toString();
-		char * l_S = liste.getTabTrajet()[j]->toString();
+		char * l_S = liste.GetTabTrajet()[j]->toString();
 
 		if(strcmp(t_S, l_S) == 0)
 		{
@@ -234,7 +234,7 @@ void Catalogue::AjoutCompose(void)
 	}
 	if(!used)
 	{
-		liste.ajouterTrajet(tc);
+		liste.AjouterTrajet(tc);
 		cout << "\n" << "Trajet ajoute !" << endl;
 	}
 	else{

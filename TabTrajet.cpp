@@ -101,6 +101,6 @@ TabTrajet::~TabTrajet ( )
     delete[] trajet;
     trajet = nullptr;
   }
-} //----- Fin de ~Structure
+} //----- Fin de ~TabTrajet
 
 //----------------------------------------------------- Méthodes protégées

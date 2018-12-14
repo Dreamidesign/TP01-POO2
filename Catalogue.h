@@ -11,7 +11,7 @@
 #define Catalogue_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "Structure.h"
+#include "TabTrajet.h"
 #include "TrajetCompose.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
@@ -43,7 +43,7 @@ public:
 
     void rechercheAvancee(void);
 
-    void rechercheEnProfondeur(char* recherche, TrajetCompose* branche, Structure* res);
+    void rechercheEnProfondeur(char* recherche, TrajetCompose* branche, TabTrajet* res);
 
     void MenuTrajet(void);
     // Mode d'emploi : implémente l'interface d'Ajout des trajets
