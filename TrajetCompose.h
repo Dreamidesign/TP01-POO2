@@ -11,7 +11,7 @@
 #define TrajetCompose_H
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
-#include "Structure.h"
+#include "TabTrajet.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <TrajetCompose>
 // Implémente un trajet compose de n trajets (éventuellement simple ou composé)
@@ -43,18 +43,18 @@ public:
      // Contrat : Aucun
      //
 
-     char * getVilleArrive(void) const ;
+     char * GetVilleArrive(void) const ;
      // Mode d'emploi : Renvoi la ville d'arrivee
      //
      // Contrat : Aucun
      //
 
-     char * getVilleDepart (void) const ;
+     char * GetVilleDepart (void) const ;
      // Mode d'emploi : Renvoi la ville de départ
      //
      // Contrat : Aucun
      //
-     char* getMoyenTransport(void) const ;
+     char* GetMoyenTransport(void) const ;
      // Mode d'emploi : retourne le moyen de transport employé
      //
      // Contrat : Aucun
@@ -63,7 +63,7 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (Structure *s);
+    TrajetCompose (TabTrajet *s);
     // Mode d'emploi : définition des attributs des instances de trajet composé
     //                 à partir des paramètres formels du constructeur
     // Contrat : Aucun
@@ -78,7 +78,7 @@ public:
 protected:
 
 //----------------------------------------------------- Attributs protégés
-  Structure * tabTC;
+  TabTrajet * tabTC;
 };
 
 //--------------------------- Autres définitions dépendantes de <TrajetCompose>

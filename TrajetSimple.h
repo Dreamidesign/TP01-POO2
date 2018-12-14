@@ -32,19 +32,19 @@ public:
     // Contrat : Affichage est purement virtuelle dans Trajet
     //           Affichage doit donc etre redéfinie ici.
 
-    char* getMoyenTransport(void) const ;
+    char* GetMoyenTransport(void) const ;
     // Mode d'emploi : retourne le moyen de transport employé
     //
     // Contrat : Aucun
     //
 
-    char * getVilleArrive(void) const ;
+    char * GetVilleArrive(void) const ;
     // Mode d'emploi : Renvoi la ville d'arrivee
     //
     // Contrat : Aucun
     //
 
-    char * getVilleDepart (void) const ;
+    char * GetVilleDepart (void) const ;
     // Mode d'emploi : Renvoi la ville de départ
     //
     // Contrat : Aucun
@@ -61,8 +61,13 @@ public:
     TrajetSimple ( const char*  uneVilleDepart,
                    const char*  uneVilleArrive,
                    const char* unMoyenTransport);
+    // Contrat : Aucun
+    //
 
     virtual ~TrajetSimple ();
+
+    // Contrat : Aucun
+    //
 
 //------------------------------------------------------------------ Protégé
 

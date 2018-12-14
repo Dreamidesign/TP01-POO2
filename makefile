@@ -5,21 +5,21 @@ EXEC=voyage
 
 all : $(EXEC)
 
-voyage: Structure.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o
-	 $(CXX) -o voyage Structure.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o $(LDFLAGS)
+voyage: TabTrajet.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o
+	 $(CXX) -o voyage TabTrajet.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o $(LDFLAGS)
 Trajet.o: Trajet.cpp Trajet.h
 	 $(CXX) -c Trajet.cpp $(CXXFLAGS)
 
 TrajetSimple.o: TrajetSimple.cpp TrajetSimple.h
 	 $(CXX) -c TrajetSimple.cpp $(CXXFLAGS)
 
-TrajetCompose.o: TrajetCompose.cpp TrajetCompose.h Structure.h
+TrajetCompose.o: TrajetCompose.cpp TrajetCompose.h TabTrajet.h
 	 $(CXX) -c TrajetCompose.cpp $(CXXFLAGS);
 
-Structure.o: Structure.cpp Structure.h Trajet.h
-	 $(CXX) -c Structure.cpp $(CXXFLAGS)
+TabTrajet.o: TabTrajet.cpp TabTrajet.h Trajet.h
+	 $(CXX) -c TabTrajet.cpp $(CXXFLAGS)
 
-Catalogue.o: Structure.h Trajet.h TrajetSimple.h TrajetCompose.h Catalogue.cpp Catalogue.h
+Catalogue.o: TabTrajet.h Trajet.h TrajetSimple.h TrajetCompose.h Catalogue.cpp Catalogue.h
 	 $(CXX) -c Catalogue.cpp $(CXXFLAGS)
 
 main.o: Catalogue.h main.cpp

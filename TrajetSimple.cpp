@@ -24,19 +24,20 @@ void TrajetSimple::Affichage (const char* c) const
 {
     Trajet::Affichage("TS : ");
     cout << "en "<< moyenTransport << endl;
+    cout << "\n";
 } //----- Fin de Méthode
 
-char* TrajetSimple::getVilleDepart(void) const
+char* TrajetSimple::GetVilleDepart(void) const
 {
   return villeDepart;
-} //----- Fin de getVilleDepart
+} //----- Fin de GetVilleDepart
 
-char* TrajetSimple::getVilleArrive(void) const
+char* TrajetSimple::GetVilleArrive(void) const
 {
   return villeArrive;
-} //----- Fin de getVilleDepart
+} //----- Fin de GetVilleDepart
 
-char* TrajetSimple::getMoyenTransport(void) const
+char* TrajetSimple::GetMoyenTransport(void) const
 {
     return moyenTransport;
 } //----- Fin de Méthode

@@ -28,8 +28,9 @@ void TrajetCompose::Affichage (const char* c) const
 			 << " trajets : " << endl;
 	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
-		tabTC->getTabTrajet()[i]->Affichage(c);
+		tabTC->GetTabTrajet()[i]->Affichage(c);
 	}
+	cout << "\n";
 } //----- Fin de Affichage
 
 char * TrajetCompose::toString(void)
@@ -45,22 +46,23 @@ char * TrajetCompose::toString(void)
 	return description;
 }//-- Fin toString
 
-char* TrajetCompose::getVilleDepart(void) const
+char* TrajetCompose::GetVilleDepart(void) const
 {
-  return tabTC->getTabTrajet()[0]->getVilleDepart();
-} //----- Fin de getVilleDepart
+  return tabTC->GetTabTrajet()[0]->GetVilleDepart();
+} //----- Fin de GetVilleDepart
 
-char* TrajetCompose::getVilleArrive(void) const
+char* TrajetCompose::GetVilleArrive(void) const
 {
-  return tabTC->getTabTrajet()[tabTC->getNbTrajets()-1]->getVilleArrive();
-} //----- Fin de getVilleDepart
+  return tabTC->GetTabTrajet()[tabTC->GetNbTrajets()-1]->GetVilleArrive();
+} //----- Fin de GetVilleDepart
 
-char* TrajetCompose::getMoyenTransport(void) const
+
+char* TrajetCompose::GetMoyenTransport(void) const
 {
 	char * moyenTransport = new char [20] ;
 	strcpy(moyenTransport,"MT");
 	return moyenTransport;
-} //----- Fin de getMoyenTrasport
+} //----- Fin de GetMoyenTrasport
 
 Structure* TrajetCompose::getTab(void)
 {
@@ -69,7 +71,7 @@ Structure* TrajetCompose::getTab(void)
 
 //-------------------------------------------- Constructeurs - destructeur
 
-TrajetCompose::TrajetCompose (Structure *tab) : tabTC (tab)
+TrajetCompose::TrajetCompose (TabTrajet *tab) : tabTC (tab)
 // Algorithme :
 //
 {

@@ -31,19 +31,19 @@ public:
 	  // son constructeur est déclaré en protected pour bien eviter la création d'instances
 	  // de trajet ce qui n'a aucun sens
 
-    virtual char * getVilleDepart (void) const = 0;
+    virtual char * GetVilleDepart (void) const = 0;
     // Mode d'emploi : Renvoi la ville de départ
     //
     // Contrat : Aucun
     //
 
-    virtual char * getVilleArrive(void) const = 0;
+    virtual char * GetVilleArrive(void) const = 0;
     // Mode d'emploi : Renvoi la ville d'arrivee
     //
     // Contrat : Aucun
     //
 
-    virtual char* getMoyenTransport(void) const = 0 ;
+    virtual char* GetMoyenTransport(void) const = 0 ;
     // Mode d'emploi : retourne le moyen de transport employé
     //
     // Contrat : Aucun
