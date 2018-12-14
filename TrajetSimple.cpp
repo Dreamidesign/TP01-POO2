@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 /*************************************************************************
                            TrajetSimple  -  description
                              -------------------
@@ -40,26 +41,17 @@ char* TrajetSimple::getMoyenTransport(void) const
     return moyenTransport;
 } //----- Fin de Méthode
 
-bool TrajetSimple :: estEgal(const Trajet * t) const
+char * TrajetSimple::toString(void)
 {
-  char * mT = t->getMoyenTransport() ;
-  if (!strcmp(mT,"MT"))
-  {
-    delete[] mT ;
-    return false ;
-  }
-  if (     !strcmp(villeDepart,t->getVilleDepart())
-        && !strcmp(villeArrive,t->getVilleArrive())
-        && !strcmp(moyenTransport,mT)
-     )
-  {
-      return true;
-  }
-  else
-  {
-    return false;
-  }
-} //-- Fin estEgal
+  char * description = new char[100];
+  description[0]='\0';
+  strcat(description, villeDepart);
+  strcat(description, villeArrive);
+  strcat(description, moyenTransport);
+
+  return description;
+}//-- Fin toString
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -85,7 +77,19 @@ TrajetSimple::~TrajetSimple ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
+if (villeDepart != nullptr)
+{
   delete[] villeDepart;
+  villeDepart = nullptr;
+}
+if (villeArrive != nullptr)
+{
   delete[] villeArrive;
-	delete[] moyenTransport;
+  villeArrive = nullptr;
+}
+if (moyenTransport != nullptr)
+{
+  delete[] moyenTransport;
+  moyenTransport = nullptr;
+}
 } //----- Fin de ~TrajetSimple

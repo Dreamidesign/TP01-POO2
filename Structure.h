@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Structure> (fichier Structure.h) ----------

@@ -3,7 +3,7 @@
                              -------------------
     début                : 23/11/18
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----
@@ -50,12 +50,11 @@ public:
     // Contrat : Aucun
     //
 
-    bool estEgal (const Trajet * t) const ;
-    // Mode d'emploi : Compare t et this
-    //                 Redéfinition de estEgal de Trajet
+    char * toString(void);
+    // Mode d'emploi : Renvoi une description textuelle sorte d'ID du trajet
+    //
     // Contrat : Aucun
     //
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -72,7 +71,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
      char* villeDepart;
      char* villeArrive;
-     char* moyenTransport ;
+     char* moyenTransport;
 };
 //---------------------------- Autres définitions dépendantes de <TrajetSimple>
 

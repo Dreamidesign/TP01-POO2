@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------
@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Structure.h"
+#include "TrajetCompose.h"
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'ajout
@@ -40,6 +41,9 @@ public:
     //                 de départ et ville d'arrivé saisies par l'utilisateur,
     //                 utilisation du polymorphisme
 
+    void rechercheAvancee(void);
+
+    void rechercheEnProfondeur(char* recherche, TrajetCompose* branche, Structure* res);
 
     void menuTrajet(void);
     // Mode d'emploi : implémente l'interface d'ajout des trajets

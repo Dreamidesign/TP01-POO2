@@ -1,9 +1,10 @@
+#define _CRT_SECURE_NO_WARNINGS
 /*************************************************************************
                            TrajetCompose  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //-------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp)
@@ -20,28 +21,29 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void TrajetCompose::Affichage (const char* c = "") const
+void TrajetCompose::Affichage (const char* c) const
 {
 	Trajet::Affichage("TC : ");
 	cout << "Le trajet est compose de " << tabTC->getNbTrajets()
-			 << "trajets : " << endl;
+			 << " trajets : " << endl;
 	for (int i = 0; i < tabTC->getNbTrajets(); i++)
 	{
 		tabTC->getTabTrajet()[i]->Affichage(c);
 	}
 } //----- Fin de Affichage
 
-/*bool estEgal (const Trajet * t) const
+char * TrajetCompose::toString(void)
 {
-	for (int i = 0 ; i < tabTC->getNbTrajets(); i++)
+	char * description = new char[1000];
+	description[0]='\0';
+	for(int i=0; i<tabTC->getNbTrajets(); i++)
 	{
-		if (!(t->getTabTrajet()[i]->estEgal(tabTC[i])))
-		{
-			return false;
-		}
+		char * t_S =tabTC->getTabTrajet()[i]->toString();
+		strcat(description, t_S);
+		delete [] t_S;
 	}
-	return true ;
-} //----- Fin de estEgal*/
+	return description;
+}//-- Fin toString
 
 char* TrajetCompose::getVilleDepart(void) const
 {
@@ -53,7 +55,6 @@ char* TrajetCompose::getVilleArrive(void) const
   return tabTC->getTabTrajet()[tabTC->getNbTrajets()-1]->getVilleArrive();
 } //----- Fin de getVilleDepart
 
-
 char* TrajetCompose::getMoyenTransport(void) const
 {
 	char * moyenTransport = new char [20] ;
@@ -61,6 +62,10 @@ char* TrajetCompose::getMoyenTransport(void) const
 	return moyenTransport;
 } //----- Fin de getMoyenTrasport
 
+Structure* TrajetCompose::getTab(void)
+{
+	return tabTC;
+}//-- Fin getTab
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -81,7 +86,5 @@ TrajetCompose::~TrajetCompose ( )
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
-	//Trajet::~Trajet();
-
 	delete tabTC;
 } //----- Fin de ~TrajetCompose

@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <Structure> (fichier Structure.cpp) ------------
@@ -66,15 +66,7 @@ if(nbAllocated == nbTrajets)
     trajet = temp;
 	}
 
-  //Ajout du trajet au tableau
   nbTrajets++;
-  #ifdef MAP
-      cout << "NbTrajets : " << nbTrajets << endl;
-      cout << "nbAllocated : " << nbAllocated << endl;
-      cout << "ajout en position : " << (nbTrajets-1) << endl;
-      cout << "Ajout du trajet à la structure" << endl;
-  #endif
-
 	trajet[nbTrajets - 1] = t;
 } //-- Fin ajouterTrajet
 
@@ -98,9 +90,17 @@ Structure::~Structure ( )
 
 	for (int i = 0; i < nbTrajets; i++)
 	{
-		delete trajet[i];
+    if(trajet[i] != nullptr)
+    {
+      delete trajet[i];
+      trajet[i] = nullptr;
+    }
 	}
-	delete[] trajet;
+  if( trajet != nullptr)
+  {
+    delete[] trajet;
+    trajet = nullptr;
+  }
 } //----- Fin de ~Structure
 
 //----------------------------------------------------- Méthodes protégées

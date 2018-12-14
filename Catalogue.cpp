@@ -3,7 +3,7 @@
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------
@@ -24,6 +24,113 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
+void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, Structure* res)
+{
+	for(int i = 0; i < liste.getNbTrajets(); i++)
+	{
+		bool used = false;
+		for(int j = 0; j < branche->getTab()->getNbTrajets(); j++)
+		{
+			char * desBranche = branche->getTab()->getTabTrajet()[j]->toString();
+			char * desCurr = liste.getTabTrajet()[i]->toString();
+
+			if(strcmp(desCurr, desBranche) == 0)
+			{
+				used = true;
+				delete [] desBranche;
+				delete [] desCurr;
+				break;
+			}
+			delete [] desBranche;
+			delete [] desCurr;
+		}
+    if(!used && (strcmp(liste.getTabTrajet()[i]->getVilleDepart(), branche->getVilleArrive()) == 0))
+    {
+			Structure * temp_S = new Structure();
+			for(int k = 0; k < branche->getTab()->getNbTrajets(); k++)
+			{
+				temp_S->ajouterTrajet(branche->getTab()->getTabTrajet()[k]);
+			}
+			temp_S->ajouterTrajet(liste.getTabTrajet()[i]);
+			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
+			res->ajouterTrajet(temp);
+
+
+			#ifdef MAP
+			cout << "analyse POUSSEE trajet suivant:" << endl;
+			liste.getTabTrajet()[i]->Affichage();
+			cout << endl;
+			cout << "Construction branche :" << endl;
+			temp->Affichage();
+			#endif
+
+
+      if(strcmp(liste.getTabTrajet()[i]->getVilleArrive(), recherche) == 0)
+      {
+				cout << "- Trajet :" << endl;
+        temp->Affichage();
+      }
+			else{
+				rechercheEnProfondeur(recherche, temp, res);
+			}
+    }
+	}
+
+}
+
+
+void Catalogue::rechercheAvancee(){
+	char depart [100];
+	char arrivee [100];
+
+	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
+	cin >> depart;
+	cout << "Et votre ville d'arrivee" << endl;
+	cin >> arrivee;
+
+	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
+
+	Structure* resultats = new Structure();
+
+	for(int i = 0; i < liste.getNbTrajets(); i++)
+	{
+		#ifdef MAP
+				cout << "Debut recherche avancee" << endl;
+				cout << "Nombre de trajets TOTAL : " << liste.getNbTrajets() << '\n';
+		#endif
+
+    if(strcmp(liste.getTabTrajet()[i]->getVilleDepart(), depart) == 0)
+    {
+		#ifdef MAP
+			cout << "analyse trajet suivant :" << endl;
+			liste.getTabTrajet()[i]->Affichage();
+			cout << endl;
+		#endif
+
+		Structure *tabT (new Structure());
+		tabT->ajouterTrajet(liste.getTabTrajet()[i]);
+		TrajetCompose* temp = new TrajetCompose(tabT); //On va remplir le trajetComposé au fur et à mesure du parcours
+		resultats->ajouterTrajet(temp);
+
+      if(strcmp(liste.getTabTrajet()[i]->getVilleArrive(), arrivee) == 0)
+      {
+				cout << "- Trajet :" << endl;
+        liste.getTabTrajet()[i]->Affichage("");
+      }
+			else{
+				rechercheEnProfondeur(arrivee, temp, resultats);
+			}
+    }
+	}
+	// resultats->destructionRecherche();
+	// resultats = nullptr;
+	// delete resultats;
+
+
+}
+
+
+
 void Catalogue::ajoutSimple(void)
 {
 	char depart [100];
@@ -39,17 +146,25 @@ void Catalogue::ajoutSimple(void)
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
-	bool canBeAdded = true;
-	for(int i=0; i<liste.getNbTrajets(); i++)
+	bool used = false;
+	for(int j = 0; j < liste.getNbTrajets(); j++)
 	{
-			if (t->estEgal(liste.getTabTrajet()[i]))
-			{
-				canBeAdded = false;
-				cout << "\n" << "Trajet existant" << "\n" << endl;
-				break;
-			}
+		char * t_S =t->toString();
+		char * l_S = liste.getTabTrajet()[j]->toString();
+
+		if(strcmp(t_S, l_S) == 0)
+		{
+			used = true;
+			cout << "\n" << "Trajet existant" << "\n" << endl;
+			delete [] t_S;
+			delete [] l_S;
+			break;
+		}
+		delete [] t_S;
+		delete [] l_S;
 	}
-	if(canBeAdded == true)
+
+	if(used == false)
 	{
 		liste.ajouterTrajet(t);
 		cout << "\n" << "Trajet ajoute !" << endl;
@@ -100,8 +215,31 @@ void Catalogue::ajoutCompose(void)
 
 	TrajetCompose* tc(new TrajetCompose(tabTS));
 
-	liste.ajouterTrajet(tc);
-	cout << "\n" << "Trajet ajoute !" << endl;
+	bool used = false;
+	for(int j = 0; j < liste.getNbTrajets(); j++)
+	{
+		char * t_S =tc->toString();
+		char * l_S = liste.getTabTrajet()[j]->toString();
+
+		if(strcmp(t_S, l_S) == 0)
+		{
+			used = true;
+			cout << "\n" << "Trajet existant" << "\n" << endl;
+			delete [] t_S;
+			delete [] l_S;
+			break;
+		}
+		delete [] t_S;
+		delete [] l_S;
+	}
+	if(!used)
+	{
+		liste.ajouterTrajet(tc);
+		cout << "\n" << "Trajet ajoute !" << endl;
+	}
+	else{
+		delete tc;
+	}
 
 	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
@@ -175,7 +313,8 @@ void Catalogue::mainCatalogue(void)
   	cout << "1. Ajouter un trajet" << endl;
   	cout << "2. Afficher le catalogue de trajets proposes" << endl;
   	cout << "3. Rechercher un parcours" << endl;
-  	cout << "4. Quitter" << endl;
+  	cout << "4. Rechercher un parcours - recherche avancee" << endl;
+  	cout << "5. Quitter" << endl;
   	cin >> choix1;
 
 		switch (choix1)
@@ -193,13 +332,17 @@ void Catalogue::mainCatalogue(void)
 			rechercher();
 			break;
 		case 4:
+			cout << "4. Rechercher un parcours - recherche avancee" << endl;
+			rechercheAvancee();
+			break;
+		case 5:
 			break;
 		default:
 		 cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
 			break;
 		}
 
-	} while (choix1 != 4);
+	} while (choix1 != 5);
 }//----- Fin de mainCatalogue
 
 //-------------------------------------------- Constructeurs - destructeur

@@ -3,7 +3,7 @@
                              -------------------
     début                : 23/11/18
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
@@ -45,6 +45,12 @@ public:
 
     virtual char* getMoyenTransport(void) const = 0 ;
     // Mode d'emploi : retourne le moyen de transport employé
+    //
+    // Contrat : Aucun
+    //
+
+    virtual char * toString(void) = 0;
+    // Mode d'emploi : Renvoi une description textuelle sorte d'ID du trajet
     //
     // Contrat : Aucun
     //

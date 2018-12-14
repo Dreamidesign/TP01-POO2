@@ -3,7 +3,7 @@
                              -------------------
     début                : 23/11/18
     copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$ 
+    e-mail               : $EMAIL$
 *************************************************************************/
 
 //------ Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ------
@@ -25,15 +25,21 @@ class TrajetCompose : public Trajet
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    void Affichage (const char* c)const ;
+    void Affichage (const char* c = "") const;
     // Mode d'emploi : Affiche les caractéristiques du trajet avec la possibilité
     //                 d'ajouter des specifications grace au char * c
     //Contrat : Redéfinition de la méthode virtuelle pure de la classe mère Trajet
     //
 
-  //   bool estEgal (const Trajet * t) const ;
-     // Mode d'emploi : Compare t et this
-     //                 Redéfinition de estEgal de Trajet
+     char * toString(void);
+     // Mode d'emploi : Renvoi une description textuelle sorte d'ID du trajet
+     //
+     // Contrat : Aucun
+     //
+
+     Structure* getTab(void);
+     // Mode d'emploi : Renvoie la structure de trajets constituant le trajet composé
+     //
      // Contrat : Aucun
      //
 
@@ -53,6 +59,7 @@ public:
      //
      // Contrat : Aucun
      //
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
