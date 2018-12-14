@@ -16,7 +16,7 @@
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
-// - la  recherche de trajets ainsi que l'interface utilisateur
+// - la  Recherche de trajets ainsi que l'interface utilisateur
 //------------------------------------------------------------------------
 
 class Catalogue
@@ -37,13 +37,13 @@ public:
     //           de la validité du trajet à la saisie
 
     void Rechercher(void);
-    // Mode d'emploi : recherche un trajet dans le catalogue à partir d'une ville
+    // Mode d'emploi : Recherche un trajet dans le catalogue à partir d'une ville
     //                 de départ et ville d'arrivé saisies par l'utilisateur,
     //                 utilisation du polymorphisme
 
-    void rechercheAvancee(void);
+    void RechercheAvancee(void);
 
-    void rechercheEnProfondeur(char* recherche, TrajetCompose* branche, TabTrajet* res);
+    void RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, TabTrajet* res);
 
     void MenuTrajet(void);
     // Mode d'emploi : implémente l'interface d'Ajout des trajets

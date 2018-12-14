@@ -24,7 +24,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, TabTrajet* res)
+void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, TabTrajet* res)
 {
 	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
@@ -65,13 +65,13 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, T
 			#endif
 
 
-      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), recherche) == 0)
+      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
       {
 				cout << "- Trajet :" << endl;
         temp->Affichage();
       }
 			else{
-				rechercheEnProfondeur(recherche, temp, res);
+				RechercheEnProfondeur(Recherche, temp, res);
 			}
     }
 	}
@@ -79,7 +79,7 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, T
 }
 
 
-void Catalogue::rechercheAvancee(){
+void Catalogue::RechercheAvancee(){
 	char depart [100];
 	char arrivee [100];
 
@@ -95,7 +95,7 @@ void Catalogue::rechercheAvancee(){
 	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
 		#ifdef MAP
-				cout << "Debut recherche avancee" << endl;
+				cout << "Debut Recherche avancee" << endl;
 				cout << "Nombre de trajets TOTAL : " << liste.GetNbTrajets() << '\n';
 		#endif
 
@@ -118,7 +118,7 @@ void Catalogue::rechercheAvancee(){
         liste.GetTabTrajet()[i]->Affichage("");
       }
 			else{
-				rechercheEnProfondeur(arrivee, temp, resultats);
+				RechercheEnProfondeur(arrivee, temp, resultats);
 			}
     }
 	}
@@ -313,7 +313,7 @@ void Catalogue::MenuCatalogue(void)
   	cout << "1. Ajouter un trajet" << endl;
   	cout << "2. Afficher le catalogue de trajets proposes" << endl;
   	cout << "3. Rechercher un parcours" << endl;
-  	cout << "4. Rechercher un parcours - recherche avancee" << endl;
+  	cout << "4. Rechercher un parcours - Recherche avancee" << endl;
   	cout << "5. Quitter" << endl;
   	cin >> choix1;
 
@@ -332,8 +332,8 @@ void Catalogue::MenuCatalogue(void)
 			Rechercher();
 			break;
 		case 4:
-			cout << "4. Rechercher un parcours - recherche avancee" << endl;
-			rechercheAvancee();
+			cout << "4. Rechercher un parcours - Recherche avancee" << endl;
+			RechercheAvancee();
 			break;
 		case 5:
 			break;
