@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -W -ansi -Wall -Wextra -std=c++11 -pedantic -O2 -DMAP
+CXXFLAGS=-g -W -ansi -Wall -Wextra -std=c++11 -pedantic -O2
 LDFLAGS=
 EXEC=voyage
 

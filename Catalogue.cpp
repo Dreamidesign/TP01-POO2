@@ -24,8 +24,9 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, TabTrajet* res)
+void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, TabTrajet* res)
 {
+	//Recherches des trajets non etudiés, pas dans le TC de la branche d'avant donc
 	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
 		bool used = false;
@@ -44,6 +45,7 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, T
 			delete [] desBranche;
 			delete [] desCurr;
 		}
+		//On ne selectionne que les trajets restants et valides
     if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
     {
 			TabTrajet * temp_S = new TabTrajet();
@@ -55,23 +57,13 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, T
 			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
 			res->AjouterTrajet(temp);
 
-
-			#ifdef MAP
-			cout << "analyse POUSSEE trajet suivant:" << endl;
-			liste.GetTabTrajet()[i]->Affichage();
-			cout << endl;
-			cout << "Construction branche :" << endl;
-			temp->Affichage();
-			#endif
-
-
-      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), recherche) == 0)
+      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
       {
 				cout << "- Trajet :" << endl;
         temp->Affichage();
       }
 			else{
-				rechercheEnProfondeur(recherche, temp, res);
+				RechercheEnProfondeur(Recherche, temp, res); //ON recommence le processus sur les trajets restants
 			}
     }
 	}
@@ -79,7 +71,7 @@ void Catalogue::rechercheEnProfondeur(char* recherche, TrajetCompose* branche, T
 }
 
 
-void Catalogue::rechercheAvancee(){
+void Catalogue::RechercheAvancee(){
 	char depart [100];
 	char arrivee [100];
 
@@ -90,43 +82,28 @@ void Catalogue::rechercheAvancee(){
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
-	TabTrajet* resultats = new TabTrajet();
+	TabTrajet* resultats = new TabTrajet(); //On stocke toutes les branches parcourues
 
 	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
-		#ifdef MAP
-				cout << "Debut recherche avancee" << endl;
-				cout << "Nombre de trajets TOTAL : " << liste.GetNbTrajets() << '\n';
-		#endif
-
-    if(strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) == 0)
+    if(strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) == 0) //On ne choisi que les trajets compatibles
     {
-		#ifdef MAP
-			cout << "analyse trajet suivant :" << endl;
-			liste.GetTabTrajet()[i]->Affichage();
-			cout << endl;
-		#endif
 
 		TabTrajet *tabT (new TabTrajet());
 		tabT->AjouterTrajet(liste.GetTabTrajet()[i]);
-		TrajetCompose* temp = new TrajetCompose(tabT); //On va remplir le trajetComposé au fur et à mesure du parcours
+		TrajetCompose* temp = new TrajetCompose(tabT); //Creation de la 1ere branche
 		resultats->AjouterTrajet(temp);
 
       if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee) == 0)
       {
-				cout << "- Trajet :" << endl;
+				cout << "- Trajet :" << endl; //Si le trajet correspond on l'affiche
         liste.GetTabTrajet()[i]->Affichage("");
       }
 			else{
-				rechercheEnProfondeur(arrivee, temp, resultats);
+				RechercheEnProfondeur(arrivee, temp, resultats); //Recursivité de la rechercche
 			}
     }
 	}
-	// resultats->destructionRecherche();
-	// resultats = nullptr;
-	// delete resultats;
-
-
 }
 
 
@@ -313,7 +290,7 @@ void Catalogue::MenuCatalogue(void)
   	cout << "1. Ajouter un trajet" << endl;
   	cout << "2. Afficher le catalogue de trajets proposes" << endl;
   	cout << "3. Rechercher un parcours" << endl;
-  	cout << "4. Rechercher un parcours - recherche avancee" << endl;
+  	cout << "4. Rechercher un parcours - Recherche avancee" << endl;
   	cout << "5. Quitter" << endl;
   	cin >> choix1;
 
@@ -332,8 +309,8 @@ void Catalogue::MenuCatalogue(void)
 			Rechercher();
 			break;
 		case 4:
-			cout << "4. Rechercher un parcours - recherche avancee" << endl;
-			rechercheAvancee();
+			cout << "4. Rechercher un parcours - Recherche avancee" << endl;
+			RechercheAvancee();
 			break;
 		case 5:
 			break;
