@@ -1,10 +1,28 @@
-bool valideAuCritere (trajet * t, critere c);
-void gestionfichir (Critere & c, bool sauvegardeornot);
+// Mode d'emploi :
+//  Indique si le trajet fourni est valide au critere.
+//  t : Pointeur de Trajet
+//  c : structure Critere
+//  i : indice du trajet fourni dans le catalogue (facultatif)
+// Contrat :
+//  Les parametres fournis sont valides, en particulier le critere.
+bool TrajetValideAuCritere (trajet * t, Critere c, unsigned int i = -1);
 
-enum Critere_e {SANS, TYPE, VILLE, SELECTION]; // Type de critere
-struct Critere {Critere_e type; char * n; char * m}; // Definit un critere, avec son type, et ses éventuels paramètres m et n (villes ou indices de trajets).
+enum Critere_e 
+{
+    SANS, 
+    TYPE, 
+    VILLE, 
+    SELECTION
+}; // Type de critere
 
-bool valideAuCritere (Trajet * t, Critere & c, int i)
+struct Critere 
+{
+    Critere_e type; 
+    char * n; 
+    char * m
+}; // Definit un critere, avec son type, et ses éventuels paramètres m et n (villes ou indices de trajets).
+
+bool valideAuCritere (Trajet * t, Critere & c, unsigned int i)
 {
     if (t == nullptr) 
     {   return false;
@@ -26,6 +44,7 @@ bool valideAuCritere (Trajet * t, Critere & c, int i)
                     // Test ville d’arrivee
                 }
             case SELECTION:
+                // Si i est entre c.n inclus et c.m inclus.
                 return ((i >= atoi (c.n)) && (i <= atoi(c.m))) ? true : false;
             default:
                 cerr << “Type de critere invalide !” << endl;
