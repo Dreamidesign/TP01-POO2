@@ -86,9 +86,9 @@ void Catalogue::RechercheAvancee(){
 	char arrivee [100];
 
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin >> depart;
+	cin.getline(depart, 100);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin >> arrivee;
+	cin.getline(arrivee, 100);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -125,11 +125,11 @@ void Catalogue::AjoutSimple(void)
 	char mt [100];
 
 	cout << "Quel est le depart du trajet" << endl;
-	cin >> depart;
+	cin.getline(depart, 100);
 	cout << "Quelle est l'arrivee du trajet" << endl;
-	cin >> arrivee;
+	cin.getline(arrivee, 100);
 	cout << "Quel est le moyen de transport employe ?" << endl;
-	cin >> mt;
+	cin.getline(mt, 100);
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
@@ -183,7 +183,7 @@ void Catalogue::AjoutCompose(void)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
 		tabVille[i] = new char[20];
-		cin >> tabVille[i];
+		cin.getline(tabVille[i], 100);
 
 		if(i != nbVilles - 1) tabMT[i]=new char[20];
 		//On a moins de moyens de transport que de villes
@@ -191,7 +191,7 @@ void Catalogue::AjoutCompose(void)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
 			 " et " << tabVille[i] << " ?" << endl;
-			cin >> tabMT[i-1];
+			cin.getline(tabMT[i-1], 100);
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
 
@@ -238,9 +238,9 @@ void Catalogue::Rechercher(void)
 	char arrivee[100];
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin >> depart;
+	cin.getline(depart, 100);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin >> arrivee;
+	cin.getline(arrivee, 100);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
