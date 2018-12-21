@@ -82,13 +82,13 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 
 
 void Catalogue::RechercheAvancee(){
-	char depart [100];
-	char arrivee [100];
+	char depart [TAILLE_NOM];
+	char arrivee [TAILLE_NOM];
 
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, 100);
+	cin.getline(depart, TAILLE_NOM);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, 100);
+	cin.getline(arrivee, TAILLE_NOM);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -120,16 +120,16 @@ void Catalogue::RechercheAvancee(){
 
 void Catalogue::AjoutSimple(void)
 {
-	char depart [100];
-	char arrivee [100];
-	char mt [100];
+	char depart [TAILLE_NOM];
+	char arrivee [TAILLE_NOM];
+	char mt [TAILLE_NOM];
 
 	cout << "Quel est le depart du trajet" << endl;
-	cin.getline(depart, 100);
+	cin.getline(depart, TAILLE_NOM);
 	cout << "Quelle est l'arrivee du trajet" << endl;
-	cin.getline(arrivee, 100);
+	cin.getline(arrivee, TAILLE_NOM);
 	cout << "Quel est le moyen de transport employe ?" << endl;
-	cin.getline(mt, 100);
+	cin.getline(mt, TAILLE_NOM);
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
@@ -182,16 +182,16 @@ void Catalogue::AjoutCompose(void)
 	for (int i = 0; i < nbVilles; i++)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
-		tabVille[i] = new char[20];
-		cin.getline(tabVille[i], 100);
+		tabVille[i] = new char[TAILLE_NOM];
+		cin.getline(tabVille[i], TAILLE_NOM);
 
-		if(i != nbVilles - 1) tabMT[i]=new char[20];
+		if(i != nbVilles - 1) tabMT[i]=new char[TAILLE_NOM];
 		//On a moins de moyens de transport que de villes
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
 			 " et " << tabVille[i] << " ?" << endl;
-			cin.getline(tabMT[i-1], 100);
+			cin.getline(tabMT[i-1], TAILLE_NOM);
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
 
@@ -234,13 +234,13 @@ void Catalogue::AjoutCompose(void)
 
 void Catalogue::Rechercher(void)
 {
-	char depart [100];
-	char arrivee[100];
+	char depart [TAILLE_NOM];
+	char arrivee[TAILLE_NOM];
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, 100);
+	cin.getline(depart, TAILLE_NOM);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, 100);
+	cin.getline(arrivee, TAILLE_NOM);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -331,6 +331,34 @@ void Catalogue::MenuCatalogue(void)
 
 	} while (choix1 != 5);
 }//----- Fin de mainCatalogue
+
+void SaisirNom (char * dest)
+{
+	bool ok = false;
+	while ( ! ok)
+	{
+		cin.getline (dest, TAILLE_NOM);
+		
+		if (strlen(dest) < 1) continue;
+		for (int i=0; dest[i] != '\0'; ++i)
+		{
+			if (
+				(dest[i] == ':') ||
+				(dest[i] == ';') ||
+				(dest[i] == ',') ||
+				(dest[i] == '(') ||
+				(dest[i] == ')')
+			   )
+			{	ok = false;
+			 	cout << "Saisie invalide !" << endl;
+				break;
+			}
+			else
+			{	ok = true;
+			}
+		}
+	}
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue (void)
