@@ -46,11 +46,21 @@ char * TrajetSimple::toString(void)
   char * description = new char[100];
   description[0]='\0';
   strcat(description, "S:");
-  strcat(description, Trajet::ChaineEnMaj(villeDepart);
+  strcat(description, villeDepart);
   strcat(description, ";");
-  strcat(description, Trajet::ChaineEnMaj(villeArrive));
+  strcat(description, villeArrive);
   strcat(description, ";");
-  strcat(description, Trajet::ChaineEnMaj(moyenTransport));
+  strcat(description, moyenTransport);
+  
+  unsigned int i = 0;
+  while (description[i] != '\0')
+  {
+    if (description[i] >= 'a' && description[i] <= 'z')
+    {
+      description[i] += 'A' - 'a';
+    }
+    ++i;
+  }
 
   return description;
 }//-- Fin toString
