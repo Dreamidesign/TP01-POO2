@@ -35,6 +35,19 @@ using namespace std;
 	#endif
 	} //----- Fin de ~Trajet
 
+	void Trajet::ChaineEnMaj (char * ch)
+	{
+		unsigned int i = 0;
+		while (ch[i] != '\0')
+		{
+			if (ch[i] >= 'a' && ch[i] <= 'z')
+			{
+				ch[i] += 'A' - 'a';
+			}
+			++i;
+		}
+	}
+
 	//------------------------------------------------------------------ PROTEGE
 	Trajet::Trajet()
 	{
