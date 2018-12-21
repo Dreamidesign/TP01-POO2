@@ -57,8 +57,6 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
 			res->AjouterTrajet(temp);
 
-<<<<<<< HEAD
-=======
 
 			#ifdef MAP
 			cout << "analyse POUSSEE trajet suivant:" << endl;
@@ -69,18 +67,13 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			#endif
 
 
->>>>>>> 91588c9ba5f575b0f6eb88650d0fc1a8cc0abe57
       if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
       {
 				cout << "- Trajet :" << endl;
         temp->Affichage();
       }
 			else{
-<<<<<<< HEAD
 				RechercheEnProfondeur(Recherche, temp, res); //ON recommence le processus sur les trajets restants
-=======
-				RechercheEnProfondeur(Recherche, temp, res);
->>>>>>> 91588c9ba5f575b0f6eb88650d0fc1a8cc0abe57
 			}
     }
 	}
@@ -103,16 +96,7 @@ void Catalogue::RechercheAvancee(){
 
 	for(int i = 0; i < liste.GetNbTrajets(); i++)
 	{
-<<<<<<< HEAD
     if(strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) == 0) //On ne choisi que les trajets compatibles
-=======
-		#ifdef MAP
-				cout << "Debut Recherche avancee" << endl;
-				cout << "Nombre de trajets TOTAL : " << liste.GetNbTrajets() << '\n';
-		#endif
-
-    if(strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) == 0)
->>>>>>> 91588c9ba5f575b0f6eb88650d0fc1a8cc0abe57
     {
 
 		TabTrajet *tabT (new TabTrajet());
@@ -126,11 +110,7 @@ void Catalogue::RechercheAvancee(){
         liste.GetTabTrajet()[i]->Affichage("");
       }
 			else{
-<<<<<<< HEAD
 				RechercheEnProfondeur(arrivee, temp, resultats); //Recursivité de la rechercche
-=======
-				RechercheEnProfondeur(arrivee, temp, resultats);
->>>>>>> 91588c9ba5f575b0f6eb88650d0fc1a8cc0abe57
 			}
     }
 	}
