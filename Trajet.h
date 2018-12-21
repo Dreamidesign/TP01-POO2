@@ -32,13 +32,13 @@ public:
 	  // de trajet ce qui n'a aucun sens
 
     virtual char * GetVilleDepart (void) const = 0;
-    // Mode d'emploi : Renvoi la ville de départ
+    // Mode d'emploi : renvoie la ville de départ
     //
     // Contrat : Aucun
     //
 
     virtual char * GetVilleArrive(void) const = 0;
-    // Mode d'emploi : Renvoi la ville d'arrivee
+    // Mode d'emploi : renvoie la ville d'arrivee
     //
     // Contrat : Aucun
     //
@@ -50,10 +50,16 @@ public:
     //
 
     virtual char * toString(void) = 0;
-    // Mode d'emploi : Renvoi une description textuelle sorte d'ID du trajet
+    // Mode d'emploi : renvoie une description textuelle sorte d'ID du trajet
     //
     // Contrat : Aucun
     //
+	
+    static char * ChaineEnMaj (char * ch);
+    // Mode d'emploi : met la chaine fournie en majuscules.
+    // 
+    // Contrat : la chaine est valide.
+    // 
 
 //-------------------------------------------- Constructeurs - destructeur
 
