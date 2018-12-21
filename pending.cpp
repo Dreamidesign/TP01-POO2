@@ -15,14 +15,21 @@ enum Critere_e
     SELECTION
 }; // Type de critere
 
+// Definit un critere, avec son type, et ses éventuels paramètres 
+// m et n (villes ou indices de trajets).
+// m et n dependent du type : 
+// - si SANS, ils sont ignores
+// - si TYPE, n[0] contient 'S' ou 'C'
+// - si VILLE, n est la ville de depart et m la ville d'arrivee (les chaines sont valides).
+// - si SELECTION, m et n sont des chaines valides contenant un entier positif ou nul.
 struct Critere 
 {
     Critere_e type; 
     char * n; 
     char * m
-}; // Definit un critere, avec son type, et ses éventuels paramètres m et n (villes ou indices de trajets).
+}; 
 
-bool valideAuCritere (Trajet * t, Critere & c, unsigned int i)
+bool TrajetValideAuCritere (Trajet * t, Critere & c, unsigned int i)
 {
     if (t == nullptr) 
     {   return false;
@@ -37,12 +44,16 @@ bool valideAuCritere (Trajet * t, Critere & c, unsigned int i)
                 // Si les types du critere et du trajet sont identiques.
                 return ( ! strcmp (c.n[0], trajet[0]) ) ? true : false;
             case VILLE:
-                {
-                    if ( ! strcmp (c.n, “”) && ! 
-                    {    int villeDepart = atoi (c.n);
-
-                    // Test ville d’arrivee
+                // Si c.n n'est pas vide, on compare c.n a la ville de depart :
+                if (( strcmp (c.n, "") ) && ( strcmp (c.n, t->GetVilleDepart() ) )
+                {   return false;
                 }
+                if (( strcmp (c.m, "") ) && ( strcmp (c.m, t->GetVilleArrivee() ) )
+                {   return false;
+                }
+                return true;
+                    
+                return 
             case SELECTION:
                 // Si i est entre c.n inclus et c.m inclus.
                 return ((i >= atoi (c.n)) && (i <= atoi(c.m))) ? true : false;
