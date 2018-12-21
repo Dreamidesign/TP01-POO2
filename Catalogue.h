@@ -13,6 +13,8 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "TabTrajet.h"
 #include "TrajetCompose.h"
+
+#define TAILLE_NOM 100
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
@@ -53,6 +55,10 @@ public:
     void MenuCatalogue(void);
     // Mode d'emploi : implémente l'interface principale du catalogue
     //
+  
+    static void SaisirNom (char * dest);
+    // Mode d'emploi : recupere la saisie de l'utilisateur et l'enregistre dans dest.
+    // Contrat : la zone pointee par dest est de taille TAILLE_NOM.
 
 //-------------------------------------------- Constructeurs - destructeur
     Catalogue (void);
