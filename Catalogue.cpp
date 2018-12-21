@@ -86,9 +86,9 @@ void Catalogue::RechercheAvancee(){
 	char arrivee [TAILLE_NOM];
 
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, TAILLE_NOM);
+	SaisirNom (depart);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, TAILLE_NOM);
+	SaisirNom(arrivee);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -125,11 +125,11 @@ void Catalogue::AjoutSimple(void)
 	char mt [TAILLE_NOM];
 
 	cout << "Quel est le depart du trajet" << endl;
-	cin.getline(depart, TAILLE_NOM);
+	SaisirNom(depart);
 	cout << "Quelle est l'arrivee du trajet" << endl;
-	cin.getline(arrivee, TAILLE_NOM);
+	SaisirNom(arrivee);
 	cout << "Quel est le moyen de transport employe ?" << endl;
-	cin.getline(mt, TAILLE_NOM);
+	SaisirNom(mt);
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
@@ -183,7 +183,7 @@ void Catalogue::AjoutCompose(void)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
 		tabVille[i] = new char[TAILLE_NOM];
-		cin.getline(tabVille[i], TAILLE_NOM);
+		SaisirNom(tabVille[i], TAILLE_NOM);
 
 		if(i != nbVilles - 1) tabMT[i]=new char[TAILLE_NOM];
 		//On a moins de moyens de transport que de villes
@@ -191,7 +191,7 @@ void Catalogue::AjoutCompose(void)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
 			 " et " << tabVille[i] << " ?" << endl;
-			cin.getline(tabMT[i-1], TAILLE_NOM);
+			SaisirNom(tabMT[i-1]);
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
 
@@ -238,9 +238,9 @@ void Catalogue::Rechercher(void)
 	char arrivee[TAILLE_NOM];
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, TAILLE_NOM);
+	SaisirNom(depart);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, TAILLE_NOM);
+	SaisirNom(arrivee);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -337,7 +337,7 @@ void SaisirNom (char * dest)
 	bool ok = false;
 	while ( ! ok)
 	{
-		cin.getline (dest, TAILLE_NOM);
+		SaisirNom (dest);
 		
 		if (strlen(dest) < 1) continue;
 		for (int i=0; dest[i] != '\0'; ++i)
