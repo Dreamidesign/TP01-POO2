@@ -55,8 +55,8 @@ public:
     // Contrat : Aucun
     //
 	
-    static char * ChaineEnMaj (char * ch);
-    // Mode d'emploi : met la chaine fournie en majuscules.
+    static void ChaineEnMaj (char * ch);
+    // Mode d'emploi : met la chaine fournie en majuscules (cela la modifie).
     // 
     // Contrat : la chaine est valide.
     // 
