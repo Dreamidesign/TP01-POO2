@@ -183,7 +183,7 @@ void Catalogue::AjoutCompose(void)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
 		tabVille[i] = new char[TAILLE_NOM];
-		SaisirNom(tabVille[i], TAILLE_NOM);
+		SaisirNom(tabVille[i]);
 
 		if(i != nbVilles - 1) tabMT[i]=new char[TAILLE_NOM];
 		//On a moins de moyens de transport que de villes
@@ -260,7 +260,8 @@ void Catalogue::Rechercher(void)
 
 } //----- Fin de Rechercher
 
-void Catalogue::MenuTrajet(void) {
+void Catalogue::MenuTrajet(void) 
+{
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
@@ -332,12 +333,12 @@ void Catalogue::MenuCatalogue(void)
 	} while (choix1 != 5);
 }//----- Fin de mainCatalogue
 
-void SaisirNom (char * dest)
+void Catalogue::SaisirNom (char * dest)
 {
 	bool ok = false;
 	while ( ! ok)
 	{
-		SaisirNom (dest);
+		cin.getline (dest, TAILLE_NOM);
 		
 		if (strlen(dest) < 1) continue;
 		for (int i=0; dest[i] != '\0'; ++i)

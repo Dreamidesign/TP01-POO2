@@ -2,6 +2,7 @@
 *.vcxproj.user
 *.vcxproj.filters
 *.o
+obj/*
 ./voyage
 Debug/
 bin

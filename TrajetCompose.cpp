@@ -42,7 +42,7 @@ char * TrajetCompose::toString(void)
 		char * t_S =tabTC->GetTabTrajet()[i]->toString();
 		strcat(description, t_S);
 		delete [] t_S;
-		if (i < tabTC->GetNbTrajers() - 1)
+		if (i < tabTC->GetNbTrajets() - 1)
 		{	strcat (description, "s");
 		}
 	}
