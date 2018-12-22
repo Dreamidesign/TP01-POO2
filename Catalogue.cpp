@@ -172,6 +172,11 @@ void Catalogue::AjoutCompose(void)
 	{
 		cout << "Erreur : Le nombre d'etapes minimum est 3" << endl;
 		cout << "Combien d'étapes comporte votre trajet ? (nombre de villes total)" << endl;
+		while ( ! cin )
+		{
+			cin.clear();
+			cin.ignore(250, '\n');
+		}
 		cin >> nbVilles;
 	}
 
@@ -285,6 +290,11 @@ void Catalogue::MenuTrajet(void)
 			break;
 		default:
 			cout << "Choix invalide. Attendu : 1-2-3" << endl;
+			while ( ! cin )
+			{
+				cin.clear();
+				cin.ignore(250, '\n');
+			}
 			break;
 		}
 	} while (choix2 != 3);
@@ -351,13 +361,14 @@ void Catalogue::MenuCatalogue(void)
 void Catalogue::SaisirNom (char * dest)
 {
 	bool ok = false;
+	dest[0] = '\0';
 	while ( ! ok)
 	{
 		cin.getline (dest, TAILLE_NOM);
 		
-		if (strlen(dest) < 1 || strlen (dest) >= TAILLE_NOM-1) 
+		if (strlen (dest) >= TAILLE_NOM-1) 
 		{
-			cout << "Taille du texte saisi invalide." << endl;
+			cout << "Longueur du texte saisi invalide." << endl;
 			continue;
 		}
 		for (int i=0; dest[i] != '\0'; ++i)
