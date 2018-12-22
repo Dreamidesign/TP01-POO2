@@ -7,7 +7,7 @@
 #include <iostream>
 using namespace std;
 
-void MenuTests ()
+static void TestToString()
 {
 	Trajet * ts = new TrajetSimple ("A", "B", "Velo");
 	char * text = ts->toString();
@@ -25,11 +25,14 @@ void MenuTests ()
 	Trajet * tc = new TrajetCompose(tt);
 	text = tc->toString();
 	cout << text << endl;
-	delete[] text;
 	// Doit afficher C(S:a;b;c,S:b;d;c,S:d;e;c)
-	delete ts;/*
-	delete a;
-	delete b;
-	delete c;*/
+	
+	delete[] text;
+	delete ts;
 	delete tc;
+}
+
+void MenuTests ()
+{
+	TestToString();
 }
