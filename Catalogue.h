@@ -74,14 +74,13 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-void freeTab(char ** tab , int size);
-// Mode d'emploi : permet de libérer les tableaux de chaines de caractères utilisés
-//                 pour stocker les variables récupérées du flux cin
+	void freeTab(char ** tab , int size);
+	// Mode d'emploi : permet de libérer un tableau de chaines de caractères.
 
 //----------------------------------------------------- Attributs protégés
-  int choix1 ; //Choix du premier Catalogue
-  int choix2 ; //choix du sous Catalogue d'Ajout de trajets
-  TabTrajet liste;
+	int choix1 ; //Choix du premier Catalogue
+	int choix2 ; //choix du sous Catalogue d'Ajout de trajets
+	TabTrajet liste;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Catalogue>

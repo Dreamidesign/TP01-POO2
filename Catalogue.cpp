@@ -45,9 +45,10 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			delete [] desBranche;
 			delete [] desCurr;
 		}
+		
 		//On ne selectionne que les trajets restants et valides
-    if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
-    {
+		if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
+		{
 			TabTrajet * temp_S = new TabTrajet();
 			for(int k = 0; k < branche->GetTab()->GetNbTrajets(); k++)
 			{
@@ -57,7 +58,6 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
 			res->AjouterTrajet(temp);
 
-
 			#ifdef MAP
 			cout << "analyse POUSSEE trajet suivant:" << endl;
 			liste.GetTabTrajet()[i]->Affichage();
@@ -66,22 +66,22 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			temp->Affichage();
 			#endif
 
-
-      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
-      {
+			if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
+			{
 				cout << "- Trajet :" << endl;
-        temp->Affichage();
-      }
-			else{
+				temp->Affichage();
+			}
+			else
+			{
 				RechercheEnProfondeur(Recherche, temp, res); //ON recommence le processus sur les trajets restants
 			}
-    }
+		}
 	}
 
 }
 
-
-void Catalogue::RechercheAvancee(){
+void Catalogue::RechercheAvancee() 
+{
 	char depart [TAILLE_NOM];
 	char arrivee [TAILLE_NOM];
 
@@ -115,8 +115,6 @@ void Catalogue::RechercheAvancee(){
     }
 	}
 }
-
-
 
 void Catalogue::AjoutSimple(void)
 {
@@ -246,8 +244,10 @@ void Catalogue::Rechercher(void)
 
 	for (int i=0; i<liste.GetNbTrajets(); i++)
 	{
-		if (!strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) &&
-		 	  !strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee))
+		if	(
+			!strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) &&
+		 	!strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee)
+			)
 		{
 			cout << "Trajet : ", liste.GetTabTrajet()[i]->Affichage();
 			count++;
@@ -283,7 +283,7 @@ void Catalogue::MenuTrajet(void)
 		case 3:
 			break;
 		default:
-		cout << "Choix invalide. Attendu : 1-2-3" << endl;
+			cout << "Choix invalide. Attendu : 1-2-3" << endl;
 			break;
 		}
 	} while (choix2 != 3);
@@ -297,13 +297,13 @@ void Catalogue::MenuCatalogue(void)
 		choix2 = 0;
 
 		cout <<"\n"<<"\n"<< "------Bienvenue sur FlexiTrip------" <<"\n"<< endl;
-  	cout << "         Catalogue         " << endl;
-  	cout << "1. Ajouter un trajet" << endl;
-  	cout << "2. Afficher le catalogue de trajets proposes" << endl;
-  	cout << "3. Rechercher un parcours" << endl;
-  	cout << "4. Rechercher un parcours - Recherche avancee" << endl;
-  	cout << "5. Quitter" << endl;
-  	cin >> choix1;
+		cout << "         Catalogue         " << endl;
+		cout << "1. Ajouter un trajet" << endl;
+		cout << "2. Afficher le catalogue de trajets proposes" << endl;
+		cout << "3. Rechercher un parcours" << endl;
+		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
+		cout << "5. Quitter" << endl;
+		cin >> choix1;
 
 		switch (choix1)
 		{
@@ -326,7 +326,7 @@ void Catalogue::MenuCatalogue(void)
 		case 5:
 			break;
 		default:
-		 cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
+			cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
 			break;
 		}
 
@@ -340,7 +340,11 @@ void Catalogue::SaisirNom (char * dest)
 	{
 		cin.getline (dest, TAILLE_NOM);
 		
-		if (strlen(dest) < 1) continue;
+		if (strlen(dest) < 1 || strlen (dest) >= TAILLE_NOM-1) 
+		{
+			cout << "Taille du texte saisi invalide." << endl;
+			continue;
+		}
 		for (int i=0; dest[i] != '\0'; ++i)
 		{
 			if (
@@ -367,8 +371,8 @@ Catalogue::Catalogue (void)
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
-	 choix1 = 0;
-	 choix2 = 3;
+	choix1 = 0;
+	choix2 = 3;
 } //----- Fin de Catalogue
 
 
