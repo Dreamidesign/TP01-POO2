@@ -21,6 +21,7 @@ using namespace std;
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
+extern void MenuTests();
 
 //----------------------------------------------------- Méthodes publiques
 
@@ -303,6 +304,9 @@ void Catalogue::MenuCatalogue(void)
 		cout << "3. Rechercher un parcours" << endl;
 		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
 		cout << "5. Quitter" << endl;
+#ifdef MAP
+		cout << "11. Tests" << endl;
+#endif // defined MAP
 		cin >> choix1;
 
 		switch (choix1)
@@ -325,8 +329,19 @@ void Catalogue::MenuCatalogue(void)
 			break;
 		case 5:
 			break;
+#ifdef MAP
+		case 11:
+			cout << "OK pour les tests." << endl;
+			MenuTests();
+			break;
+#endif // defined MAP
 		default:
-			cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
+			cout << "Choix invalide." << endl;
+			while ( ! cin )
+			{
+				cin.clear();
+				cin.ignore(250, '\n');
+			}
 			break;
 		}
 
