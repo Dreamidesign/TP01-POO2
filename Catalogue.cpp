@@ -138,6 +138,19 @@ void Catalogue::Sauvegarde(/*Critere &critere*/void)
 
 	if(monFlux)  //On teste si tout est OK
 	{
+
+		//--- Construction des métadonnées
+
+		//On compte le nombre de trajet de chaque sorte
+		int nbTS=0;
+		int nbTC=0;
+		for(int i = 0; i<liste.GetNbTrajets(); i++)
+		{
+			liste.GetTabTrajet()[i]->toString()[0] == 'S' ? nbTS++: nbTC++;
+		}
+
+		monFlux << nbTS << ";" << nbTC << endl;
+
 		for(int i=0; i < liste.GetNbTrajets(); i++)
 		{
 			if(ValideAuCritere(critere, liste.GetTabTrajet[i], i))
