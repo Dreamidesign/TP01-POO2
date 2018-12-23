@@ -30,6 +30,8 @@ public:
 
     void Restitution(void);
     void Sauvegarde(void);
+    void lecture_TS(TabTrajet* tab, string content);
+    void lecture_TC(TabTrajet* tab, string content);
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin

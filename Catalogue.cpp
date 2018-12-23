@@ -14,6 +14,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -82,7 +83,52 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 
 }
 
+void Catalogue::lecture_TS(TabTrajet* tab, string content)
+{
+  content.erase(0, 2);
+  string delimiter = ";";
+  int pos = 0; //position du delimiter
+  string temp;
+  string villeD;
+  string villeA;
+  string mT;
+  int count = 0;
+  Trajet* TS;
+  while ((pos = content.find(delimiter)) != string::npos)
+  {
+    temp = content.substr(0, pos);
+    content.erase(0, pos + delimiter.length());
+    if(count == 0) { villeD = temp; }
+    if(count == 1)
+    {
+      villeA = temp;
+      mT = content;
+    }
+    count ++;
+  }
+    TS = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+    tab->AjouterTrajet(TS);
+}
 
+void Catalogue::lecture_TC(TabTrajet* tab, string content)
+{
+  //On recupère uniquement le contenu du TC
+  content.erase(0, 2);
+  content.erase(content.length()-1, content.length());
+	string temp;
+  string delimiter = ",";
+  int pos = 0; //position du delimiter
+  while((pos = content.find(delimiter)) != string::npos)
+  {
+    temp = content.substr(0, pos);
+    content.erase(0, pos + delimiter.length());
+
+    temp[0] == 'S' ? lecture_TS(tab, temp) : lecture_TC(tab, temp);
+
+  }
+  //Faut le faire pour la partie restante
+  content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
+}
 
 void Catalogue::Sauvegarde(/*Critere &critere*/void)
 {
@@ -96,7 +142,7 @@ void Catalogue::Sauvegarde(/*Critere &critere*/void)
 		{
 			if(ValideAuCritere(critere, liste.GetTabTrajet[i], i))
 			{
-				monFlux << liste.GetTabTrajet[i]->toString() << endl;
+				monFlux << liste.GetTabTrajet()[i]->toString() << endl;
 			}
 		}
 	}
@@ -115,13 +161,21 @@ void Catalogue::Restitution(/*Critere &critere*/void)
 
 	if(monFlux)  //On teste si tout est OK
 	{
+		int ligneNum = 0;
 		string trajetLigne;
 		while(getline(monFlux, trajetLigne))
 		{
+
+			/* Etapes de la lecture d'un TC :
+			 * 1. On enleves les parenthèses --> que le contenu
+			 * 2. Lecture entre les virgules
+			 * 3. Lecture de soit un TS, soit on recommence pour un TC
+			 * 4. A chaque étape on ajoute le contenu a un tabTrajet
+			 */
 			Trajet* t;
 
 			//Ajout d'un trajet simple
-			if(trajetLigne[0] != 'S')
+			if(trajetLigne[0] == 'S')
 			{
 			trajetLigne.erase(0, 2);
 			string delimiter = ";";
@@ -144,24 +198,34 @@ void Catalogue::Restitution(/*Critere &critere*/void)
 				count ++;
 			}
 				t = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
-			}/*
-			else{
-			trajetLigne.erase(0, 2);
-			trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
+			}
 
+			else
+			{
+				trajetLigne.erase(0, 2);
+				trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
 
+				TabTrajet* tabT = new TabTrajet();
+				string delimiter = ",";
+			  int pos = 0; //position du delimiter
+				string temp;
+			  while((pos = trajetLigne.find(delimiter)) != string::npos)
+			  {
+			    temp = trajetLigne.substr(0, pos);
+			    trajetLigne.erase(0, pos + delimiter.length());
 
-
-
-
+			    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
+			  }
+				trajetLigne[0] == 'S' ? lecture_TS(tabT, trajetLigne) : lecture_TC(tabT, trajetLigne);
 
 				t = new TrajetCompose(tabT);
 			}
 
-			if(ValideAuCritere(critere, t, i))
+			if(ValideAuCritere(critere, t, ligneNum))
 			{
-				monFlux << liste.GetTabTrajet[i]->toString() << endl;
-			}*/
+				liste.AjouterTrajet(t);
+			}
+			ligneNum++;
 		}
 	}
 	else
