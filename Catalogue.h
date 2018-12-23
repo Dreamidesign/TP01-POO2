@@ -13,13 +13,38 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "TabTrajet.h"
 #include "TrajetCompose.h"
+#include "Trajet.h"
+#include <cstring>
 #include <string>
 #define TAILLE_NOM 100
+using namespace std;
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
 // - la  Recherche de trajets ainsi que l'interface utilisateur
 //------------------------------------------------------------------------
+
+enum Critere_e
+{
+    SANS,
+    TYPE,
+    VILLE,
+    SELECTION
+}; // Type de Critere
+
+// Definit un Critere, avec son type, et ses éventuels paramètres
+// m et n (villes ou indices de trajets).
+// m et n dependent du type :
+// - si SANS, ils sont ignores
+// - si TYPE, n[0] contient 'S' ou 'C'
+// - si VILLE, n est la ville de de part et m la ville d'arrivee (les chaines sont valides).
+// - si SELECTION, m et n sont des chaines valides contenant un entier positif ou nul.
+struct Critere
+{
+    Critere_e type;
+    char * n;
+    char * m;
+};
 
 class Catalogue
 {
@@ -28,10 +53,16 @@ class Catalogue
 public:
 //----------------------------------------------------- Méthodes publiques
 
-    void Restitution(void);
-    void Sauvegarde(void);
+    void Restitution(Critere &Critere);
+
+    void Sauvegarde(Critere &Critere);
+
     void lecture_TS(TabTrajet* tab, string content);
+
     void lecture_TC(TabTrajet* tab, string content);
+
+    bool TrajetValideAuCritere (Trajet * t, Critere &c, unsigned int i = -1);
+
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin
