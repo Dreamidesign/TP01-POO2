@@ -48,25 +48,26 @@ void TabTrajet::Affichage(void) const
 
 void TabTrajet::AjouterTrajet(Trajet *t)
 {
-//Réallocation dynamique du tableau de pointeur de trajet si il est plein
-if(nbAllocated == nbTrajets)
-{
-  #ifdef MAP
-      cout << "Reallocation de la TabTrajet" << endl;
-  #endif
+	//Réallocation dynamique du tableau de pointeur de trajet si il est plein
+	if(nbAllocated == nbTrajets)
+	{
+		#ifdef MAP
+		cout << "Reallocation de la TabTrajet" << endl;
+		#endif
 		Trajet ** temp;
 		nbAllocated += 30;
 		temp = new Trajet *[nbAllocated];
 
-		for (int i = 0; i < nbTrajets; i++) {
+		for (int i = 0; i < nbTrajets; i++) 
+		{
 			temp[i] = trajet[i];
 		}
 
-    delete[] trajet;
-    trajet = temp;
+		delete[] trajet;
+		trajet = temp;
 	}
 
-  nbTrajets++;
+	nbTrajets++;
 	trajet[nbTrajets - 1] = t;
 } //-- Fin AjouterTrajet
 

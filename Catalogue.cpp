@@ -22,6 +22,7 @@ using namespace std;
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
+extern void MenuTests();
 
 //----------------------------------------------------- Méthodes publiques
 
@@ -46,9 +47,10 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			delete [] desBranche;
 			delete [] desCurr;
 		}
+
 		//On ne selectionne que les trajets restants et valides
-    if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
-    {
+		if(!used && (strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), branche->GetVilleArrive()) == 0))
+		{
 			TabTrajet * temp_S = new TabTrajet();
 			for(int k = 0; k < branche->GetTab()->GetNbTrajets(); k++)
 			{
@@ -58,7 +60,6 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			TrajetCompose* temp = new TrajetCompose(temp_S); //Creer une nouvelle branche a partir de l'ancienne
 			res->AjouterTrajet(temp);
 
-
 			#ifdef MAP
 			cout << "analyse POUSSEE trajet suivant:" << endl;
 			liste.GetTabTrajet()[i]->Affichage();
@@ -67,16 +68,16 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			temp->Affichage();
 			#endif
 
-
-      if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
-      {
+			if(strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), Recherche) == 0)
+			{
 				cout << "- Trajet :" << endl;
-        temp->Affichage();
-      }
-			else{
+				temp->Affichage();
+			}
+			else
+			{
 				RechercheEnProfondeur(Recherche, temp, res); //ON recommence le processus sur les trajets restants
 			}
-    }
+		}
 	}
 
 }
@@ -175,13 +176,13 @@ void Catalogue::Restitution(/*Critere &critere*/void)
 
 
 void Catalogue::RechercheAvancee(){
-	char depart [100];
-	char arrivee [100];
+	char depart [TAILLE_NOM];
+	char arrivee [TAILLE_NOM];
 
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, 100);
+	SaisirNom (depart);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, 100);
+	SaisirNom(arrivee);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
@@ -209,20 +210,18 @@ void Catalogue::RechercheAvancee(){
 	}
 }
 
-
-
 void Catalogue::AjoutSimple(void)
 {
-	char depart [100];
-	char arrivee [100];
-	char mt [100];
+	char depart [TAILLE_NOM];
+	char arrivee [TAILLE_NOM];
+	char mt [TAILLE_NOM];
 
 	cout << "Quel est le depart du trajet" << endl;
-	cin.getline(depart, 100);
+	SaisirNom(depart);
 	cout << "Quelle est l'arrivee du trajet" << endl;
-	cin.getline(arrivee, 100);
+	SaisirNom(arrivee);
 	cout << "Quel est le moyen de transport employe ?" << endl;
-	cin.getline(mt, 100);
+	SaisirNom(mt);
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
@@ -266,6 +265,11 @@ void Catalogue::AjoutCompose(void)
 	{
 		cout << "Erreur : Le nombre d'etapes minimum est 3" << endl;
 		cout << "Combien d'étapes comporte votre trajet ? (nombre de villes total)" << endl;
+		while ( ! cin )
+		{
+			cin.clear();
+			cin.ignore(250, '\n');
+		}
 		cin >> nbVilles;
 	}
 
@@ -275,16 +279,16 @@ void Catalogue::AjoutCompose(void)
 	for (int i = 0; i < nbVilles; i++)
 	{
 		cout << "Rentrer la " << (i+1) << "eme ville : " << endl;
-		tabVille[i] = new char[20];
-		cin.getline(tabVille[i], 100);
+		tabVille[i] = new char[TAILLE_NOM];
+		SaisirNom(tabVille[i]);
 
-		if(i != nbVilles - 1) tabMT[i]=new char[20];
+		if(i != nbVilles - 1) tabMT[i]=new char[TAILLE_NOM];
 		//On a moins de moyens de transport que de villes
 		if (i != 0)
 		{
 			cout << "Quel est le moyen de transport entre " << tabVille[i - 1] <<
 			 " et " << tabVille[i] << " ?" << endl;
-			cin.getline(tabMT[i-1], 100);
+			SaisirNom(tabMT[i-1]);
 			//Le moyen de transport est stocke e l'adresse de la ville d'arrivee,
 			// aucun moyen de transport en 0
 
@@ -327,20 +331,22 @@ void Catalogue::AjoutCompose(void)
 
 void Catalogue::Rechercher(void)
 {
-	char depart [100];
-	char arrivee[100];
+	char depart [TAILLE_NOM];
+	char arrivee[TAILLE_NOM];
 	int count = 0 ;
 	cout << "Bonjour, quelle est votre destination de depart ? " << endl;
-	cin.getline(depart, 100);
+	SaisirNom(depart);
 	cout << "Et votre ville d'arrivee" << endl;
-	cin.getline(arrivee, 100);
+	SaisirNom(arrivee);
 
 	cout << "\n" << "\n" << "Resultats de la requete : " << endl;
 
 	for (int i=0; i<liste.GetNbTrajets(); i++)
 	{
-		if (!strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) &&
-		 	  !strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee))
+		if	(
+			!strcmp(liste.GetTabTrajet()[i]->GetVilleDepart(), depart) &&
+		 	!strcmp(liste.GetTabTrajet()[i]->GetVilleArrive(), arrivee)
+			)
 		{
 			cout << "Trajet : ", liste.GetTabTrajet()[i]->Affichage();
 			count++;
@@ -353,7 +359,8 @@ void Catalogue::Rechercher(void)
 
 } //----- Fin de Rechercher
 
-void Catalogue::MenuTrajet(void) {
+void Catalogue::MenuTrajet(void)
+{
 	do
 	{
 		cout << "Quel est le type de trajet ?" << endl;
@@ -375,7 +382,12 @@ void Catalogue::MenuTrajet(void) {
 		case 3:
 			break;
 		default:
-		cout << "Choix invalide. Attendu : 1-2-3" << endl;
+			cout << "Choix invalide. Attendu : 1-2-3" << endl;
+			while ( ! cin )
+			{
+				cin.clear();
+				cin.ignore(250, '\n');
+			}
 			break;
 		}
 	} while (choix2 != 3);
@@ -389,13 +401,16 @@ void Catalogue::MenuCatalogue(void)
 		choix2 = 0;
 
 		cout <<"\n"<<"\n"<< "------Bienvenue sur FlexiTrip------" <<"\n"<< endl;
-  	cout << "         Catalogue         " << endl;
-  	cout << "1. Ajouter un trajet" << endl;
-  	cout << "2. Afficher le catalogue de trajets proposes" << endl;
-  	cout << "3. Rechercher un parcours" << endl;
-  	cout << "4. Rechercher un parcours - Recherche avancee" << endl;
-  	cout << "5. Quitter" << endl;
-  	cin >> choix1;
+		cout << "         Catalogue         " << endl;
+		cout << "1. Ajouter un trajet" << endl;
+		cout << "2. Afficher le catalogue de trajets proposes" << endl;
+		cout << "3. Rechercher un parcours" << endl;
+		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
+		cout << "5. Quitter" << endl;
+#ifdef MAP
+		cout << "11. Tests" << endl;
+#endif // defined MAP
+		cin >> choix1;
 
 		switch (choix1)
 		{
@@ -417,13 +432,57 @@ void Catalogue::MenuCatalogue(void)
 			break;
 		case 5:
 			break;
+#ifdef MAP
+		case 11:
+			cout << "OK pour les tests." << endl;
+			MenuTests();
+			break;
+#endif // defined MAP
 		default:
-		 cout << "Choix invalide. Attendu : 1-2-3-4" << endl;
+			cout << "Choix invalide." << endl;
+			while ( ! cin )
+			{
+				cin.clear();
+				cin.ignore(250, '\n');
+			}
 			break;
 		}
 
 	} while (choix1 != 5);
 }//----- Fin de mainCatalogue
+
+void Catalogue::SaisirNom (char * dest)
+{
+	bool ok = false;
+	dest[0] = '\0';
+	while ( ! ok)
+	{
+		cin.getline (dest, TAILLE_NOM);
+
+		if (strlen (dest) >= TAILLE_NOM-1)
+		{
+			cout << "Longueur du texte saisi invalide." << endl;
+			continue;
+		}
+		for (int i=0; dest[i] != '\0'; ++i)
+		{
+			if (
+				(dest[i] == ':') ||
+				(dest[i] == ';') ||
+				(dest[i] == ',') ||
+				(dest[i] == '(') ||
+				(dest[i] == ')')
+			   )
+			{	ok = false;
+			 	cout << "Saisie invalide !" << endl;
+				break;
+			}
+			else
+			{	ok = true;
+			}
+		}
+	}
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue (void)
@@ -431,8 +490,8 @@ Catalogue::Catalogue (void)
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
-	 choix1 = 0;
-	 choix2 = 3;
+	choix1 = 0;
+	choix2 = 3;
 } //----- Fin de Catalogue
 
 

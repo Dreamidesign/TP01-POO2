@@ -2,8 +2,11 @@
 *.vcxproj.user
 *.vcxproj.filters
 *.o
+obj/*
 ./voyage
 Debug/
 bin
 voyage
 rechercheAvancee.cpp
+exec
+pending.*

@@ -14,6 +14,7 @@
 #include "TabTrajet.h"
 #include "TrajetCompose.h"
 #include <string>
+#define TAILLE_NOM 100
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
@@ -58,6 +59,10 @@ public:
     // Mode d'emploi : implémente l'interface principale du catalogue
     //
 
+    static void SaisirNom (char * dest);
+    // Mode d'emploi : recupere la saisie de l'utilisateur et l'enregistre dans dest.
+    // Contrat : la zone pointee par dest est de taille TAILLE_NOM.
+
 //-------------------------------------------- Constructeurs - destructeur
     Catalogue (void);
     // Mode d'emploi : constructeur vide
@@ -72,14 +77,13 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-void freeTab(char ** tab , int size);
-// Mode d'emploi : permet de libérer les tableaux de chaines de caractères utilisés
-//                 pour stocker les variables récupérées du flux cin
+	void freeTab(char ** tab , int size);
+	// Mode d'emploi : permet de libérer un tableau de chaines de caractères.
 
 //----------------------------------------------------- Attributs protégés
-  int choix1 ; //Choix du premier Catalogue
-  int choix2 ; //choix du sous Catalogue d'Ajout de trajets
-  TabTrajet liste;
+	int choix1 ; //Choix du premier Catalogue
+	int choix2 ; //choix du sous Catalogue d'Ajout de trajets
+	TabTrajet liste;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Catalogue>

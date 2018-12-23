@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 /*************************************************************************
                            TrajetCompose  -  description
                              -------------------
@@ -37,12 +36,17 @@ char * TrajetCompose::toString(void)
 {
 	char * description = new char[1000];
 	description[0]='\0';
+	strcat (description, "C(");
 	for(int i=0; i<tabTC->GetNbTrajets(); i++)
 	{
 		char * t_S =tabTC->GetTabTrajet()[i]->toString();
 		strcat(description, t_S);
 		delete [] t_S;
+		if (i < tabTC->GetNbTrajets() - 1)
+		{	strcat (description, ",");
+		}
 	}
+	strcat(description, ")");
 	return description;
 }//-- Fin toString
 

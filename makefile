@@ -1,32 +1,86 @@
-CXX=g++
-CXXFLAGS=-g -W -ansi -Wall -Wextra -std=c++11 -pedantic -O2
-LDFLAGS=
-EXEC=voyage
+.SILENT:
+.PHONY : compil run clean suppr valgrind gdb
+# Fichier Makefile generique
 
-all : $(EXEC)
 
-voyage: TabTrajet.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o
-	 $(CXX) -o voyage TabTrajet.o Trajet.o TrajetCompose.o TrajetSimple.o Catalogue.o main.o $(LDFLAGS)
-Trajet.o: Trajet.cpp Trajet.h
-	 $(CXX) -c Trajet.cpp $(CXXFLAGS)
+#--- VARIABLES ---
+#Fichiers
+FICHIER_SORTIE := exec
+CPP := $(wildcard *.cpp)
+LIBRAIRIES := 
+CMD = 
 
-TrajetSimple.o: TrajetSimple.cpp TrajetSimple.h
-	 $(CXX) -c TrajetSimple.cpp $(CXXFLAGS)
+DIR = obj
+O := $(patsubst %,$(DIR)/%,$(CPP:.cpp=.o))
+DEP :=$(O:.o=.d)
 
-TrajetCompose.o: TrajetCompose.cpp TrajetCompose.h TabTrajet.h
-	 $(CXX) -c TrajetCompose.cpp $(CXXFLAGS);
+#Variables de compilation
+COMPILATEUR := g++
+COMPILATEUR_FLAGS := -Wall -W -ansi -pedantic -std=c++11
+DEBUG := -g -D MAP
+DEPENDANCES := -MMD
 
-TabTrajet.o: TabTrajet.cpp TabTrajet.h Trajet.h
-	 $(CXX) -c TabTrajet.cpp $(CXXFLAGS)
 
-Catalogue.o: TabTrajet.h Trajet.h TrajetSimple.h TrajetCompose.h Catalogue.cpp Catalogue.h
-	 $(CXX) -c Catalogue.cpp $(CXXFLAGS)
+#Variables d'edition de liens
+EDITION_DE_LIENS := g++
+EDITION_FLAGS :=
 
-main.o: Catalogue.h main.cpp
-	 $(CXX) -c main.cpp $(CXXFLAGS)
 
-clean:
-	 rm -rf *.o
+#Variables de commande
+ECHO := echo
+RM := rm
+RM_FLAGS := -f 
+CLEAN := clean
+MAKE := make
+VALGRIND := valgrind --leak-check=yes
+GDB := gdb
 
-mrproper: clean
-	 rm -rf $(EXEC)
+
+#--- COMMANDES ---
+compil : $(FICHIER_SORTIE)
+
+#Edition de Lien
+$(FICHIER_SORTIE) : $(O)
+	@echo "Edition de lien de $(FICHIER_SORTIE)"
+	$(EDITION_DE_LIENS) -o $(FICHIER_SORTIE) $(EDITION_FLAGS) $(O) $(LIBRAIRES)
+
+#Execution
+run : $(FICHIER_SORTIE)
+	@echo "Execution ..."
+	./$(FICHIER_SORTIE) $(CMD)
+
+#Nettoyage
+clean :
+	$(MAKE) suppr
+	$(MAKE) compil
+
+#Suppression
+suppr :
+	@echo "Nettoyage ..."
+	$(RM) $(RM_FLAGS) $(FICHIER_SORTIE) $(O) $(DEP)
+
+#Valgrind
+valgrind :
+	$(MAKE) suppr
+	$(MAKE) compil
+	@echo "Valgrind de $(FICHIER_SORTIE) ..."
+	$(VALGRIND) ./$(FICHIER_SORTIE)
+
+#GDB
+gdb :
+	$(MAKE) suppr
+	$(MAKE) compil
+	@echo "GdB de $(FICHIER_SORTIE) ..."
+	$(GDB) ./$(FICHIER_SORTIE) -x input.gdb
+
+#on inclut toutes les dependances des fichiers .cpp
+-include $(DEP)
+
+#Pattern de Compilation
+$(DIR)/%.o : %.cpp | $(DIR)
+	@echo "    Compilation de $<"
+	$(COMPILATEUR) $(COMPILATEUR_FLAGS) $(DEBUG) $(DEPENDANCES) -o $@ -c $<
+
+#Creation du repertoire d'objets au besoin
+$(DIR) :
+	mkdir -p $@

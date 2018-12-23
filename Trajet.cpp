@@ -35,6 +35,7 @@ using namespace std;
 	#endif
 	} //----- Fin de ~Trajet
 
+
 	//------------------------------------------------------------------ PROTEGE
 	Trajet::Trajet()
 	{
