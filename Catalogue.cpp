@@ -124,29 +124,35 @@ bool Catalogue::TrajetValideAuCritere (Trajet * t, Critere & c, unsigned int i)
 
 void Catalogue::lecture_TS(TabTrajet* tab, string content)
 {
-  content.erase(0, 2);
-  string delimiter = ";";
-  int pos = 0; //position du delimiter
-  string temp;
-  string villeD;
-  string villeA;
-  string mT;
-  int count = 0;
-  Trajet* TS;
-  while ((pos = content.find(delimiter)) != string::npos)
-  {
-    temp = content.substr(0, pos);
-    content.erase(0, pos + delimiter.length());
-    if(count == 0) { villeD = temp; }
-    if(count == 1)
-    {
-      villeA = temp;
-      mT = content;
-    }
-    count ++;
-  }
-    TS = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
-    tab->AjouterTrajet(TS);
+		content.erase(0, 2);
+		string delimiter = ";";
+		int pos = 0; //position du delimiter
+		string temp;
+		string villeD;
+		string villeA;
+		string mT;
+		int count = 0; // Nombre d'elements recuperes
+
+		while ((pos = content.find(delimiter)) != string::npos)
+		{
+				temp = content.substr(0, pos);
+				content.erase(0, pos + delimiter.length());
+				if(count == 0)
+				{
+					villeD = temp;
+				}
+				if(count == 1)
+				{
+						villeA = temp;
+						mT = content;
+				}
+				count ++;
+		}
+
+		tab->AjouterTrajet
+		(
+			new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str())
+		);
 }
 
 void Catalogue::lecture_TC(TabTrajet* tab, string content)
@@ -163,9 +169,9 @@ void Catalogue::lecture_TC(TabTrajet* tab, string content)
     content.erase(0, pos + delimiter.length());
 
     temp[0] == 'S' ? lecture_TS(tab, temp) : lecture_TC(tab, temp);
-
   }
-  //Faut le faire pour la partie restante
+	
+  // Partie restante
   content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
 }
 
