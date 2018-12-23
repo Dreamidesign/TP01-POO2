@@ -12,6 +12,7 @@
 
 //-------------------------------------------------------- Include système
 #include <cstring>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -79,6 +80,98 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 	}
 
 }
+
+
+
+void Catalogue::Sauvegarde(/*Critere &critere*/void)
+{
+	string const nomFichier("catalogueExport.txt");
+	//Déclaration d'un flux permettant d'écrire dans un fichier.
+	ofstream monFlux(nomFichier.c_str());
+
+	if(monFlux)  //On teste si tout est OK
+	{
+		for(int i=0; i < liste.GetNbTrajets(); i++)
+		{
+			if(ValideAuCritere(critere, liste.GetTabTrajet[i], i))
+			{
+				monFlux << liste.GetTabTrajet[i]->toString() << endl;
+			}
+		}
+	}
+	else
+	{
+	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	}
+}
+
+
+void Catalogue::Restitution(/*Critere &critere*/void)
+{
+	string const nomFichier("catalogueExport.txt");
+	//Déclaration d'un flux permettant d'écrire dans un fichier.
+	ifstream monFlux(nomFichier.c_str());
+
+	if(monFlux)  //On teste si tout est OK
+	{
+		string trajetLigne;
+		while(getline(monFlux, trajetLigne))
+		{
+			Trajet* t;
+
+			//Ajout d'un trajet simple
+			if(trajetLigne[0] != 'S')
+			{
+			trajetLigne.erase(0, 2);
+			string delimiter = ";";
+			int pos = 0;
+			string temp;
+			string villeD;
+			string villeA;
+			string mT;
+			int count = 0;
+			while ((pos = trajetLigne.find(delimiter)) != string::npos)
+			{
+				temp = trajetLigne.substr(0, pos);
+				trajetLigne.erase(0, pos + delimiter.length());
+				if(count == 0) {villeD = temp;}
+				if(count == 1)
+				{
+					villeA = temp;
+					mT = trajetLigne;
+				}
+				count ++;
+			}
+				t = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+			}/*
+			else{
+			trajetLigne.erase(0, 2);
+			trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
+
+
+
+
+
+
+
+				t = new TrajetCompose(tabT);
+			}
+
+			if(ValideAuCritere(critere, t, i))
+			{
+				monFlux << liste.GetTabTrajet[i]->toString() << endl;
+			}*/
+		}
+	}
+	else
+	{
+	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	}
+
+
+}
+
+
 
 
 void Catalogue::RechercheAvancee(){

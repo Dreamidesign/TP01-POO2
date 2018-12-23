@@ -13,6 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "TabTrajet.h"
 #include "TrajetCompose.h"
+#include <string>
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
 //Implemente le catalogue de trajets : mon mode d'affichage - les méthodes d'Ajout
@@ -25,6 +26,9 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
+
+    void Restitution(void);
+    void Sauvegarde(void);
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin
