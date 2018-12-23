@@ -62,7 +62,14 @@ public:
     void lecture_TC(TabTrajet* tab, string content);
 
     bool TrajetValideAuCritere (Trajet * t, Critere &c, unsigned int i = -1);
-
+    // Mode d'emploi :
+    //  Indique si le trajet fourni est valide au critere.
+    //  t : Pointeur de Trajet
+    //  c : structure Critere
+    //  i : indice du trajet fourni dans le catalogue (facultatif)
+    // Contrat :
+    //  Les parametres fournis sont valides, en particulier le critere.
+    
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin

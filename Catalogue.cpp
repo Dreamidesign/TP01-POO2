@@ -26,28 +26,6 @@ using namespace std;
 extern void MenuTests();
 
 
-// enum Critere_e
-// {
-//     SANS,
-//     TYPE,
-//     VILLE,
-//     SELECTION
-// }; // Type de Critere
-
-// // Definit un Critere, avec son type, et ses éventuels paramètres
-// // m et n (villes ou indices de trajets).
-// // m et n dependent du type :
-// // - si SANS, ils sont ignores
-// // - si TYPE, n[0] contient 'S' ou 'C'
-// // - si VILLE, n est la ville de depart et m la ville d'arrivee (les chaines sont valides).
-// // - si SELECTION, m et n sont des chaines valides contenant un entier positif ou nul.
-// struct Critere
-// {
-//     Critere_e type;
-//     char * n;
-//     char * m
-// };
-
 //----------------------------------------------------- Méthodes publiques
 
 void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, TabTrajet* res)
@@ -114,32 +92,35 @@ bool Catalogue::TrajetValideAuCritere (Trajet * t, Critere & c, unsigned int i)
     }
     char* trajet = t->toString();
 
-        switch (c.type)
-        {
-            case SANS:
-                return true;
-            case TYPE:
-                // Si les types du Critere et du trajet sont identiques.
-                return ( c.n[0] == trajet[0] ) ? true : false;
-            case VILLE:
-                // Si c.n n'est pas vide, on compare c.n a la ville de depart :
-                if ( ( strcmp (c.n, "") ) && ( strcmp (c.n, t->GetVilleDepart()) ) )
-                {   return false;
-                }
-                if (( strcmp (c.m, "") ) && ( strcmp (c.m, t->GetVilleArrive()) ) )
-                {   return false;
-                }
-                return true;
+    switch (c.type)
+    {
+        case SANS:
+            return true;
 
-                // return;
-            case SELECTION:
-                // Si i est entre c.n inclus et c.m inclus.
-                return ((i >= atoi (c.n)) && (i <= atoi(c.m))) ? true : false;
-            default:
-                cerr << "Type de Critere invalide !" << endl;
-                return false;
-        }
-  }
+				case TYPE:
+            // Si les types du Critere et du trajet sont identiques.
+            return ( c.n[0] == trajet[0] ) ? true : false;
+
+				case VILLE:
+            // Si c.n n'est pas vide, on compare c.n a la ville de depart :
+            if ( ( strcmp (c.n, "") ) && ( strcmp (c.n, t->GetVilleDepart()) ) )
+            {   return false;
+            }
+            if (( strcmp (c.m, "") ) && ( strcmp (c.m, t->GetVilleArrive()) ) )
+            {   return false;
+            }
+            return true;
+
+				case SELECTION:
+            // Si i est entre c.n inclus et c.m inclus.
+            return ((i >= atoi (c.n)) && (i <= atoi(c.m))) ? true : false;
+
+				default:
+						// N'est pas sense se produire.
+            cerr << "Type de Critere invalide !" << endl;
+            return false;
+    }
+}
 
 void Catalogue::lecture_TS(TabTrajet* tab, string content)
 {
