@@ -81,7 +81,6 @@ void Catalogue::RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, T
 			}
 		}
 	}
-
 }
 
 
