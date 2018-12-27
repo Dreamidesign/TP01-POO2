@@ -10,12 +10,246 @@
 
 
 //-------------------------------------------------------- Include système
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
 //------------------------------------------------------ Include personnel
+#include "GestionFichier.h"
 
 //------------------------------------------------------------- CONSTANTES
 
 //----------------------------------------------------------------- PUBLIC
 //------------------------------------------------- Fonctions publiques --
+
+void GestionFichier (Catalogue & c) 
+{
+	cat = c;
+
+}
+
+void Catalogue::Sauvegarde(Critere &Critere)
+{
+	string const nomFichier("catalogueExport.txt");
+	//Déclaration d'un flux permettant d'écrire dans un fichier.
+	ofstream monFlux(nomFichier.c_str());
+
+	if(monFlux)  //On teste si tout est OK
+	{
+
+		//--- Construction des métadonnées
+
+		//On compte le nombre de trajet de chaque sorte
+		int nbTS=0;
+		int nbTC=0;
+		for(int i = 0; i<liste.GetNbTrajets(); i++)
+		{
+			liste.GetTabTrajet()[i]->toString()[0] == 'S' ? nbTS++: nbTC++;
+		}
+
+		monFlux << nbTS << ";" << nbTC << endl;
+
+		for(int i=0; i < liste.GetNbTrajets(); i++)
+		{
+			if(TrajetValideAuCritere(liste.GetTabTrajet()[i], Critere, i))
+			{
+				monFlux << liste.GetTabTrajet()[i]->toString() << endl;
+			}
+		}
+	}
+	else
+	{
+	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	}
+}
+
+
+void Catalogue::Restitution(Critere &Critere)
+{
+	string const nomFichier("catalogueExport.txt");
+	//Déclaration d'un flux permettant d'écrire dans un fichier.
+	ifstream monFlux(nomFichier.c_str());
+
+	if(monFlux)  //On teste si tout est OK
+	{
+		int ligneNum = 0;
+		string trajetLigne;
+		while(getline(monFlux, trajetLigne))
+		{
+
+			/* Etapes de la lecture d'un TC :
+			 * 1. On enleves les parenthèses --> que le contenu
+			 * 2. Lecture entre les virgules
+			 * 3. Lecture de soit un TS, soit on recommence pour un TC
+			 * 4. A chaque étape on ajoute le contenu a un tabTrajet
+			 */
+			Trajet* t;
+
+			//Ajout d'un trajet simple
+			if(trajetLigne[0] == 'S')
+			{
+			trajetLigne.erase(0, 2);
+			string delimiter = ";";
+			int pos = 0;
+			string temp;
+			string villeD;
+			string villeA;
+			string mT;
+			int count = 0;
+			while ((pos = trajetLigne.find(delimiter)) != string::npos)
+			{
+				temp = trajetLigne.substr(0, pos);
+				trajetLigne.erase(0, pos + delimiter.length());
+				if(count == 0) {villeD = temp;}
+				if(count == 1)
+				{
+					villeA = temp;
+					mT = trajetLigne;
+				}
+				count ++;
+			}
+				t = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+			}
+
+			else
+			{
+				trajetLigne.erase(0, 2);
+				trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
+
+				TabTrajet* tabT = new TabTrajet();
+				string delimiter = ",";
+			  int pos = 0; //position du delimiter
+				string temp;
+			  while((pos = trajetLigne.find(delimiter)) != string::npos)
+			  {
+			    temp = trajetLigne.substr(0, pos);
+			    trajetLigne.erase(0, pos + delimiter.length());
+
+			    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
+			  }
+				trajetLigne[0] == 'S' ? lecture_TS(tabT, trajetLigne) : lecture_TC(tabT, trajetLigne);
+
+				t = new TrajetCompose(tabT);
+			}
+
+			if(TrajetValideAuCritere(t, Critere, ligneNum))
+			{
+				liste.AjouterTrajet(t);
+			}
+			ligneNum++;
+		}
+	}
+	else
+	{
+	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	}
+
+
+}
+
+void lecture_TS(TabTrajet* tab, string content)
+{
+	content.erase(0, 2);
+	string delimiter = ";";
+	int pos = 0; //position du delimiter
+	string temp;
+	string villeD;
+	string villeA;
+	string mT;
+	int count = 0; // Nombre d'elements recuperes
+
+	while ((pos = content.find(delimiter)) != string::npos)
+	{
+			temp = content.substr(0, pos);
+			content.erase(0, pos + delimiter.length());
+			if(count == 0)
+			{
+				villeD = temp;
+			}
+			if(count == 1)
+			{
+				villeA = temp;
+				mT = content;
+			}
+			count ++;
+	}
+
+	tab->AjouterTrajet
+	(
+		new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str())
+	);
+}
+
+void lecture_TC(TabTrajet* tab, string content)
+{
+	//On recupère uniquement le contenu du TC
+	content.erase(0, 2);
+	content.erase(content.length()-1, content.length());
+	string temp;
+	string delimiter = ",";
+
+	int pos = 0; //position du delimiter
+	while((pos = content.find(delimiter)) != string::npos)
+	{
+		temp = content.substr(0, pos);
+		content.erase(0, pos + delimiter.length());
+
+		temp[0] == 'S' ? lecture_TS(tab, temp) : lecture_TC(tab, temp);
+	}
+	
+	// Partie restante
+	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
+}
+
+bool TrajetValideAuCritere (const Trajet * t)
+{
+	char * trajet;
+
+    if (t == nullptr)
+    {   return false;
+    }
+    
+    trajet = t->toString();
+
+    switch (cri.type)
+    {
+        case SANS:
+            return true;
+
+		case TYPE:
+            // Si les types du Critere et du trajet sont identiques.
+            return ( cri.n[0] == trajet[0] ) ? true : false;
+
+		case VILLE:
+            // Si cri.n n'est pas vide, on compare cri.n a la ville de depart :
+            if ( ( strcmp (cri.n, "") ) && ( strcmp (cri.n, t->GetVilleDepart()) ) )
+            {   return false;
+            }
+            // Idem ville d'arrivee
+            if (( strcmp (cri.m, "") ) && ( strcmp (cri.m, t->GetVilleArrive()) ) )
+            {   return false;
+            }
+            return true;
+
+		case SELECTION:
+            // Si i est entre c.n inclus et c.m inclus.
+            return ((i >= atoi (cri.n)) && (i <= atoi(cri.m))) ? true : false;
+
+		default:
+			// N'est pas sense se produire.
+            cerr << "Type de Critere invalide !" << endl;
+            return false;
+    }
+}
+
+void MenuChoixAction ();
+
+void MenuNomFichier ();
+
+void MenuChoixCritere ();
+
+void MenuDefinitionCritere ();
+
 //---------------------------------------------- Surcharge d operateurs --
 
 //----------------------------------------- Constructeurs - Destructeur --
@@ -23,5 +257,5 @@
 
 //------------------------------------------------------------------ PRIVE
 
-//---------------------------------------------------Attributs proteges --
+//---------------------------------------------------Attributs prives --
 //-------------------------------------------------- Methodes protegees --

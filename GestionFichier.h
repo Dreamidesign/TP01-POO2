@@ -102,5 +102,7 @@ struct Critere
 //------------------------------------------------------------------ PROTEGE
 //------------------------------------------------------- Methodes protegees --
 //----------------------------------------------------- Attributs protégés
+Catalogue * cat; // Le catalogue lu ou modifie au besoin.
+Critere cri; // Le critere demande par l'utilisateur.
 
 #endif // ifndef GESTION_FICHIER_H
