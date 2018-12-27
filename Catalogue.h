@@ -65,7 +65,7 @@ public:
     // Mode d'emploi : recupere la saisie de l'utilisateur et l'enregistre dans dest.
     // Contrat : la zone pointee par dest est de taille TAILLE_NOM.
 
-    TabTrajet & GetTabTrajet ()
+    inline TabTrajet & GetTabTrajet ()
     // Mode d'emploi : 
     //  Methode inline qui renvoie la reference du TabTrajet courant.
     //  Attention : le retour est non constant.

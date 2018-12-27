@@ -312,7 +312,8 @@ void Catalogue::MenuCatalogue(void)
 		cout << "2. Afficher le catalogue de trajets proposes" << endl;
 		cout << "3. Rechercher un parcours" << endl;
 		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
-		cout << "5. Quitter" << endl;
+		cout << "5. Manipuler un fichier." << endl;
+		cout << "6. Quitter" << endl;
 #ifdef MAP
 		cout << "11. Tests" << endl;
 #endif // defined MAP
@@ -337,6 +338,8 @@ void Catalogue::MenuCatalogue(void)
 			RechercheAvancee();
 			break;
 		case 5:
+			GestionFichier_Main(*this);
+		case 6:
 			break;
 #ifdef MAP
 		case 11:
