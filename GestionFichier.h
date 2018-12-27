@@ -99,10 +99,12 @@ struct Critere
     //  la manipulation des trajets.
     // Contrat : aucun.
 
-    void MenuDefinitionCritere ();
+    void MenuDefinitionCritere (Critere_e cr_e);
     // Mode d'emploi :
     //  Permet a l'utilisateur de preciser ses voeux pour le critere 
     //  qu'il a choisi.
+    //  Constante nommee associee au type choisi.
+    // Contrat : aucun.
 
 
 //--------------------------------------------------- Surcharge d operateurs --
@@ -113,6 +115,7 @@ struct Critere
 //----------------------------------------------------- Attributs protégés
 Catalogue * cat; // Le catalogue lu ou modifie au besoin.
 Critere cri; // Le critere demande par l'utilisateur.
-string nomFichier; // Le nom du fichier que l'on manipule.
+string nomFichier("catalogueExport.txt"); // Le nom du fichier que l'on manipule.
+bool onSauvegarde;
 
 #endif // ifndef GESTION_FICHIER_H

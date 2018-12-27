@@ -25,18 +25,26 @@
 void GestionFichier_Main (Catalogue & c) 
 {
 	cat = &c;
-	nomFichier = "catalogueExport.txt";
 	ChoixAction action = CHANGER_NOM; // Valeur par defaut.
 	do
 	{
 		action = MenuChoixAction();	
+		if (action == CHANGER_NOM)
+		{
+			MenuNomFichier();
+		}
 	} while (action == CHANGER_NOM);
-	
+
+	if (action == QUITTER)
+	{
+		return;
+	}
+
+	onSauvegarde = (action == SAUV) ? true : false;
 } // -- Fin de GestionFichier
 
 void Sauvegarde()
 {
-	string const nomFichier("catalogueExport.txt");
 	//Déclaration d'un flux permettant d'écrire dans un fichier.
 	ofstream monFlux(nomFichier.c_str());
 
@@ -72,7 +80,6 @@ void Sauvegarde()
 
 void Restitution()
 {
-	string const nomFichier("catalogueExport.txt");
 	//Déclaration d'un flux permettant d'écrire dans un fichier.
 	ifstream monFlux(nomFichier.c_str());
 
@@ -282,31 +289,112 @@ ChoixAction MenuChoixAction ()
 				return CHANGER_NOM;
 			case 4:
 				return QUITTER;
+			default:
+				cout << "Choix invalide." << endl;
+				while ( ! cin )
+				{
+					cin.clear();
+					cin.ignore(250, '\n');
+				}
 		}
 	} while (true);
 }
 
 void MenuNomFichier ()
 {
-	for (;;)
+	int fini;
+	string tmp;
+	do 
 	{
 		cout << "Quel nom de fichier manipuler ?" << endl;
-		cin >> nomFichier;
-		cout << "Test des autorisations de " << nomFichier << '.' << endl;
+		cin >> tmp;
+		cout << "Test des autorisations de " << tmp << '.' << endl;
 
 		// Test possible de lire
-		ifstream ifs (nomFichier);
-		cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
+		ifstream ifs (tmp);
+		if (ifs.eof())
+		{
+			cout << "Fichier vide, lecture impossible." << endl;
+		} 
+		else 
+		{
+			cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
+		}
 
 		// Test possible d'ecrire
-		ofstream ofs (nomFichier);
+		ofstream ofs (tmp);
 		cout << "Ecriture : " << (ofs ? "OUI" : "NON") << endl;
-	}
+
+		// Confirmation et boucle ou validation
+		cout << endl << "Cela vous convient ? 1 pour oui, 0 pour non" << endl;
+		cin >> fini;
+		while ( ! cin )
+		{
+			cin.clear();
+			cin.ignore(250, '\n');
+			fini = 0;
+		}
+	} while ( ! fini);
+	nomFichier = tmp;
 }
 
-void MenuChoixCritere ();
+void MenuChoixCritere ()
+{
+	cout << 
+		"Choix du critere pour la " << 
+		(onSauvegarde ? "sauvegarde" : "restitution") <<
+		"du catalogue avec le fichier \"" << nomFichier << "\"." << endl;
 
-void MenuDefinitionCritere ();
+	unsigned int choix = -1;
+	Critere_e cr_e = SANS;
+	while 
+	(
+		(choix != 1) && 
+		(choix != 2) && 
+		(choix != 3) && 
+		(choix != 4)
+	)
+	{
+		cout << "Quel critere de selection appliquer ?" << endl;
+		cout << "1. Aucun critere, prendre tous les trajets." << endl;
+		cout << "2. Seulement les trajets simples OU composes." << endl;
+		cout << "3. Seulement les trajets arrivant ou partant d’une "
+			<< "certaine ville." << endl;
+		cout << "4. Seulement les trajets d’un certain intervalle "
+			<< "(depuis l’ordre de saisie dans le catalogue)." << endl;
+		
+
+		cin >> choix;
+		switch (choix)
+		{
+			case 1:
+				cr_e = SANS;
+				break;
+			case 2:
+				cr_e = TYPE;
+				break;
+			case 3:
+				cr_e = VILLE;
+				break;
+			case 4:
+				cr_e = SELECTION;
+				break;
+			default:
+				cout << "Choix invalide." << endl;
+				while ( ! cin )
+				{
+					cin.clear();
+					cin.ignore(250, '\n');
+				}
+		}
+	}
+	MenuDefinitionCritere (cr_e);
+}
+
+void MenuDefinitionCritere (Critere_e cr_e)
+{
+	// a faire
+}
 
 //---------------------------------------------- Surcharge d operateurs --
 
