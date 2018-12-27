@@ -302,6 +302,7 @@ void Catalogue::MenuTrajet(void)
 
 void Catalogue::MenuCatalogue(void)
 {
+	const unsigned int CHOIX_QUITTER = 6;
 	do
 	{
 		choix2 = 0;
@@ -313,7 +314,7 @@ void Catalogue::MenuCatalogue(void)
 		cout << "3. Rechercher un parcours" << endl;
 		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
 		cout << "5. Manipuler un fichier." << endl;
-		cout << "6. Quitter" << endl;
+		cout << CHOIX_QUITTER << ". Quitter" << endl;
 #ifdef MAP
 		cout << "11. Tests" << endl;
 #endif // defined MAP
@@ -339,7 +340,8 @@ void Catalogue::MenuCatalogue(void)
 			break;
 		case 5:
 			GestionFichier_Main(*this);
-		case 6:
+			break;
+		case CHOIX_QUITTER:
 			break;
 #ifdef MAP
 		case 11:
@@ -357,7 +359,7 @@ void Catalogue::MenuCatalogue(void)
 			break;
 		}
 
-	} while (choix1 != 5);
+	} while (choix1 != CHOIX_QUITTER);
 }//----- Fin de mainCatalogue
 
 void Catalogue::SaisirNom (char * dest)

@@ -271,7 +271,7 @@ ChoixAction MenuChoixAction ()
 	do 
 	{
 		cout << "Que souhaitez-vous faire ?" << endl;
-		cout << "Le fichier selectionne est \"catalogueExport.txt\"" << endl;
+		cout << "Le fichier selectionne est \"" << nomFichier << "\"" << endl;
 		cout << "1. Exporter le catalogue courant." << endl;
 		cout << "2. Importer / restituer le catalogue courant." << endl;
 		cout << "3. Modifier le nom du fichier." << endl;
