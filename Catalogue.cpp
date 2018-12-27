@@ -289,14 +289,13 @@ void Catalogue::Restitution(Critere &Critere)
 	{
 	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
 	}
-
-
 }
 
 
 
 
-void Catalogue::RechercheAvancee(){
+void Catalogue::RechercheAvancee()
+{
 	char depart [TAILLE_NOM];
 	char arrivee [TAILLE_NOM];
 
@@ -373,7 +372,6 @@ void Catalogue::AjoutSimple(void)
 	{
 		delete t;
 	}
-
 } //----- Fin de AjoutSimple
 
 void Catalogue::AjoutCompose(void)
@@ -477,7 +475,6 @@ void Catalogue::Rechercher(void)
 	{
 		cout << "Désolé, ce trajet n'est pas disponible!" << endl ;
 	}
-
 } //----- Fin de Rechercher
 
 void Catalogue::MenuTrajet(void)
@@ -512,7 +509,6 @@ void Catalogue::MenuTrajet(void)
 			break;
 		}
 	} while (choix2 != 3);
-
 } //----- Fin de MenuTrajet
 
 void Catalogue::MenuCatalogue(void)

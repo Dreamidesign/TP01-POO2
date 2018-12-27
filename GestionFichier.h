@@ -11,8 +11,10 @@
 #define GESTION_FICHIER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <string>
 #include "TabTrajet.h"
 #include "Trajet.h"
+#include "Catalogue.h"
 //------------------------------------------------------------- Constantes
 //------------------------------------------------------------------ Types
 enum Critere_e
@@ -22,6 +24,14 @@ enum Critere_e
     VILLE,
     SELECTION
 }; // Type de Critere
+
+enum ChoixAction
+{
+    QUITTER,
+    CHANGER_NOM,
+    SAUV,
+    REST
+}; // Choix de l'action a effectuer
 
 // Definit un Critere, avec son type, et ses éventuels paramètres
 // m et n (villes ou indices de trajets).
@@ -48,7 +58,7 @@ struct Critere
 
 //----------------------------------------------------- Méthodes publiques
 
-    void GestionFichier (Catalogue & c);
+    void GestionFichier_Main (Catalogue & c);
     // Mode d'emploi :
     //  Controle le bon deroulement de la gestion du fichier en appelant
     //  les bons menus et les bonnes methodes dans l'ordre.
@@ -62,26 +72,25 @@ struct Critere
 
     void lecture_TC(TabTrajet* tab, string content);
 
-    bool TrajetValideAuCritere (Trajet * t, Critere &c, unsigned int i = -1);
+    bool TrajetValideAuCritere (Trajet * t, unsigned int i = -1);
     // Mode d'emploi :
     //  Indique si le trajet fourni est valide au critere.
     //  t : Pointeur de Trajet
-    //  c : structure Critere
     //  i : indice du trajet fourni dans le catalogue (facultatif)
     // Contrat :
     //  Les parametres fournis sont valides, en particulier le critere.
 
-    void MenuChoixAction ();
+    ChoixAction MenuChoixAction ();
     // Mode d'emploi :
     //  Permet a l'utilisateur de choisir l'action a faire vers 
     //  ou depuis son catalogue.
-    //  c : le catalogue.
+    //  Renvoie l'action choisie.
     // Contrat : aucun.
 
     void MenuNomFichier ();
     // Mode d'emploi :
     //  Permet a l'utilisateur de choisir le fichier sur lequel il travaille
-    //  Via la saisie de son nom.
+    //  via la saisie de son nom.
     // Contrat : aucun.
 
     void MenuChoixCritere ();
@@ -104,5 +113,6 @@ struct Critere
 //----------------------------------------------------- Attributs protégés
 Catalogue * cat; // Le catalogue lu ou modifie au besoin.
 Critere cri; // Le critere demande par l'utilisateur.
+string nomFichier; // Le nom du fichier que l'on manipule.
 
 #endif // ifndef GESTION_FICHIER_H

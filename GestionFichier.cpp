@@ -12,21 +12,27 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <cstring>
 //------------------------------------------------------ Include personnel
 #include "GestionFichier.h"
+#include "TrajetSimple.h"
 
 //------------------------------------------------------------- CONSTANTES
 
 //----------------------------------------------------------------- PUBLIC
 //------------------------------------------------- Fonctions publiques --
 
-void GestionFichier (Catalogue & c) 
+void GestionFichier_Main (Catalogue & c) 
 {
-	cat = c;
-
-}
+	cat = &c;
+	nomFichier = "catalogueExport.txt";
+	ChoixAction action = CHANGER_NOM; // Valeur par defaut.
+	do
+	{
+		action = MenuChoixAction();	
+	} while (action == CHANGER_NOM);
+	
+} // -- Fin de GestionFichier
 
 void Catalogue::Sauvegarde(Critere &Critere)
 {
@@ -63,7 +69,6 @@ void Catalogue::Sauvegarde(Critere &Critere)
 	}
 }
 
-
 void Catalogue::Restitution(Critere &Critere)
 {
 	string const nomFichier("catalogueExport.txt");
@@ -95,7 +100,7 @@ void Catalogue::Restitution(Critere &Critere)
 			string villeD;
 			string villeA;
 			string mT;
-			int count = 0;
+			unsigned int count = 0;
 			while ((pos = trajetLigne.find(delimiter)) != string::npos)
 			{
 				temp = trajetLigne.substr(0, pos);
@@ -143,8 +148,6 @@ void Catalogue::Restitution(Critere &Critere)
 	{
 	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
 	}
-
-
 }
 
 void lecture_TS(TabTrajet* tab, string content)
@@ -201,7 +204,7 @@ void lecture_TC(TabTrajet* tab, string content)
 	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
 }
 
-bool TrajetValideAuCritere (const Trajet * t)
+bool TrajetValideAuCritere (const Trajet * t, unsigned int i)
 {
 	char * trajet;
 
@@ -242,9 +245,38 @@ bool TrajetValideAuCritere (const Trajet * t)
     }
 }
 
-void MenuChoixAction ();
+ChoixAction MenuChoixAction ()
+{
+	unsigned int choix;
+	do 
+	{
+		cout << "Que souhaitez-vous faire ?" << endl;
+		cout << "Le fichier selectionne est \"catalogueExport.txt\"" << endl;
+		cout << "1. Exporter le catalogue courant." << endl;
+		cout << "2. Importer / restituer le catalogue courant." << endl;
+		cout << "3. Modifier le nom du fichier." << endl;
+		cout << "4. Retourner au menu principal." << endl;
 
-void MenuNomFichier ();
+		choix = -1;
+		cin >> choix;
+		switch (choix)
+		{
+			case 1:
+				return SAUV; 
+			case 2:
+				return REST;
+			case 3:
+				return CHANGER_NOM;
+			case 4:
+				return QUITTER;
+		}
+	} while (true);
+}
+
+void MenuNomFichier ()
+{
+
+}
 
 void MenuChoixCritere ();
 
