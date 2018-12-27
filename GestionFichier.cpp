@@ -131,7 +131,7 @@ void Restitution()
 				}
 				count ++;
 			}
-				t = new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+				t= new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
 			}
 
 			else
@@ -150,7 +150,9 @@ void Restitution()
 
 			    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
 			  }
-				trajetLigne[0] == 'S' ? lecture_TS(tabT, trajetLigne) : lecture_TC(tabT, trajetLigne);
+				trajetLigne[0] == 'S' ? 
+					lecture_TS(tabT, trajetLigne) : 
+					lecture_TC(tabT, trajetLigne);
 
 				t = new TrajetCompose(tabT);
 			}
