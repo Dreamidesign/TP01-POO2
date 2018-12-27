@@ -273,6 +273,7 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
             cerr << "Type de Critere invalide !" << endl;
             return false;
     }
+    delete [] trajet;
 } // -- Fin de TrajetValideAuCritere
 
 ChoixAction MenuChoixAction ()
@@ -322,17 +323,10 @@ void MenuNomFichier ()
 
 		// Test possible de lire
 		ifstream ifs (tmp);
-		if (ifs.eof())
-		{
-			cout << "Fichier vide, lecture impossible." << endl;
-		} 
-		else 
-		{
-			cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
-		}
+		cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
 
 		// Test possible d'ecrire
-		ofstream ofs (tmp);
+		ofstream ofs (tmp, ios_base::out | ios_base::app);
 		cout << "Ecriture : " << (ofs ? "OUI" : "NON") << endl;
 
 		// Confirmation et boucle ou validation
