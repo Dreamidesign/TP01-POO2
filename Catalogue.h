@@ -24,27 +24,6 @@ using namespace std;
 // - la  Recherche de trajets ainsi que l'interface utilisateur
 //------------------------------------------------------------------------
 
-enum Critere_e
-{
-    SANS,
-    TYPE,
-    VILLE,
-    SELECTION
-}; // Type de Critere
-
-// Definit un Critere, avec son type, et ses éventuels paramètres
-// m et n (villes ou indices de trajets).
-// m et n dependent du type :
-// - si SANS, ils sont ignores
-// - si TYPE, n[0] contient 'S' ou 'C'
-// - si VILLE, n est la ville de de part et m la ville d'arrivee (les chaines sont valides).
-// - si SELECTION, m et n sont des chaines valides contenant un entier positif ou nul.
-struct Critere
-{
-    Critere_e type;
-    char * n;
-    char * m;
-};
 
 class Catalogue
 {
@@ -52,23 +31,6 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-
-    void Restitution(Critere &Critere);
-
-    void Sauvegarde(Critere &Critere);
-
-    void lecture_TS(TabTrajet* tab, string content);
-
-    void lecture_TC(TabTrajet* tab, string content);
-
-    bool TrajetValideAuCritere (Trajet * t, Critere &c, unsigned int i = -1);
-    // Mode d'emploi :
-    //  Indique si le trajet fourni est valide au critere.
-    //  t : Pointeur de Trajet
-    //  c : structure Critere
-    //  i : indice du trajet fourni dans le catalogue (facultatif)
-    // Contrat :
-    //  Les parametres fournis sont valides, en particulier le critere.
     
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
@@ -102,6 +64,15 @@ public:
     static void SaisirNom (char * dest);
     // Mode d'emploi : recupere la saisie de l'utilisateur et l'enregistre dans dest.
     // Contrat : la zone pointee par dest est de taille TAILLE_NOM.
+
+    TabTrajet & GetTabTrajet ()
+    // Mode d'emploi : 
+    //  Methode inline qui renvoie la reference du TabTrajet courant.
+    //  Attention : le retour est non constant.
+    // Contrat : aucun.
+    {
+        return this->liste;
+    }
 
 //-------------------------------------------- Constructeurs - destructeur
     Catalogue (void);

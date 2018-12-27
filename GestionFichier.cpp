@@ -34,7 +34,7 @@ void GestionFichier_Main (Catalogue & c)
 	
 } // -- Fin de GestionFichier
 
-void Catalogue::Sauvegarde(Critere &Critere)
+void Sauvegarde()
 {
 	string const nomFichier("catalogueExport.txt");
 	//Déclaration d'un flux permettant d'écrire dans un fichier.
@@ -48,6 +48,7 @@ void Catalogue::Sauvegarde(Critere &Critere)
 		//On compte le nombre de trajet de chaque sorte
 		int nbTS=0;
 		int nbTC=0;
+		TabTrajet & liste = cat->GetTabTrajet();
 		for(int i = 0; i<liste.GetNbTrajets(); i++)
 		{
 			liste.GetTabTrajet()[i]->toString()[0] == 'S' ? nbTS++: nbTC++;
@@ -57,7 +58,7 @@ void Catalogue::Sauvegarde(Critere &Critere)
 
 		for(int i=0; i < liste.GetNbTrajets(); i++)
 		{
-			if(TrajetValideAuCritere(liste.GetTabTrajet()[i], Critere, i))
+			if(TrajetValideAuCritere(liste.GetTabTrajet()[i], i))
 			{
 				monFlux << liste.GetTabTrajet()[i]->toString() << endl;
 			}
@@ -69,7 +70,7 @@ void Catalogue::Sauvegarde(Critere &Critere)
 	}
 }
 
-void Catalogue::Restitution(Critere &Critere)
+void Restitution()
 {
 	string const nomFichier("catalogueExport.txt");
 	//Déclaration d'un flux permettant d'écrire dans un fichier.
@@ -95,7 +96,7 @@ void Catalogue::Restitution(Critere &Critere)
 			{
 			trajetLigne.erase(0, 2);
 			string delimiter = ";";
-			int pos = 0;
+			size_t pos = 0;
 			string temp;
 			string villeD;
 			string villeA;
@@ -123,7 +124,7 @@ void Catalogue::Restitution(Critere &Critere)
 
 				TabTrajet* tabT = new TabTrajet();
 				string delimiter = ",";
-			  int pos = 0; //position du delimiter
+			  size_t pos = 0; //position du delimiter
 				string temp;
 			  while((pos = trajetLigne.find(delimiter)) != string::npos)
 			  {
@@ -137,9 +138,9 @@ void Catalogue::Restitution(Critere &Critere)
 				t = new TrajetCompose(tabT);
 			}
 
-			if(TrajetValideAuCritere(t, Critere, ligneNum))
+			if(TrajetValideAuCritere(t, ligneNum))
 			{
-				liste.AjouterTrajet(t);
+				cat->GetTabTrajet().AjouterTrajet(t);
 			}
 			ligneNum++;
 		}
@@ -154,7 +155,7 @@ void lecture_TS(TabTrajet* tab, string content)
 {
 	content.erase(0, 2);
 	string delimiter = ";";
-	int pos = 0; //position du delimiter
+	size_t pos = 0; //position du delimiter
 	string temp;
 	string villeD;
 	string villeA;
@@ -191,7 +192,7 @@ void lecture_TC(TabTrajet* tab, string content)
 	string temp;
 	string delimiter = ",";
 
-	int pos = 0; //position du delimiter
+	size_t pos = 0; //position du delimiter
 	while((pos = content.find(delimiter)) != string::npos)
 	{
 		temp = content.substr(0, pos);
@@ -204,7 +205,7 @@ void lecture_TC(TabTrajet* tab, string content)
 	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
 }
 
-bool TrajetValideAuCritere (const Trajet * t, unsigned int i)
+bool TrajetValideAuCritere (Trajet * t, unsigned int i)
 {
 	char * trajet;
 
@@ -225,18 +226,30 @@ bool TrajetValideAuCritere (const Trajet * t, unsigned int i)
 
 		case VILLE:
             // Si cri.n n'est pas vide, on compare cri.n a la ville de depart :
-            if ( ( strcmp (cri.n, "") ) && ( strcmp (cri.n, t->GetVilleDepart()) ) )
+            if
+            ( 
+            	( strcmp (cri.n, "") ) && 
+            	( strcmp (cri.n, t->GetVilleDepart()) )
+            )
             {   return false;
             }
             // Idem ville d'arrivee
-            if (( strcmp (cri.m, "") ) && ( strcmp (cri.m, t->GetVilleArrive()) ) )
+            if 
+            (
+            	( strcmp (cri.m, "") ) && 
+            	( strcmp (cri.m, t->GetVilleArrive()) ) 
+            )
             {   return false;
             }
             return true;
 
 		case SELECTION:
             // Si i est entre c.n inclus et c.m inclus.
-            return ((i >= atoi (cri.n)) && (i <= atoi(cri.m))) ? true : false;
+            return 
+            (
+            	((long int)(i) >= atoi (cri.n)) && 
+            	((long int)(i) <= atoi (cri.m))
+            ) ? true : false;
 
 		default:
 			// N'est pas sense se produire.
@@ -275,7 +288,20 @@ ChoixAction MenuChoixAction ()
 
 void MenuNomFichier ()
 {
+	for (;;)
+	{
+		cout << "Quel nom de fichier manipuler ?" << endl;
+		cin >> nomFichier;
+		cout << "Test des autorisations de " << nomFichier << '.' << endl;
 
+		// Test possible de lire
+		ifstream ifs (nomFichier);
+		cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
+
+		// Test possible d'ecrire
+		ofstream ofs (nomFichier);
+		cout << "Ecriture : " << (ofs ? "OUI" : "NON") << endl;
+	}
 }
 
 void MenuChoixCritere ();
