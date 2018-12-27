@@ -41,7 +41,7 @@ char* TrajetSimple::GetMoyenTransport(void) const
     return moyenTransport;
 } //----- Fin de Méthode
 
-char * TrajetSimple::toString(void)
+char * TrajetSimple::toString(void) const 
 {
   char * description = new char[100];
   description[0]='\0';

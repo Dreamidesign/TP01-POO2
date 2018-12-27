@@ -49,7 +49,7 @@ public:
     // Contrat : Aucun
     //
 
-    virtual char * toString(void) = 0;
+    virtual char * toString(void) const = 0;
     // Mode d'emploi : renvoie une description textuelle sorte d'ID du trajet
     //
     // Contrat : Aucun

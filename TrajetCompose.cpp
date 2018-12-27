@@ -32,7 +32,7 @@ void TrajetCompose::Affichage (const char* c) const
 	cout << "\n";
 } //----- Fin de Affichage
 
-char * TrajetCompose::toString(void)
+char * TrajetCompose::toString(void) const
 {
 	char * description = new char[1000];
 	description[0]='\0';
