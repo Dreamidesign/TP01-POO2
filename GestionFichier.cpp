@@ -40,7 +40,17 @@ void GestionFichier_Main (Catalogue & c)
 		return;
 	}
 
-	onSauvegarde = (action == SAUV) ? true : false;
+	onSauvegarde = ((action == SAUV) ? true : false);
+
+	Critere_e cr_e = MenuChoixCritere ();
+	if ( MenuDefinitionCritere (cr_e))
+	{
+		onSauvegarde ? Sauvegarde () : Restitution ();
+	} 
+	else
+	{
+		cerr << "Arret de GestionFichier." << endl;
+	}
 } // -- Fin de GestionFichier
 
 void Sauvegarde()
@@ -74,9 +84,9 @@ void Sauvegarde()
 	}
 	else
 	{
-	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	    cerr << "ERREUR: Impossible d'ouvrir le fichier." << endl;
 	}
-}
+} // -- Fin de Sauvegarde
 
 void Restitution()
 {
@@ -154,9 +164,9 @@ void Restitution()
 	}
 	else
 	{
-	    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+	    cerr << "ERREUR: Impossible d'ouvrir le fichier." << endl;
 	}
-}
+} // -- Fin de Restitution
 
 void lecture_TS(TabTrajet* tab, string content)
 {
@@ -189,7 +199,7 @@ void lecture_TS(TabTrajet* tab, string content)
 	(
 		new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str())
 	);
-}
+} // -- Fin de lecture_TS
 
 void lecture_TC(TabTrajet* tab, string content)
 {
@@ -210,9 +220,9 @@ void lecture_TC(TabTrajet* tab, string content)
 	
 	// Partie restante
 	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
-}
+} // -- Fin de lecture_TC
 
-bool TrajetValideAuCritere (Trajet * t, unsigned int i)
+bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 {
 	char * trajet;
 
@@ -235,16 +245,16 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int i)
             // Si cri.n n'est pas vide, on compare cri.n a la ville de depart :
             if
             ( 
-            	( strcmp (cri.n, "") ) && 
-            	( strcmp (cri.n, t->GetVilleDepart()) )
+            	( cri.n.compare("") ) && 
+            	( cri.n.compare(t->GetVilleDepart()) )
             )
             {   return false;
             }
             // Idem ville d'arrivee
             if 
             (
-            	( strcmp (cri.m, "") ) && 
-            	( strcmp (cri.m, t->GetVilleArrive()) ) 
+            	( cri.m.compare("") ) && 
+            	( cri.m.compare(t->GetVilleArrive()) ) 
             )
             {   return false;
             }
@@ -254,8 +264,8 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int i)
             // Si i est entre c.n inclus et c.m inclus.
             return 
             (
-            	((long int)(i) >= atoi (cri.n)) && 
-            	((long int)(i) <= atoi (cri.m))
+            	((long int)(index) >= stoi (cri.n)) && 
+            	((long int)(index) <= stoi (cri.m))
             ) ? true : false;
 
 		default:
@@ -263,7 +273,7 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int i)
             cerr << "Type de Critere invalide !" << endl;
             return false;
     }
-}
+} // -- Fin de TrajetValideAuCritere
 
 ChoixAction MenuChoixAction ()
 {
@@ -298,7 +308,7 @@ ChoixAction MenuChoixAction ()
 				}
 		}
 	} while (true);
-}
+} // -- Fin de MenuChoixAction
 
 void MenuNomFichier ()
 {
@@ -336,9 +346,9 @@ void MenuNomFichier ()
 		}
 	} while ( ! fini);
 	nomFichier = tmp;
-}
+} // -- Fin de MenuNomFichier
 
-void MenuChoixCritere ()
+Critere_e MenuChoixCritere ()
 {
 	cout << 
 		"Choix du critere pour la " << 
@@ -346,7 +356,6 @@ void MenuChoixCritere ()
 		"du catalogue avec le fichier \"" << nomFichier << "\"." << endl;
 
 	unsigned int choix = -1;
-	Critere_e cr_e = SANS;
 	while 
 	(
 		(choix != 1) && 
@@ -368,16 +377,16 @@ void MenuChoixCritere ()
 		switch (choix)
 		{
 			case 1:
-				cr_e = SANS;
+				return SANS;
 				break;
 			case 2:
-				cr_e = TYPE;
+				return TYPE;
 				break;
 			case 3:
-				cr_e = VILLE;
+				return VILLE;
 				break;
 			case 4:
-				cr_e = SELECTION;
+				return SELECTION;
 				break;
 			default:
 				cout << "Choix invalide." << endl;
@@ -388,12 +397,99 @@ void MenuChoixCritere ()
 				}
 		}
 	}
-	MenuDefinitionCritere (cr_e);
-}
+	return SANS;
+} // -- Fin de MenuChoixCritere
 
-void MenuDefinitionCritere (Critere_e cr_e)
+bool MenuDefinitionCritere (Critere_e cr_e)
 {
-	// a faire
+	cri.type = cr_e;
+	switch (cr_e)
+	{
+		case SANS:
+			cri.n = "";
+			cri.m = "";
+			break;
+		case TYPE:
+			{
+				cout << "Trajets simples ou composes ?" << endl;
+				unsigned int choix = -1;
+				while (choix != 1 && choix != 2)
+				{
+					cout << "1 pour simple, 2 pour compose." << endl;
+					cin >> choix;
+					if ( ! cin )
+					{
+						cin.clear();
+						cin.ignore (250, '\n');
+					}
+				}
+				cri.n = ((choix == 1) ? "S" : "C");
+				// *(cri.n+1) = '\0';
+				cri.m = "";
+				break;
+			}
+		case VILLE:
+			cout << "Souhaitez-vous imposer la ville de depart ? " <<
+				"Si oui, saisissez-la, sinon laissez vide." << endl;
+			cin >> cri.n;
+			cout << "Souhaitez-vous imposer la ville d'arrivee ? " <<
+				"Si oui, saisissez-la, sinon laissez vide." << endl;
+			cin >> cri.m;
+			break;
+		case SELECTION:
+			{
+				unsigned int choix = -1;
+				unsigned int maxIndice = (onSauvegarde) ? 
+					cat->GetTabTrajet().GetNbTrajets() : 
+					GetNombreLignesFichier ();
+
+				cout << "Vous allez saisir l'intervalle d'indices." << endl;
+				cout << "Les deux nombres sont entre 0 et " << maxIndice << '.';
+				cout << endl;
+
+				cout << "Saisir l'indice de depart." << endl;
+				while (choix > maxIndice)
+				{
+					cin >> choix;
+					if ( ! cin )
+					{
+						cin.clear();
+						cin.ignore (250, '\n');
+					}
+				}
+				cri.n = to_string(choix);
+
+				cout << "Saisir l'indice d'arrivee." << endl;
+				choix = -1;
+				while (choix > maxIndice || choix < (unsigned int)(stoi(cri.n)))
+				{
+					cin >> choix;
+					if ( ! cin )
+					{
+						cin.clear();
+						cin.ignore (250, '\n');
+					}
+				}
+				cri.m = to_string(choix);
+				break;
+			}
+		default:
+			cerr << "Format du type de critere invalide." << endl;
+			return false;
+	}
+
+	return true;
+} // -- Fin de MenuDefinitionCritere
+
+unsigned int GetNombreLignesFichier ()
+{
+	ifstream ifs (nomFichier);
+	unsigned int compteur = 0;
+	while (ifs && ! ifs.eof())
+	{
+		++compteur;
+	}
+	return compteur;
 }
 
 //---------------------------------------------- Surcharge d operateurs --

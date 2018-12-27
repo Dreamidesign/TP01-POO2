@@ -43,8 +43,8 @@ enum ChoixAction
 struct Critere
 {
     Critere_e type;
-    char * n;
-    char * m;
+    string n;
+    string m;
 };
 
 
@@ -64,19 +64,19 @@ struct Critere
     //  les bons menus et les bonnes methodes dans l'ordre.
     // Contrat : aucun.
 
-    void Restitution(Critere &Critere);
+    void Restitution();
 
-    void Sauvegarde(Critere &Critere);
+    void Sauvegarde();
 
     void lecture_TS(TabTrajet* tab, string content);
 
     void lecture_TC(TabTrajet* tab, string content);
 
-    bool TrajetValideAuCritere (Trajet * t, unsigned int i = -1);
+    bool TrajetValideAuCritere (Trajet * t, unsigned int index = -1);
     // Mode d'emploi :
     //  Indique si le trajet fourni est valide au critere.
     //  t : Pointeur de Trajet
-    //  i : indice du trajet fourni dans le catalogue (facultatif)
+    //  index : indice du trajet fourni dans le catalogue (facultatif)
     // Contrat :
     //  Les parametres fournis sont valides, en particulier le critere.
 
@@ -93,18 +93,24 @@ struct Critere
     //  via la saisie de son nom.
     // Contrat : aucun.
 
-    void MenuChoixCritere ();
+    Critere_e MenuChoixCritere ();
     // Mode d'emploi :
     //  Permet a l'utilisateur de choisir le critere sur lequel se basera 
     //  la manipulation des trajets.
     // Contrat : aucun.
 
-    void MenuDefinitionCritere (Critere_e cr_e);
+    bool MenuDefinitionCritere (Critere_e cr_e);
     // Mode d'emploi :
     //  Permet a l'utilisateur de preciser ses voeux pour le critere 
     //  qu'il a choisi.
     //  Constante nommee associee au type choisi.
     // Contrat : aucun.
+
+    unsigned int GetNombreLignesFichier ();
+    // Mode d'emploi :
+    //  Renvoie le nombre de lignes du fichier.
+    //  On le parcourt rapidement.
+    // Contrat : aucun (si URL fichier invalide, zero);
 
 
 //--------------------------------------------------- Surcharge d operateurs --
