@@ -67,10 +67,13 @@ void Sauvegarde()
 		//On compte le nombre de trajet de chaque sorte
 		int nbTS=0;
 		int nbTC=0;
+		char * tostring;
 		TabTrajet & liste = cat->GetTabTrajet();
 		for(int i = 0; i<liste.GetNbTrajets(); i++)
 		{
-			liste.GetTabTrajet()[i]->toString()[0] == 'S' ? nbTS++: nbTC++;
+			tostring = liste.GetTabTrajet()[i]->toString();
+			tostring[0] == 'S' ? nbTS++: nbTC++;
+			delete [] tostring;
 		}
 
 		monFlux << nbTS << ";" << nbTC << endl;
@@ -79,7 +82,9 @@ void Sauvegarde()
 		{
 			if(TrajetValideAuCritere(liste.GetTabTrajet()[i], i))
 			{
-				monFlux << liste.GetTabTrajet()[i]->toString() << endl;
+				tostring = liste.GetTabTrajet()[i]->toString();
+				monFlux << tostring << endl;
+				delete [] tostring;
 			}
 		}
 	}
@@ -113,45 +118,50 @@ void Restitution()
 				//Ajout d'un trajet simple
 				if(trajetLigne[0] == 'S')
 				{
-				trajetLigne.erase(0, 2);
-				string delimiter = ";";
-				size_t pos = 0;
-				string temp;
-				string villeD;
-				string villeA;
-				string mT;
-				unsigned int count = 0;
-				while ((pos = trajetLigne.find(delimiter)) != string::npos)
-				{
-					temp = trajetLigne.substr(0, pos);
-					trajetLigne.erase(0, pos + delimiter.length());
-					if(count == 0) {villeD = temp;}
-					if(count == 1)
+					trajetLigne.erase(0, 2);
+					string delimiter = ";";
+					size_t pos = 0;
+					string temp;
+					string villeD;
+					string villeA;
+					string mT;
+					unsigned int count = 0;
+					while ((pos = trajetLigne.find(delimiter)) != string::npos)
 					{
-						villeA = temp;
-						mT = trajetLigne;
+						temp = trajetLigne.substr(0, pos);
+						trajetLigne.erase(0, pos + delimiter.length());
+						if(count == 0) {villeD = temp;}
+						if(count == 1)
+						{
+							villeA = temp;
+							mT = trajetLigne;
+						}
+						count ++;
 					}
-					count ++;
-				}
-					t= new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+					
+					t= new TrajetSimple(villeD.c_str(), villeA.c_str(), 
+						mT.c_str());
 				}
 
 				else
 				{
 					trajetLigne.erase(0, 2);
-					trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
+					trajetLigne.erase(trajetLigne.length()-1, 
+						trajetLigne.length());
 
 					TabTrajet* tabT = new TabTrajet();
 					string delimiter = ",";
-				  size_t pos = 0; //position du delimiter
+					size_t pos = 0; //position du delimiter
 					string temp;
-				  while((pos = trajetLigne.find(delimiter)) != string::npos)
-				  {
-				    temp = trajetLigne.substr(0, pos);
-				    trajetLigne.erase(0, pos + delimiter.length());
+					while((pos = trajetLigne.find(delimiter)) != string::npos)
+					{
+						temp = trajetLigne.substr(0, pos);
+						trajetLigne.erase(0, pos + delimiter.length());
 
-				    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
-				  }
+						temp[0] == 'S' ? 
+							lecture_TS(tabT, temp) : 
+							lecture_TC(tabT, temp);
+					}
 					trajetLigne[0] == 'S' ?
 						lecture_TS(tabT, trajetLigne) :
 						lecture_TC(tabT, trajetLigne);
@@ -162,6 +172,10 @@ void Restitution()
 				if(TrajetValideAuCritere(t, ligneNum))
 				{
 					cat->GetTabTrajet().AjouterTrajet(t);
+				}
+				else
+				{
+					delete t;
 				}
 
 			}
@@ -230,13 +244,13 @@ void lecture_TC(TabTrajet* tab, string content)
 
 bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 {
-	char * trajet;
-
-    if (t == nullptr)
+	if (t == nullptr)
     {   return false;
     }
 
-    trajet = t->toString();
+    char * trajet = t->toString();
+    string trajet_s = string(trajet);
+    delete [] trajet;
 
     switch (cri.type)
     {
@@ -245,13 +259,13 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 
 		case TYPE:
             // Si les types du Critere et du trajet sont identiques.
-            return ( cri.n[0] == trajet[0] ) ? true : false;
+            return ( cri.n[0] == trajet_s[0] ) ? true : false;
 
 		case VILLE:
             // Si cri.n n'est pas vide, on compare cri.n a la ville de depart :
             if
             (
-            	( cri.n.compare("") ) &&
+            	( cri.n.compare("_") ) &&
             	( cri.n.compare(t->GetVilleDepart()) )
             )
             {   return false;
@@ -259,7 +273,7 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
             // Idem ville d'arrivee
             if
             (
-            	( cri.m.compare("") ) &&
+            	( cri.m.compare("_") ) &&
             	( cri.m.compare(t->GetVilleArrive()) )
             )
             {   return false;
@@ -279,7 +293,6 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
             cerr << "Type de Critere invalide !" << endl;
             return false;
     }
-    delete [] trajet;
 } // -- Fin de TrajetValideAuCritere
 
 ChoixAction MenuChoixAction ()
@@ -305,7 +318,7 @@ ChoixAction MenuChoixAction ()
 		switch (choix)
 		{
 			case 1:
-				if (autorisations.lecture)
+				if (autorisations.ecriture)
 				{
 					return SAUV;
 				} 
@@ -315,7 +328,7 @@ ChoixAction MenuChoixAction ()
 					break;
 				}
 			case 2:
-				if (autorisations.ecriture)
+				if (autorisations.lecture)
 				{
 					return REST;
 				} 
@@ -452,10 +465,10 @@ bool MenuDefinitionCritere (Critere_e cr_e)
 			}
 		case VILLE:
 			cout << "Souhaitez-vous imposer la ville de depart ? " <<
-				"Si oui, saisissez-la, sinon laissez vide." << endl;
+				"Si oui, saisissez-la, sinon mettez _." << endl;
 			cin >> cri.n;
 			cout << "Souhaitez-vous imposer la ville d'arrivee ? " <<
-				"Si oui, saisissez-la, sinon laissez vide." << endl;
+				"Si oui, saisissez-la, sinon mettez _." << endl;
 			cin >> cri.m;
 			break;
 		case SELECTION:

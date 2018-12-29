@@ -38,8 +38,9 @@ enum ChoixAction
 // m et n dependent du type :
 // - si SANS, ils sont ignores
 // - si TYPE, n[0] contient 'S' ou 'C'
-// - si VILLE, n est la ville de de part et m la ville d'arrivee (les chaines sont valides).
-// - si SELECTION, m et n sont des chaines valides contenant un entier positif ou nul.
+// - si VILLE, n est la ville de de part et m la ville d'arrivee.
+//   Si elles valent '_' alors on ne s'intéresse pas.
+// - si SELECTION, m et n sont des strings contenant un entier positif ou nul.
 struct Critere
 {
     Critere_e type;
