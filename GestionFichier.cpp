@@ -22,13 +22,13 @@
 //----------------------------------------------------------------- PUBLIC
 //------------------------------------------------- Fonctions publiques --
 
-void GestionFichier_Main (Catalogue & c) 
+void GestionFichier_Main (Catalogue & c)
 {
 	cat = &c;
 	ChoixAction action = CHANGER_NOM; // Valeur par defaut.
 	do
 	{
-		action = MenuChoixAction();	
+		action = MenuChoixAction();
 		if (action == CHANGER_NOM)
 		{
 			MenuNomFichier();
@@ -46,7 +46,7 @@ void GestionFichier_Main (Catalogue & c)
 	if ( MenuDefinitionCritere (cr_e))
 	{
 		onSauvegarde ? Sauvegarde () : Restitution ();
-	} 
+	}
 	else
 	{
 		cerr << "Arret de GestionFichier." << endl;
@@ -99,67 +99,70 @@ void Restitution()
 		string trajetLigne;
 		while(getline(monFlux, trajetLigne))
 		{
-
-			/* Etapes de la lecture d'un TC :
-			 * 1. On enleves les parenthèses --> que le contenu
-			 * 2. Lecture entre les virgules
-			 * 3. Lecture de soit un TS, soit on recommence pour un TC
-			 * 4. A chaque étape on ajoute le contenu a un tabTrajet
-			 */
-			Trajet* t;
-
-			//Ajout d'un trajet simple
-			if(trajetLigne[0] == 'S')
+			if(ligneNum >= 1)
 			{
-			trajetLigne.erase(0, 2);
-			string delimiter = ";";
-			size_t pos = 0;
-			string temp;
-			string villeD;
-			string villeA;
-			string mT;
-			unsigned int count = 0;
-			while ((pos = trajetLigne.find(delimiter)) != string::npos)
-			{
-				temp = trajetLigne.substr(0, pos);
-				trajetLigne.erase(0, pos + delimiter.length());
-				if(count == 0) {villeD = temp;}
-				if(count == 1)
+				/* Etapes de la lecture d'un TC :
+				 * 1. On enleves les parenthèses --> que le contenu
+				 * 2. Lecture entre les virgules
+				 * 3. Lecture de soit un TS, soit on recommence pour un TC
+				 * 4. A chaque étape on ajoute le contenu a un tabTrajet
+				 */
+				Trajet* t;
+
+				//Ajout d'un trajet simple
+				if(trajetLigne[0] == 'S')
 				{
-					villeA = temp;
-					mT = trajetLigne;
-				}
-				count ++;
-			}
-				t= new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
-			}
-
-			else
-			{
 				trajetLigne.erase(0, 2);
-				trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
-
-				TabTrajet* tabT = new TabTrajet();
-				string delimiter = ",";
-			  size_t pos = 0; //position du delimiter
+				string delimiter = ";";
+				size_t pos = 0;
 				string temp;
-			  while((pos = trajetLigne.find(delimiter)) != string::npos)
-			  {
-			    temp = trajetLigne.substr(0, pos);
-			    trajetLigne.erase(0, pos + delimiter.length());
+				string villeD;
+				string villeA;
+				string mT;
+				unsigned int count = 0;
+				while ((pos = trajetLigne.find(delimiter)) != string::npos)
+				{
+					temp = trajetLigne.substr(0, pos);
+					trajetLigne.erase(0, pos + delimiter.length());
+					if(count == 0) {villeD = temp;}
+					if(count == 1)
+					{
+						villeA = temp;
+						mT = trajetLigne;
+					}
+					count ++;
+				}
+					t= new TrajetSimple(villeD.c_str(), villeA.c_str(), mT.c_str());
+				}
 
-			    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
-			  }
-				trajetLigne[0] == 'S' ? 
-					lecture_TS(tabT, trajetLigne) : 
-					lecture_TC(tabT, trajetLigne);
+				else
+				{
+					trajetLigne.erase(0, 2);
+					trajetLigne.erase(trajetLigne.length()-1, trajetLigne.length());
 
-				t = new TrajetCompose(tabT);
-			}
+					TabTrajet* tabT = new TabTrajet();
+					string delimiter = ",";
+				  size_t pos = 0; //position du delimiter
+					string temp;
+				  while((pos = trajetLigne.find(delimiter)) != string::npos)
+				  {
+				    temp = trajetLigne.substr(0, pos);
+				    trajetLigne.erase(0, pos + delimiter.length());
 
-			if(TrajetValideAuCritere(t, ligneNum))
-			{
-				cat->GetTabTrajet().AjouterTrajet(t);
+				    temp[0] == 'S' ? lecture_TS(tabT, temp) : lecture_TC(tabT, temp);
+				  }
+					trajetLigne[0] == 'S' ?
+						lecture_TS(tabT, trajetLigne) :
+						lecture_TC(tabT, trajetLigne);
+
+					t = new TrajetCompose(tabT);
+				}
+
+				if(TrajetValideAuCritere(t, ligneNum))
+				{
+					cat->GetTabTrajet().AjouterTrajet(t);
+				}
+
 			}
 			ligneNum++;
 		}
@@ -219,7 +222,7 @@ void lecture_TC(TabTrajet* tab, string content)
 
 		temp[0] == 'S' ? lecture_TS(tab, temp) : lecture_TC(tab, temp);
 	}
-	
+
 	// Partie restante
 	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
 } // -- Fin de lecture_TC
@@ -231,7 +234,7 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
     if (t == nullptr)
     {   return false;
     }
-    
+
     trajet = t->toString();
 
     switch (cri.type)
@@ -246,17 +249,17 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 		case VILLE:
             // Si cri.n n'est pas vide, on compare cri.n a la ville de depart :
             if
-            ( 
-            	( cri.n.compare("") ) && 
+            (
+            	( cri.n.compare("") ) &&
             	( cri.n.compare(t->GetVilleDepart()) )
             )
             {   return false;
             }
             // Idem ville d'arrivee
-            if 
+            if
             (
-            	( cri.m.compare("") ) && 
-            	( cri.m.compare(t->GetVilleArrive()) ) 
+            	( cri.m.compare("") ) &&
+            	( cri.m.compare(t->GetVilleArrive()) )
             )
             {   return false;
             }
@@ -264,9 +267,9 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 
 		case SELECTION:
             // Si i est entre c.n inclus et c.m inclus.
-            return 
+            return
             (
-            	((long int)(index) >= stoi (cri.n)) && 
+            	((long int)(index) >= stoi (cri.n)) &&
             	((long int)(index) <= stoi (cri.m))
             ) ? true : false;
 
@@ -281,7 +284,7 @@ bool TrajetValideAuCritere (Trajet * t, unsigned int index)
 ChoixAction MenuChoixAction ()
 {
 	unsigned int choix;
-	do 
+	do
 	{
 		cout << "Que souhaitez-vous faire ?" << endl;
 		cout << "Le fichier selectionne est \"" << nomFichier << "\"" << endl;
@@ -295,7 +298,7 @@ ChoixAction MenuChoixAction ()
 		switch (choix)
 		{
 			case 1:
-				return SAUV; 
+				return SAUV;
 			case 2:
 				return REST;
 			case 3:
@@ -317,7 +320,7 @@ void MenuNomFichier ()
 {
 	int fini;
 	string tmp;
-	do 
+	do
 	{
 		cout << "Quel nom de fichier manipuler ?" << endl;
 		cin >> tmp;
@@ -346,17 +349,17 @@ void MenuNomFichier ()
 
 Critere_e MenuChoixCritere ()
 {
-	cout << 
-		"Choix du critere pour la " << 
+	cout <<
+		"Choix du critere pour la " <<
 		(onSauvegarde ? "sauvegarde" : "restitution") <<
 		"du catalogue avec le fichier \"" << nomFichier << "\"." << endl;
 
 	unsigned int choix = -1;
-	while 
+	while
 	(
-		(choix != 1) && 
-		(choix != 2) && 
-		(choix != 3) && 
+		(choix != 1) &&
+		(choix != 2) &&
+		(choix != 3) &&
 		(choix != 4)
 	)
 	{
@@ -367,7 +370,7 @@ Critere_e MenuChoixCritere ()
 			<< "certaine ville." << endl;
 		cout << "4. Seulement les trajets d’un certain intervalle "
 			<< "(depuis l’ordre de saisie dans le catalogue)." << endl;
-		
+
 
 		cin >> choix;
 		switch (choix)
@@ -435,8 +438,8 @@ bool MenuDefinitionCritere (Critere_e cr_e)
 		case SELECTION:
 			{
 				unsigned int choix = -1;
-				unsigned int maxIndice = (onSauvegarde) ? 
-					cat->GetTabTrajet().GetNbTrajets() : 
+				unsigned int maxIndice = (onSauvegarde) ?
+					cat->GetTabTrajet().GetNbTrajets() :
 					GetNombreLignesFichier ();
 
 				cout << "Vous allez saisir l'intervalle d'indices." << endl;
