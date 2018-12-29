@@ -24,6 +24,7 @@
 
 void GestionFichier_Main (Catalogue & c)
 {
+	DefinirAutorisations ();
 	cat = &c;
 	ChoixAction action = CHANGER_NOM; // Valeur par defaut.
 	do
@@ -288,8 +289,14 @@ ChoixAction MenuChoixAction ()
 	{
 		cout << "Que souhaitez-vous faire ?" << endl;
 		cout << "Le fichier selectionne est \"" << nomFichier << "\"" << endl;
-		cout << "1. Exporter le catalogue courant." << endl;
-		cout << "2. Importer / restituer le catalogue courant." << endl;
+		if (autorisations.ecriture)
+		{
+			cout << "1. Exporter le catalogue courant." << endl;
+		}
+		if (autorisations.lecture) 
+		{
+			cout << "2. Importer / restituer le catalogue courant." << endl;
+		}
 		cout << "3. Modifier le nom du fichier." << endl;
 		cout << "4. Retourner au menu principal." << endl;
 
@@ -298,9 +305,25 @@ ChoixAction MenuChoixAction ()
 		switch (choix)
 		{
 			case 1:
-				return SAUV;
+				if (autorisations.lecture)
+				{
+					return SAUV;
+				} 
+				else 
+				{
+					cout << "Choix invalide." << endl;
+					break;
+				}
 			case 2:
-				return REST;
+				if (autorisations.ecriture)
+				{
+					return REST;
+				} 
+				else
+				{
+					cout << "Choix invalide." << endl;
+					break;
+				}
 			case 3:
 				return CHANGER_NOM;
 			case 4:
@@ -319,20 +342,20 @@ ChoixAction MenuChoixAction ()
 void MenuNomFichier ()
 {
 	int fini;
-	string tmp;
+	cout << std::boolalpha;
 	do
 	{
 		cout << "Quel nom de fichier manipuler ?" << endl;
-		cin >> tmp;
-		cout << "Test des autorisations de " << tmp << '.' << endl;
+		cin >> nomFichier;
+		cout << "Test des autorisations de " << nomFichier << '.' << endl;
 
+		// Definition autorisations
+		DefinirAutorisations();
+		
 		// Test possible de lire
-		ifstream ifs (tmp);
-		cout << "Lecture : " << (ifs ? "OUI" : "NON") << endl;
-
-		// Test possible d'ecrire
-		ofstream ofs (tmp, ios_base::out | ios_base::app);
-		cout << "Ecriture : " << (ofs ? "OUI" : "NON") << endl;
+		ifstream ifs (nomFichier);
+		cout << "Lecture : " << autorisations.lecture << endl;
+		cout << "Ecriture : " << autorisations.ecriture << endl;
 
 		// Confirmation et boucle ou validation
 		cout << endl << "Cela vous convient ? 1 pour oui, 0 pour non" << endl;
@@ -344,7 +367,7 @@ void MenuNomFichier ()
 			fini = 0;
 		}
 	} while ( ! fini);
-	nomFichier = tmp;
+	cout << std::noboolalpha;
 } // -- Fin de MenuNomFichier
 
 Critere_e MenuChoixCritere ()
@@ -489,7 +512,15 @@ unsigned int GetNombreLignesFichier ()
 		++compteur;
 	}
 	return compteur;
-}
+} // -- Fin de GetNombreLignesFichier
+
+void DefinirAutorisations ()
+{
+	ifstream ifs (nomFichier);
+	autorisations.lecture  = bool(ifs);
+	ofstream ofs (nomFichier, ios_base::out | ios_base::app);
+	autorisations.ecriture = bool(ofs);
+} // -- Fin de DefinirAutorisations
 
 //---------------------------------------------- Surcharge d operateurs --
 

@@ -47,6 +47,13 @@ struct Critere
     string m;
 };
 
+// Indique les autorisations liees au fichier selectionne.
+struct Autorisations
+{
+    bool lecture;
+    bool ecriture;
+};
+
 
 //------------------------------------------------------------------------
 // Rôle du module <GestionFichier>
@@ -112,6 +119,12 @@ struct Critere
     //  On le parcourt rapidement.
     // Contrat : aucun (si URL fichier invalide, zero);
 
+    void DefinirAutorisations ();
+    // Mode d'emploi :
+    //  Procedure sans parametres qui enregistre les autorisations liees 
+    //  au fichier selectionne.
+    // Contrat : le fichier existe.
+
 
 //--------------------------------------------------- Surcharge d operateurs --
 //-------------------------------------------- Constructeurs - destructeur
@@ -121,7 +134,8 @@ struct Critere
 //----------------------------------------------------- Attributs protégés
 Catalogue * cat; // Le catalogue lu ou modifie au besoin.
 Critere cri; // Le critere demande par l'utilisateur.
-string nomFichier("catalogueExport.txt"); // Le nom du fichier que l'on manipule.
-bool onSauvegarde;
+string nomFichier("catalogueExport.txt"); // Le nom du fichier qu'on manipule.
+bool onSauvegarde; // Vaut true si l'utilisateur vaut sauvegarder, sinon false.
+Autorisations autorisations; // Liees au fichier selectionne.
 
 #endif // ifndef GESTION_FICHIER_H
