@@ -78,9 +78,9 @@ TabTrajet::TabTrajet (void)
 #ifdef MAP
     cout << "Appel au constructeur de <TabTrajet>" << endl;
 #endif
-nbTrajets =0;
-nbAllocated = TAILLE ;
-trajet = new Trajet*[TAILLE];
+	nbTrajets =0;
+	nbAllocated = TAILLE ;
+	trajet = new Trajet*[TAILLE];
 } //----- Fin de TabTrajet
 
 TabTrajet::~TabTrajet ( )
@@ -91,17 +91,17 @@ TabTrajet::~TabTrajet ( )
 
 	for (int i = 0; i < nbTrajets; i++)
 	{
-    if(trajet[i] != nullptr)
-    {
-      delete trajet[i];
-      trajet[i] = nullptr;
-    }
+	    if(trajet[i] != nullptr)
+	    {
+	      delete trajet[i];
+	      trajet[i] = nullptr;
+	    }
 	}
-  if( trajet != nullptr)
-  {
-    delete[] trajet;
-    trajet = nullptr;
-  }
+	if( trajet != nullptr)
+	{
+		delete[] trajet;
+		trajet = nullptr;
+	}
 } //----- Fin de ~TabTrajet
 
 //----------------------------------------------------- Méthodes protégées
