@@ -42,6 +42,11 @@ public:
     void AjouterTrajet(Trajet *t);
     // Mode d'emploi : Ajoute *t au tableau de pointeur de trajets
     //
+//--------------------------------------------------- Surcharge d operateurs --
+    const Trajet * operator [] (int index) const;
+    // Mode d'emploi : Renvoie le trajet indique par l'index.
+    // Contrat : l'index est valide (renvoie nullptr sinon).
+
 //-------------------------------------------- Constructeurs - destructeur
     TabTrajet (void);
     // Mode d'emploi : Création d'une TabTrajet.

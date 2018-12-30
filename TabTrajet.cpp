@@ -71,6 +71,12 @@ void TabTrajet::AjouterTrajet(Trajet *t)
 	trajet[nbTrajets - 1] = t;
 } //-- Fin AjouterTrajet
 
+
+const Trajet * TabTrajet::operator [] (int index) const
+{
+	return (index >= nbTrajets || index < 0) ? nullptr : trajet[index];
+} // Fin de operator []
+
 //-------------------------------------------- Constructeurs - destructeur
 
 TabTrajet::TabTrajet (void)
