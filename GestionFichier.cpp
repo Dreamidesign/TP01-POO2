@@ -60,32 +60,48 @@ void Sauvegarde()
 	ofstream monFlux(nomFichier.c_str());
 
 	if(monFlux)  //On teste si tout est OK
-	{
+	{ 
+		int nbTS=0; // Nombre de trajets simples (metadonnees)
+		int nbTC=0; // Nombre de trajets composes (metadonnees)
+		char * tostring; // Temporaire pour les toString
+		TabTrajet & liste = cat->GetTabTrajet(); // Raccourci
+		TabTrajet aAjouter; // Liste des trajets qu'on va ajouter
+		const Trajet * ta; // Temp : trajet en cours de lecture.
+		Trajet * tb; // Temp : trajet effectivement stocke.
 
-		//--- Construction des métadonnées
-
-		//On compte le nombre de trajet de chaque sorte
-		int nbTS=0;
-		int nbTC=0;
-		char * tostring;
-		TabTrajet & liste = cat->GetTabTrajet();
-		for(int i = 0; i<liste.GetNbTrajets(); i++)
+		for(int i=0; i < liste.GetNbTrajets(); i++)
 		{
-			tostring = liste.GetTabTrajet()[i]->toString();
-			tostring[0] == 'S' ? nbTS++: nbTC++;
-			delete [] tostring;
+			ta = liste[i];
+			if(TrajetValideAuCritere(ta, i))
+			{
+				tostring = ta->toString();
+				if (tostring[0] == 'S') // Trajet simple
+				{
+					nbTS++;
+					tb = new TrajetSimple 
+					(
+						ta->GetVilleDepart(), ta->GetVilleArrive(),
+						ta->GetMoyenTransport()
+					);
+				}
+				else // Trajet Compose
+				{
+					nbTC++;
+					tb = new TrajetCompose(((TrajetCompose*)ta)->GetTab());
+					/* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ 
+				}
+				delete [] tostring;
+				aAjouter.AjouterTrajet (tb);
+			}
 		}
 
 		monFlux << nbTS << ";" << nbTC << endl;
 
-		for(int i=0; i < liste.GetNbTrajets(); i++)
+		for(int i=0; i < aAjouter.GetNbTrajets(); i++)
 		{
-			if(TrajetValideAuCritere(liste.GetTabTrajet()[i], i))
-			{
-				tostring = liste.GetTabTrajet()[i]->toString();
-				monFlux << tostring << endl;
-				delete [] tostring;
-			}
+			tostring = aAjouter[i]->toString();
+			monFlux << tostring << endl;
+			delete [] tostring;
 		}
 	}
 	else
@@ -242,7 +258,7 @@ void lecture_TC(TabTrajet* tab, string content)
 	content[0] == 'S' ? lecture_TS(tab, content) : lecture_TC(tab, content);
 } // -- Fin de lecture_TC
 
-bool TrajetValideAuCritere (Trajet * t, unsigned int index)
+bool TrajetValideAuCritere (const Trajet * t, unsigned int index)
 {
 	if (t == nullptr)
     {   return false;

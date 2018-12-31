@@ -80,7 +80,7 @@ struct Autorisations
 
     void lecture_TC(TabTrajet* tab, string content);
 
-    bool TrajetValideAuCritere (Trajet * t, unsigned int index = -1);
+    bool TrajetValideAuCritere (const Trajet * t, unsigned int index = -1);
     // Mode d'emploi :
     //  Indique si le trajet fourni est valide au critere.
     //  t : Pointeur de Trajet
