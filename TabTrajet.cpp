@@ -16,6 +16,8 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "TabTrajet.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
 #define TAILLE 20
@@ -88,6 +90,28 @@ TabTrajet::TabTrajet (void)
 	nbAllocated = TAILLE ;
 	trajet = new Trajet*[TAILLE];
 } //----- Fin de TabTrajet
+
+TabTrajet::TabTrajet (TabTrajet & t) :
+	trajet (new Trajet * [t.nbAllocated]), 
+	nbTrajets (t.nbTrajets), nbAllocated(t.nbAllocated)
+	
+{
+	char * tostring;
+	for (int i=0; i<nbTrajets; i++)
+	{
+		tostring = t[i]->toString();
+		if (tostring[0] == 'S')
+		{
+			trajet[i] = new TrajetSimple (t[i]->GetVilleDepart(), t[i]->GetVilleArrive(), t[i]->GetMoyenTransport());
+		}
+		else
+		{
+			trajet[i] = new TrajetCompose (((TrajetCompose*)(t[i]))->GetTab());
+		}
+		delete [] tostring;
+	}
+}
+
 
 TabTrajet::~TabTrajet ( )
 {

@@ -52,6 +52,10 @@ public:
     // Mode d'emploi : Création d'une TabTrajet.
     //
 
+    TabTrajet (TabTrajet & t);
+    // Mode d'emploi : Creation par copie d'un TabTrajet.
+    // Contrat : aucun.
+
     virtual ~TabTrajet ( );
     // Mode d'emploi : Libéraation mémoire de la TabTrajet et de ses attributs
     //
