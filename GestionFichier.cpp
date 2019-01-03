@@ -60,48 +60,36 @@ void Sauvegarde()
 	ofstream monFlux(nomFichier.c_str());
 
 	if(monFlux)  //On teste si tout est OK
-	{ 
+	{
 		int nbTS=0; // Nombre de trajets simples (metadonnees)
 		int nbTC=0; // Nombre de trajets composes (metadonnees)
-		char * tostring; // Temporaire pour les toString
 		TabTrajet & liste = cat->GetTabTrajet(); // Raccourci
-		TabTrajet aAjouter; // Liste des trajets qu'on va ajouter
-		const Trajet * ta; // Temp : trajet en cours de lecture.
-		Trajet * tb; // Temp : trajet effectivement stocke.
+		string content[liste.GetNbTrajets()];
+		int effec = 0; //nombre de trajets effectivement stockés
 
-		for(int i=0; i < liste.GetNbTrajets(); i++)
+		for(int i = 0; i < liste.GetNbTrajets(); i++)
 		{
-			ta = liste[i];
-			if(TrajetValideAuCritere(ta, i))
+			if(TrajetValideAuCritere(liste[i], i))
 			{
-				tostring = ta->toString();
-				if (tostring[0] == 'S') // Trajet simple
+				content[effec] = liste[i]->toString();
+				// monFlux << liste[i].toString() << endl;
+				if (liste[i]->toString()[0] == 'S') // Trajet simple
 				{
 					nbTS++;
-					tb = new TrajetSimple 
-					(
-						ta->GetVilleDepart(), ta->GetVilleArrive(),
-						ta->GetMoyenTransport()
-					);
 				}
 				else // Trajet Compose
 				{
 					nbTC++;
-					tb = new TrajetCompose(((TrajetCompose*)ta)->GetTab());
-					/* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ 
 				}
-				delete [] tostring;
-				aAjouter.AjouterTrajet (tb);
+				effec++;
 			}
 		}
 
 		monFlux << nbTS << ";" << nbTC << endl;
 
-		for(int i=0; i < aAjouter.GetNbTrajets(); i++)
+		for(int i=0; i <= effec; i++)
 		{
-			tostring = aAjouter[i]->toString();
-			monFlux << tostring << endl;
-			delete [] tostring;
+			monFlux << content[i] << endl;
 		}
 	}
 	else
@@ -154,15 +142,15 @@ void Restitution()
 						}
 						count ++;
 					}
-					
-					t= new TrajetSimple(villeD.c_str(), villeA.c_str(), 
+
+					t= new TrajetSimple(villeD.c_str(), villeA.c_str(),
 						mT.c_str());
 				}
 
 				else
 				{
 					trajetLigne.erase(0, 2);
-					trajetLigne.erase(trajetLigne.length()-1, 
+					trajetLigne.erase(trajetLigne.length()-1,
 						trajetLigne.length());
 
 					TabTrajet* tabT = new TabTrajet();
@@ -174,8 +162,8 @@ void Restitution()
 						temp = trajetLigne.substr(0, pos);
 						trajetLigne.erase(0, pos + delimiter.length());
 
-						temp[0] == 'S' ? 
-							lecture_TS(tabT, temp) : 
+						temp[0] == 'S' ?
+							lecture_TS(tabT, temp) :
 							lecture_TC(tabT, temp);
 					}
 					trajetLigne[0] == 'S' ?
@@ -322,7 +310,7 @@ ChoixAction MenuChoixAction ()
 		{
 			cout << "1. Exporter le catalogue courant." << endl;
 		}
-		if (autorisations.lecture) 
+		if (autorisations.lecture)
 		{
 			cout << "2. Importer / restituer le catalogue courant." << endl;
 		}
@@ -337,8 +325,8 @@ ChoixAction MenuChoixAction ()
 				if (autorisations.ecriture)
 				{
 					return SAUV;
-				} 
-				else 
+				}
+				else
 				{
 					cout << "Choix invalide." << endl;
 					break;
@@ -347,7 +335,7 @@ ChoixAction MenuChoixAction ()
 				if (autorisations.lecture)
 				{
 					return REST;
-				} 
+				}
 				else
 				{
 					cout << "Choix invalide." << endl;
@@ -380,7 +368,7 @@ void MenuNomFichier ()
 
 		// Definition autorisations
 		DefinirAutorisations();
-		
+
 		// Test possible de lire
 		ifstream ifs (nomFichier);
 		cout << "Lecture : " << autorisations.lecture << endl;
