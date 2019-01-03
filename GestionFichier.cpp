@@ -469,10 +469,10 @@ bool MenuDefinitionCritere (Critere_e cr_e)
 			}
 		case VILLE:
 			cout << "Souhaitez-vous imposer la ville de depart ? " <<
-				"Si oui, saisissez-la, sinon mettez _." << endl;
+				"Si oui, saisissez-la, sinon mettez caractere '_'." << endl;
 			cin >> cri.n;
 			cout << "Souhaitez-vous imposer la ville d'arrivee ? " <<
-				"Si oui, saisissez-la, sinon mettez _." << endl;
+				"Si oui, saisissez-la, sinon mettez le caractere '_' ." << endl;
 			cin >> cri.m;
 			break;
 		case SELECTION:
