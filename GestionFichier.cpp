@@ -64,33 +64,26 @@ void Sauvegarde()
 		int nbTS=0; // Nombre de trajets simples (metadonnees)
 		int nbTC=0; // Nombre de trajets composes (metadonnees)
 		TabTrajet & liste = cat->GetTabTrajet(); // Raccourci
-		string content[liste.GetNbTrajets()];
+		string * content = new string [liste.GetNbTrajets()];
 		int effec = 0; //nombre de trajets effectivement stockés
 
 		for(int i = 0; i < liste.GetNbTrajets(); i++)
 		{
 			if(TrajetValideAuCritere(liste[i], i))
 			{
-				content[effec] = liste[i]->toString();
-				// monFlux << liste[i].toString() << endl;
-				if (liste[i]->toString()[0] == 'S') // Trajet simple
-				{
-					nbTS++;
-				}
-				else // Trajet Compose
-				{
-					nbTC++;
-				}
+				content[effec] = liste[i]->toStringAsString();
+				((content[effec][0] == 'S') ? nbTS : nbTC)++;
 				effec++;
 			}
 		}
 
 		monFlux << nbTS << ";" << nbTC << endl;
 
-		for(int i=0; i <= effec; i++)
+		for(int i=0; i < effec; i++)
 		{
 			monFlux << content[i] << endl;
 		}
+		delete [] content;
 	}
 	else
 	{
