@@ -10,6 +10,8 @@
 #if ! defined ( Trajet_H )
 #define Trajet_H
 
+#include <string>
+
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
 // Implémente un trajet entre uneVilleDepart et uneVilleArrive
@@ -55,6 +57,11 @@ public:
     // Contrat : Aucun
     //
 
+    std::string toStringAsString (void) const;
+    // Mode d'emploi : renvoie une description textuelle sorte d'ID du trajet
+    // 
+    // Contrat : Aucun
+    // 
 
 //-------------------------------------------- Constructeurs - destructeur
 

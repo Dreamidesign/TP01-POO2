@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <cstring>
+#include <string>
 using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
@@ -25,6 +26,14 @@ using namespace std;
 	{
 		cout << c << "De " << GetVilleDepart() << " a " << GetVilleArrive() << " ";
 	} //----- Fin de Affichage
+
+	std::string Trajet::toStringAsString (void) const
+	{
+		char * s = toString ();
+		std::string str (s);
+		delete [] s;
+		return str;
+	}
 
 	//-------------------------------------------- Constructeurs - destructeur
 
