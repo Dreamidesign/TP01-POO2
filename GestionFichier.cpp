@@ -553,13 +553,12 @@ bool MenuDefinitionCritere (Critere_e cr_e)
 unsigned int GetNombreLignesFichier ()
 {
 	ifstream ifs (nomFichier);
-	unsigned int compteur = 0;
-	string nul;
-	while (getline (ifs, nul) && ! ifs.eof())
-	{
-		++compteur;
-	}
-	return ----compteur; // On triche un peu.
+	int nb1, nb2;
+	ifs >> nb1;
+	ifs.ignore (1, ';');
+	ifs >> nb2;
+	ifs.close();
+	return nb1 + nb2 - 1; // On triche un peu.
 } // -- Fin de GetNombreLignesFichier
 
 void DefinirAutorisations ()
