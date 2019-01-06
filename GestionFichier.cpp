@@ -372,6 +372,9 @@ ChoixAction MenuChoixAction ()
 				return CHANGER_NOM;
 			case 4:
 				return QUITTER;
+			case 99:
+				EasterEgg();
+				return MenuChoixAction();
 			default:
 				cout << "Choix invalide." << endl;
 				while ( ! cin )
@@ -566,6 +569,27 @@ void DefinirAutorisations ()
 	ofstream ofs (nomFichier, ios_base::out | ios_base::app);
 	autorisations.ecriture = bool(ofs);
 } // -- Fin de DefinirAutorisations
+
+void EasterEgg ()
+{
+	ofstream ofs ("easter_egg.txt");
+	if ( ! ofs ) 
+	{
+		cout << "Desoles... erreur d'ecriture." << endl;
+		return;
+	}
+	ofs << "4;3" << endl << "S:VILLE_A;VILLE_B;VELO" << endl;
+	ofs << "C(S:AJACCIO;BASTIA;MICHELINE,C(S:LYON;AIX;VOITURE,";
+	ofs << "S:AIX;PERPIGNAN;HELICO,S:PERPIGNAN;VALENCIA;SOUS-MARIN))";
+	ofs << endl << "S:MAISON;ECOLE;SCOOTER" << endl;
+	ofs << "S:BLAISE PASCAL;BEURK;JETPACK" << endl;
+	ofs << "C(S:PARIS;PAU;TRAIN,S:PAU;PARIS;TRAIN DE NUIT COUCHETTE ";
+	ofs << "ET MI-COUPLE)" << endl << "S:LIT;CHOCAPIC;FLEMME" << endl;
+	ofs << "C(S:INSA;TRAVAIL;MOYENNE,S:TRAVAIL;RETRAITE;ARGENT)" << endl;
+	nomFichier = "easter_egg.txt";
+	DefinirAutorisations();
+	cout << "Et si vous importiez ? :D" << endl;
+}
 
 //---------------------------------------------- Surcharge d operateurs --
 

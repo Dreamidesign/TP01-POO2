@@ -30,7 +30,8 @@ enum ChoixAction
     QUITTER,
     CHANGER_NOM,
     SAUV,
-    REST
+    REST,
+    EASTER_EGG
 }; // Choix de l'action a effectuer
 
 // Definit un Critere, avec son type, et ses éventuels paramètres
@@ -125,6 +126,10 @@ struct Autorisations
     //  Procedure sans parametres qui enregistre les autorisations liees 
     //  au fichier selectionne.
     // Contrat : le fichier existe.
+
+    void EasterEgg();
+    // Mode d'emploi : mystere...
+    // Contrat : droits en ecriture dans le dossier courant.
 
 
 //--------------------------------------------------- Surcharge d operateurs --
