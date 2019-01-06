@@ -84,6 +84,8 @@ void Sauvegarde()
 			monFlux << content[i] << endl;
 		}
 		delete [] content;
+		cout << effec << " trajets correctement ecrits dans le fichier ";
+		cout << nomFichier << '.' << endl;
 	}
 	else
 	{
@@ -97,6 +99,7 @@ void Restitution()
 
 	if(monFlux)
 	{
+		unsigned int effec = 0;
 		int ligneNum = 0;
 		string trajetLigne;
 
@@ -195,6 +198,7 @@ void Restitution()
 					cout << "Il est valide au critere." << endl;
 #endif
 					cat->GetTabTrajet().AjouterTrajet(t);
+					++ effec;
 				}
 				else
 				{
@@ -208,6 +212,8 @@ void Restitution()
 			ligneNum++;
 			if ((unsigned long)ligneNum == nbTS + nbTC) break;
 		}
+		cout << effec << " trajets correctement importes depuis le fichier ";
+		cout << nomFichier << endl;
 	}
 	else
 	{
