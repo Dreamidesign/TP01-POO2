@@ -21,7 +21,6 @@ using namespace std;
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
-extern void MenuTests();
 extern void GestionFichier_Main(Catalogue & c);
 
 
@@ -314,9 +313,6 @@ void Catalogue::MenuCatalogue(void)
 		cout << "4. Rechercher un parcours - Recherche avancee" << endl;
 		cout << "5. Manipuler un fichier." << endl;
 		cout << CHOIX_QUITTER << ". Quitter" << endl;
-#ifdef MAP
-		cout << "11. Tests" << endl;
-#endif // defined MAP
 		cin >> choix1;
 
 		switch (choix1)
@@ -342,12 +338,6 @@ void Catalogue::MenuCatalogue(void)
 			break;
 		case CHOIX_QUITTER:
 			break;
-#ifdef MAP
-		case 11:
-			cout << "OK pour les tests." << endl;
-			MenuTests();
-			break;
-#endif // defined MAP
 		default:
 			cout << "Choix invalide." << endl;
 			while ( ! cin )
