@@ -307,7 +307,6 @@ bool TrajetValideAuCritere (const Trajet * t, long int index)
 
 		case SELECTION:
             // Si i est entre c.n inclus et c.m inclus.
-			cout << stoi (cri.n) << ", " << stoi (cri.m) << ", " << index << endl;
             return
             (
             	(index >= stoi (cri.n)) &&
