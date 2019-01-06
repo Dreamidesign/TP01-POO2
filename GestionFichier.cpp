@@ -374,7 +374,7 @@ ChoixAction MenuChoixAction ()
 				return QUITTER;
 			case 99:
 				EasterEgg();
-				return MenuChoixAction();
+				return QUITTER;
 			default:
 				cout << "Choix invalide." << endl;
 				while ( ! cin )
