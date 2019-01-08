@@ -577,14 +577,26 @@ void EasterEgg ()
 		cout << "Desoles... erreur d'ecriture." << endl;
 		return;
 	}
-	ofs << "4;3" << endl << "S:VILLE_A;VILLE_B;VELO" << endl;
-	ofs << "C(S:AJACCIO;BASTIA;MICHELINE,C(S:LYON;AIX;VOITURE,";
-	ofs << "S:AIX;PERPIGNAN;HELICO,S:PERPIGNAN;VALENCIA;SOUS-MARIN))";
-	ofs << endl << "S:MAISON;ECOLE;SCOOTER" << endl;
+	ofs << "4;3" << endl;
+	
+	ofs << "S:VILLE_A;VILLE_B;VELO" << endl;
+	
+	ofs << "C(S:AJACCIO;BASTIA;MICHELINE,S:BASTIA;PORTO-VECCHIO,JET-SKI)";
+	
+	ofs << "C(S:LYON;AIX;VOITURE,S:AIX;PERPIGNAN;HELICO,";
+	ofs << "S:PERPIGNAN;VALENCIA;SOUS-MARIN)" << end;
+	
+	ofs << "S:MAISON;ECOLE;SCOOTER" << endl;
+	
 	ofs << "S:BLAISE PASCAL;BEURK;JETPACK" << endl;
+	
 	ofs << "C(S:PARIS;PAU;TRAIN,S:PAU;PARIS;TRAIN DE NUIT COUCHETTE ";
-	ofs << "ET MI-COUPLE)" << endl << "S:LIT;CHOCAPIC;FLEMME" << endl;
+	ofs << "ET MI-COUPLE)" << endl;
+	
+	ofs << "S:LIT;CHOCAPIC;FLEMME" << endl;
+	
 	ofs << "C(S:INSA;TRAVAIL;MOYENNE,S:TRAVAIL;RETRAITE;ARGENT)" << endl;
+	
 	nomFichier = "easter_egg.txt";
 	DefinirAutorisations();
 	cout << "Et si vous importiez ? :D" << endl;
