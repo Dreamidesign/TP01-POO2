@@ -30,8 +30,7 @@ enum ChoixAction
     QUITTER,
     CHANGER_NOM,
     SAUV,
-    REST,
-    EASTER_EGG
+    REST
 }; // Choix de l'action a effectuer
 
 // Definit un Critere, avec son type, et ses éventuels paramètres
