@@ -120,95 +120,92 @@ void Restitution()
 #ifdef MAP
 			cout << "Lecture d'une ligne " << endl;
 #endif
-			/*if(ligneNum >= 1)
-			{*/
-				/* Etapes de la lecture d'un TC :
-				 * 1. On enleves les parenthèses --> que le contenu
-				 * 2. Lecture entre les virgules
-				 * 3. Lecture de soit un TS, soit on recommence pour un TC
-				 * 4. A chaque étape on ajoute le contenu a un tabTrajet
-				 */
-				Trajet* t;
+			/* Etapes de la lecture d'un TC :
+			 * 1. On enleves les parenthèses --> que le contenu
+			 * 2. Lecture entre les virgules
+			 * 3. Lecture de soit un TS, soit on recommence pour un TC
+			 * 4. A chaque étape on ajoute le contenu a un tabTrajet
+			 */
+			Trajet* t;
 
-				// Ajout d'un trajet simple
-				if(nbTS && trajetLigne[0] == 'S')
+			// Ajout d'un trajet simple
+			if(nbTS && trajetLigne[0] == 'S')
+			{
+				trajetLigne.erase(0, 2);
+				string delimiter = ";";
+				size_t pos = 0;
+				string temp;
+				string villeD;
+				string villeA;
+				string mT;
+				unsigned int count = 0;
+				while ((pos = trajetLigne.find(delimiter)) != string::npos)
 				{
-					trajetLigne.erase(0, 2);
-					string delimiter = ";";
-					size_t pos = 0;
-					string temp;
-					string villeD;
-					string villeA;
-					string mT;
-					unsigned int count = 0;
-					while ((pos = trajetLigne.find(delimiter)) != string::npos)
+					temp = trajetLigne.substr(0, pos);
+					trajetLigne.erase(0, pos + delimiter.length());
+					if(count == 0) {villeD = temp;}
+					if(count == 1)
 					{
-						temp = trajetLigne.substr(0, pos);
-						trajetLigne.erase(0, pos + delimiter.length());
-						if(count == 0) {villeD = temp;}
-						if(count == 1)
-						{
-							villeA = temp;
-							mT = trajetLigne;
-						}
-						count ++;
+						villeA = temp;
+						mT = trajetLigne;
 					}
-
-					t= new TrajetSimple(villeD.c_str(), villeA.c_str(),
-						mT.c_str());
-					-- nbTS;
+					count ++;
 				}
 
-				// Ajout d'un trajet compose
-				else
+				t= new TrajetSimple(villeD.c_str(), villeA.c_str(),
+					mT.c_str());
+				-- nbTS;
+			}
+
+			// Ajout d'un trajet compose
+			else
+			{
+				if ( ! nbTC ) continue;
+
+				trajetLigne.erase(0, 2);
+				trajetLigne.erase(trajetLigne.length()-1,
+					trajetLigne.length());
+
+				TabTrajet* tabT = new TabTrajet();
+				string delimiter = ",";
+				size_t pos = 0; //position du delimiter
+				string temp;
+				while((pos = trajetLigne.find(delimiter)) != string::npos)
 				{
-					if ( ! nbTC ) continue;
+					temp = trajetLigne.substr(0, pos);
+					trajetLigne.erase(0, pos + delimiter.length());
 
-					trajetLigne.erase(0, 2);
-					trajetLigne.erase(trajetLigne.length()-1,
-						trajetLigne.length());
-
-					TabTrajet* tabT = new TabTrajet();
-					string delimiter = ",";
-					size_t pos = 0; //position du delimiter
-					string temp;
-					while((pos = trajetLigne.find(delimiter)) != string::npos)
-					{
-						temp = trajetLigne.substr(0, pos);
-						trajetLigne.erase(0, pos + delimiter.length());
-
-						temp[0] == 'S' ?
-							lecture_TS(tabT, temp) :
-							lecture_TC(tabT, temp);
-					}
-					trajetLigne[0] == 'S' ?
-						lecture_TS(tabT, trajetLigne) :
-						lecture_TC(tabT, trajetLigne);
-
-					t = new TrajetCompose(tabT);
-					-- nbTC;
+					temp[0] == 'S' ?
+						lecture_TS(tabT, temp) :
+						lecture_TC(tabT, temp);
 				}
+				trajetLigne[0] == 'S' ?
+					lecture_TS(tabT, trajetLigne) :
+					lecture_TC(tabT, trajetLigne);
+
+				t = new TrajetCompose(tabT);
+				-- nbTC;
+			}
 
 #ifdef MAP
-				cout << "Trajet etudie : " << t->toStringAsString () << '.' << endl;
+			cout << "Trajet etudie : " << t->toStringAsString () << '.' << endl;
 #endif
-				if(TrajetValideAuCritere(t, ligneNum))
-				{
+			if(TrajetValideAuCritere(t, ligneNum))
+			{
 #ifdef MAP
-					cout << "Il est valide au critere." << endl;
+				cout << "Il est valide au critere." << endl;
 #endif
-					cat->GetTabTrajet().AjouterTrajet(t);
-					++ effec;
-				}
-				else
-				{
+				cat->GetTabTrajet().AjouterTrajet(t);
+				++ effec;
+			}
+			else
+			{
 #ifdef MAP
-					cout << "Il n'est pas valide au critere." << endl;
+				cout << "Il n'est pas valide au critere." << endl;
 #endif
-					delete t;
-				}
+				delete t;
+			}
 
-			/*}*/
 			ligneNum++;
 			if ((unsigned long)ligneNum == nbTS + nbTC) break;
 		}
