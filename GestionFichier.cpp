@@ -77,8 +77,9 @@ void Sauvegarde()
 			}
 		}
 
-		monFlux << nbTS << ";" << nbTC << endl;
+		monFlux << nbTS << ";" << nbTC << endl; //Ecriture des metadonnees
 
+		//Ecriture des trajets à la suite des metadonnees
 		for(int i=0; i < effec; i++)
 		{
 			monFlux << content[i] << endl;
@@ -569,32 +570,32 @@ void DefinirAutorisations ()
 void EasterEgg ()
 {
 	ofstream ofs ("easter_egg.txt");
-	if ( ! ofs ) 
+	if ( ! ofs )
 	{
 		cout << "Desoles... erreur d'ecriture." << endl;
 		return;
 	}
 	ofs << "4;3" << endl;
-	
+
 	ofs << "S:VILLE_A;VILLE_B;VELO" << endl;
-	
+
 	ofs << "C(S:AJACCIO;BASTIA;MICHELINE,S:BASTIA;PORTO-VECCHIO;JET-SKI)";
 	ofs << endl;
-	
+
 	ofs << "C(S:LYON;AIX;VOITURE,S:AIX;PERPIGNAN;HELICO,";
 	ofs << "S:PERPIGNAN;VALENCIA;SOUS-MARIN)" << endl;
-	
+
 	ofs << "S:MAISON;ECOLE;SCOOTER" << endl;
-	
+
 	ofs << "S:BLAISE PASCAL;BEURK;JETPACK" << endl;
-	
+
 	ofs << "C(S:PARIS;PAU;TRAIN,S:PAU;PARIS;TRAIN DE NUIT COUCHETTE ";
 	ofs << "ET MI-COUPLE)" << endl;
-	
+
 	ofs << "S:LIT;CHOCAPIC;FLEMME" << endl;
-	
+
 	ofs << "C(S:INSA;TRAVAIL;MOYENNE,S:TRAVAIL;RETRAITE;ARGENT)" << endl;
-	
+
 	nomFichier = "easter_egg.txt";
 	DefinirAutorisations();
 	cout << "Et si vous importiez ? :D" << endl;

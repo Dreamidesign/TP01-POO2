@@ -132,6 +132,7 @@ void Catalogue::AjoutSimple(void)
 
 	TrajetSimple* t (new TrajetSimple(depart, arrivee, mt));
 
+	// Verification de l'unicité du trajet ajouté
 	bool used = false;
 	for(int j = 0; j < liste.GetNbTrajets(); j++)
 	{
@@ -205,6 +206,7 @@ void Catalogue::AjoutCompose(void)
 
 	TrajetCompose* tc(new TrajetCompose(tabTS));
 
+	// Verification de l'unicité du trajet ajouté
 	bool used = false;
 	for(int j = 0; j < liste.GetNbTrajets(); j++)
 	{
@@ -231,6 +233,8 @@ void Catalogue::AjoutCompose(void)
 		delete tc;
 	}
 
+	//Liberation des espaces mémoire utilisés lors de l'import qui ont été copié
+	//Dans les constructeurs de trajet
 	freeTab (tabMT , nbVilles-1);
 	freeTab ( tabVille , nbVilles) ;
 } //----- Fin de AjoutCompose

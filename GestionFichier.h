@@ -58,7 +58,7 @@ struct Autorisations
 
 //------------------------------------------------------------------------
 // Rôle du module <GestionFichier>
-//  Module referencant toutes les fonctions liees a la manipulation 
+//  Module referencant toutes les fonctions liees a la manipulation
 //  de fichiers du catalogue.
 //------------------------------------------------------------------------
 
@@ -73,12 +73,28 @@ struct Autorisations
     // Contrat : aucun.
 
     void Restitution();
+    // Mode d'emploi :
+    //  Gere l'import d'un Catalogue à partir d'un fichier texte
+    //  en appelant les méthodes de lecture adapatées au trajet detecté.
+    // Contrat : aucun.
 
     void Sauvegarde();
+    // Mode d'emploi :
+    //  Ecriture du contenu du catalogue ainsi que génération et écriture
+    //  des métadonnées dans un fichier test.
+    // Contrat : aucun.
 
     void lecture_TS(TabTrajet* tab, string content);
+    // Mode d'emploi :
+    //  Subdivision et recuperation des informations d'un trajet simple
+    //  à partir d'une ligne du fichier texte pour l'import du catalogue
+    // Contrat : aucun.
 
     void lecture_TC(TabTrajet* tab, string content);
+    // Mode d'emploi :
+    //  Subdivision et recuperation des informations d'un trajet composé
+    //  à partir d'une ligne du fichier texte pour l'import du catalogue
+    // Contrat : aucun.
 
     bool TrajetValideAuCritere (const Trajet * t, long int index);
     // Mode d'emploi :
@@ -90,7 +106,7 @@ struct Autorisations
 
     ChoixAction MenuChoixAction ();
     // Mode d'emploi :
-    //  Permet a l'utilisateur de choisir l'action a faire vers 
+    //  Permet a l'utilisateur de choisir l'action a faire vers
     //  ou depuis son catalogue.
     //  Renvoie l'action choisie.
     // Contrat : aucun.
@@ -103,13 +119,13 @@ struct Autorisations
 
     Critere_e MenuChoixCritere ();
     // Mode d'emploi :
-    //  Permet a l'utilisateur de choisir le critere sur lequel se basera 
+    //  Permet a l'utilisateur de choisir le critere sur lequel se basera
     //  la manipulation des trajets.
     // Contrat : aucun.
 
     bool MenuDefinitionCritere (Critere_e cr_e);
     // Mode d'emploi :
-    //  Permet a l'utilisateur de preciser ses voeux pour le critere 
+    //  Permet a l'utilisateur de preciser ses voeux pour le critere
     //  qu'il a choisi.
     //  Constante nommee associee au type choisi.
     // Contrat : aucun.
@@ -122,7 +138,7 @@ struct Autorisations
 
     void DefinirAutorisations ();
     // Mode d'emploi :
-    //  Procedure sans parametres qui enregistre les autorisations liees 
+    //  Procedure sans parametres qui enregistre les autorisations liees
     //  au fichier selectionne.
     // Contrat : le fichier existe.
 

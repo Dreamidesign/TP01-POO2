@@ -31,7 +31,7 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
+
     void AjoutSimple(void);
     // Mode d'emploi : Ajoute un trajet simple au catalogue à partir des infos
     //                 saisies par l'utilisateur dans le flux de sortie cin
@@ -49,13 +49,18 @@ public:
     //                 utilisation du polymorphisme
 
     void RechercheAvancee(void);
+    // Mode d'emploi : Recherche un trajet dans le catalogue à partir d'une ville
+    //                 de départ et ville d'arrivé saisies par l'utilisateur,
+    //                 utilisation du polymorphisme
 
     void RechercheEnProfondeur(char* Recherche, TrajetCompose* branche, TabTrajet* res);
+    // Mode d'emploi : Methode récursive de création et de recherche d'un trajet
+    //                 dans une branche de l'arbre de recherche géneré
+    //                 au fur et à mesure. Methode reccursive.
 
     void MenuTrajet(void);
     // Mode d'emploi : implémente l'interface d'Ajout des trajets
     //
-
 
     void MenuCatalogue(void);
     // Mode d'emploi : implémente l'interface principale du catalogue
@@ -66,7 +71,7 @@ public:
     // Contrat : la zone pointee par dest est de taille TAILLE_NOM.
 
     inline TabTrajet & GetTabTrajet ()
-    // Mode d'emploi : 
+    // Mode d'emploi :
     //  Methode inline qui renvoie la reference du TabTrajet courant.
     //  Attention : le retour est non constant.
     // Contrat : aucun.
