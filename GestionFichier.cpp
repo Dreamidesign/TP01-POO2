@@ -275,9 +275,7 @@ void lecture_TC(TabTrajet* tab, string content)
 
 bool TrajetValideAuCritere (const Trajet * t, long int index)
 {
-	if (t == nullptr)
-    {   return false;
-    }
+	sw
 
     string trajet = t->toStringAsString();
 
